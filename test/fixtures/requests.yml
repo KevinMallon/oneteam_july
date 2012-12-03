@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  employee_id: 1
+  group: MyString
+  location: MyString
+  skills_needed: MyString
+  start_date: 2012-11-15
+  stop_date: 2012-11-15
+  request: MyString
+  client: MyString
+  project: MyString
+
+two:
+  employee_id: 1
+  group: MyString
+  location: MyString
+  skills_needed: MyString
+  start_date: 2012-11-15
+  stop_date: 2012-11-15
+  request: MyString
+  client: MyString
+  project: MyString
