@@ -2,7 +2,9 @@ class RequestsController < ApplicationController
   # GET /requests
   # GET /requests.json
   def index
-    @requests = Request.all
+    @employee = Employee.find_by_id(params[:employee_id])
+    @requests = Request.all 
+  # Need if else here
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,6 +15,7 @@ class RequestsController < ApplicationController
   # GET /requests/1
   # GET /requests/1.json
   def show
+    @employee = Employee.find_by_id(params[:employee_id])
     @request = Request.find(params[:id])
 
     respond_to do |format|
@@ -24,6 +27,7 @@ class RequestsController < ApplicationController
   # GET /requests/new
   # GET /requests/new.json
   def new
+    @employee = Employee.find_by_id(params[:employee_id])
     @request = Request.new
 
     respond_to do |format|
@@ -40,6 +44,7 @@ class RequestsController < ApplicationController
   # POST /requests
   # POST /requests.json
   def create
+    @employee = Employee.find_by_id(params[:employee_id])
     @request = Request.new(params[:request])
 
     respond_to do |format|

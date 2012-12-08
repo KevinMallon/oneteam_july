@@ -45,6 +45,9 @@
   <%= @request.project %>
 </p>
 
+<div class="actions">
+  <%= link_to 'Respond', new_request_response_path(@request), class: "btn btn-small btn-primary" %>
+</div>
 
 <%= link_to 'Edit', edit_request_path(@request) %> |
 <%= link_to 'Back', requests_path %>
