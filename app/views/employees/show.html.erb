@@ -10,6 +10,15 @@
   <%= @employee.email %>
 </p>
 
+<p>
+  <b>Employee ID:</b>
+  <%= @employee.id %>
+</p>
+
+<div class="actions">
+  <%= link_to 'Create a request', new_request_path(@request), class: "btn btn-large btn-primary" %>
+</div>
+
 
 <%= link_to 'Edit', edit_employee_path(@employee) %> |
 <%= link_to 'Back', employees_path %>

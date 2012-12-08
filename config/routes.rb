@@ -1,28 +1,25 @@
-OneteamApp::Application.routes.draw do
-  get "employees/new" 
-
+OneteamApp::Application.routes.draw do 
   root to: 'static_pages#home'
   
   match '/home', to: 'static_pages#home'
   match '/help', to: 'static_pages#help'
   match '/signup', to: 'employees#new'
   match '/signin', to: 'static_pages#signin'
-
-  resources :requests
-
+  
   resources :employees
+  resources :static_pages
 
-  resources :employees do
-    collection do
-      get :requests
-    end
+  resources :requests, :shallow => true do
+    resources :responses
   end
 
-  resources :requests do
-    collection do
-      get :responses
-    end
+  resources :responses, :shallow => true do
+    resources :employees
   end
+  
+  resources :responses
+
+end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -80,4 +77,4 @@ OneteamApp::Application.routes.draw do
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
-end
+

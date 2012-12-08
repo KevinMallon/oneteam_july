@@ -1,0 +1,15 @@
+<%= form_for [@request, @response] do |f| -%>
+  <div class="field">
+    <%= f.label :employee_id %> 
+    <%= f.number_field :employee_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :response %> 
+    <%= f.text_field :response %>
+  </div>
+
+  <%= f.submit %>
+<% end -%>
+
+<%= link_to 'Back to requests', requests_path %>
