@@ -10,9 +10,19 @@ OneteamApp::Application.routes.draw do
 
   resources :requests
 
-
   resources :employees
 
+  resources :employees do
+    collection do
+      get :requests
+    end
+  end
+
+  resources :requests do
+    collection do
+      get :responses
+    end
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
