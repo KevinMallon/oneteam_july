@@ -1,25 +1,27 @@
-<%= form_for(@employee) do |f| %>
-  <% if @employee.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@employee.errors.count, "error") %> prohibited this employee from being saved:</h2>
+<% provide(:title, 'Sign up') %>
 
-      <ul>
-      <% @employee.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@employee) do |f| %>
+      <%= render 'shared/error_messages' %>
+
+      <div class="field">
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+
+        <%= f.label :email %>
+        <%= f.text_field :email %>
+
+        <%= f.label :password %>
+        <%= f.password_field :password %>
+
+        <%= f.label :password_confirmation, "Confirmation" %>
+        <%= f.password_field :password_confirmation %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "Create my account", class: "btn btn-large btn-primary" %>
+      </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
   </div>
-  <div class="field">
-    <%= f.label :email %>
-    <%= f.text_field :email %>
-  </div>
-  <div class="actions">
-    <%= f.submit "Create my account", class: "btn btn-large btn-primary" %>
-  </div>
-<% end %>
+</div>

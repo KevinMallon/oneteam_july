@@ -1,14 +1,14 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b>Name:</b>
-  <%= @employee.name %>
-</p>
-
-<p>
-  <b>Name:</b>
-  <%= @employee.name %>
-</p>
+<% provide(:title, @employee.name) %>
+<div class="row">
+  <aside class="span4">
+    <section>
+      <h1>
+        <%= gravatar_for @employee %>
+        <%= @employee.name %>
+      </h1>
+    </section>
+  </aside>
+</div>
 
 <p>
   <b>Email:</b>
