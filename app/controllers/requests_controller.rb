@@ -2,13 +2,16 @@ class RequestsController < ApplicationController
   # GET /requests
   # GET /requests.json
   def index
-    @employee = Employee.find_by_id(params[:employee_id])
-    @requests = Request.all 
-  # Need if else here
+    if defined? params[:employee_id]
+      @employee = Employee.find(params[:employee_id])
+      @requests = @employee.requests
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @requests }
+    end
+    else
+      @requests = Requests.all
     end
   end
 

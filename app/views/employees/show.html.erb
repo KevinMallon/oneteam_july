@@ -6,6 +6,11 @@
 </p>
 
 <p>
+  <b>Name:</b>
+  <%= @employee.name %>
+</p>
+
+<p>
   <b>Email:</b>
   <%= @employee.email %>
 </p>
@@ -16,7 +21,11 @@
 </p>
 
 <div class="actions">
-  <%= link_to 'Create a request', new_request_path(@request), class: "btn btn-large btn-primary" %>
+  <%= link_to "Show my requests", requests_path(@employee) %>
+</div> 
+
+<div class="actions">
+  <%= link_to 'Create a new request', new_request_path(@employee), class: "btn btn-small btn-primary" %>
 </div>
 
 
