@@ -6,10 +6,12 @@ OneteamApp::Application.routes.draw do
   match '/home', to: 'static_pages#home'
   match '/help', to: 'static_pages#help'
   match '/signup', to: 'employees#new'
-  match '/signin', to: 'static_pages#signin'
+  match '/signin', to: 'sessions#new'
+  match '/signout', to: 'sessions#destroy', via: :delete
   
   resources :employees
   resources :static_pages
+  resources :sessions, only: [:new, :create, :destroy]
 
   resources :requests, :shallow => true do
     resources :responses

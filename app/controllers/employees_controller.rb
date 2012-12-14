@@ -44,6 +44,7 @@ class EmployeesController < ApplicationController
 
     respond_to do |format|
       if @employee.save
+        sign_in @employee
         flash[:success] = "Welcome to OneTeam!"
         format.html { redirect_to @employee, notice: 'Employee was successfully created.' }
         format.json { render json: @employee, status: :created, location: @employee }
