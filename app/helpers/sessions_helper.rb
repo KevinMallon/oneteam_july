@@ -6,7 +6,7 @@ module SessionsHelper
   end
 
   def signed_in?
-    !current_user.nil?
+    !current_employee.nil?
   end
 
   def current_employee=(employee)
@@ -17,8 +17,21 @@ module SessionsHelper
     @current_employee ||= Employee.find_by_remember_token(cookies[:remember_token])
   end
 
+  def current_employee?(employee)
+    employee == current_employee
+  end
+
   def sign_out
     self.current_employee = nil
     cookies.delete(:remember_token)
+  end
+
+  def redirect_back_or(default)
+    redirect_to(session[:return_to] || default)
+    session.delete(:return_to)
+  end
+
+  def store_location
+    session[:return_to] = request.url
   end
 end

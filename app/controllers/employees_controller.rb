@@ -1,8 +1,12 @@
 class EmployeesController < ApplicationController
+  before_filter :signed_in_employee, only: [:index, :edit, :update]
+  before_filter :correct_employee,   only: [:edit, :update]
+  before_filter :admin_employee,     only: :destroy
+
   # GET /employees
   # GET /employees.json
   def index
-    @employees = Employee.all
+    @employees = Employee.paginate(page: params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -34,7 +38,6 @@ class EmployeesController < ApplicationController
 
   # GET /employees/1/edit
   def edit
-    @employee = Employee.find(params[:id])
   end
 
   # POST /employees
@@ -44,9 +47,9 @@ class EmployeesController < ApplicationController
 
     respond_to do |format|
       if @employee.save
+        flash[:success] = "Welcome to OneTeam! Profile was successfully created."
         sign_in @employee
-        flash[:success] = "Welcome to OneTeam!"
-        format.html { redirect_to @employee, notice: 'Employee was successfully created.' }
+        format.html { redirect_to @employee}
         format.json { render json: @employee, status: :created, location: @employee }
       else
         format.html { render action: "new" }
@@ -58,11 +61,11 @@ class EmployeesController < ApplicationController
   # PUT /employees/1
   # PUT /employees/1.json
   def update
-    @employee = Employee.find(params[:id])
-
     respond_to do |format|
       if @employee.update_attributes(params[:employee])
-        format.html { redirect_to @employee, notice: 'Employee was successfully updated.' }
+        flash[:success] = "Profile updated."
+        sign_in @employee
+        format.html { redirect_to @employee }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -74,8 +77,8 @@ class EmployeesController < ApplicationController
   # DELETE /employees/1
   # DELETE /employees/1.json
   def destroy
-    @employee = Employee.find(params[:id])
-    @employee.destroy
+    Employee.find(params[:id]).destroy
+    flash[:success] = "Employee deleted."
 
     respond_to do |format|
       format.html { redirect_to employees_url }
@@ -83,6 +86,19 @@ class EmployeesController < ApplicationController
     end
   end
 
+private
+    def signed_in_employee
+      store_location
+      redirect_to signin_url, notice: "Please sign in." unless signed_in?
+    end
 
+    def correct_employee
+      @employee = Employee.find(params[:id])
+      redirect_to(root_path) unless current_employee?(@employee)
+    end
 
+    def admin_employee
+      redirect_to(root_path) unless current_employee.admin?
+    end
 end
+
