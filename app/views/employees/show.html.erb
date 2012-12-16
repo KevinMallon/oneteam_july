@@ -10,6 +10,16 @@
   </aside>
 </div>
 
+  <div class="span8">
+    <% if @employee.requests.any? %>
+      <h3>Requests (<%= @employee.requests.count %>)</h3>
+      <ol class="requests">
+        <%= render @requests %>
+      </ol>
+      <%= will_paginate @requests %>
+    <% end %>
+  </div>
+
 <p>
   <b>Email:</b>
   <%= @employee.email %>
@@ -21,13 +31,8 @@
 </p>
 
 <div class="actions">
-  <%= link_to "Show my requests", requests_path(@employee) %>
+  <%= link_to "Show my requests", requests_path %>
 </div> 
 
-<div class="actions">
-  <%= link_to 'Create a new request', new_request_path(@employee), class: "btn btn-small btn-primary" %>
-</div>
-
-
-<%= link_to 'Edit', edit_employee_path(@employee) %> |
+<%= link_to 'Edit', edit_employee_path %> |
 <%= link_to 'Back', employees_path %>

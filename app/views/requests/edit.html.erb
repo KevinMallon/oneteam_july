@@ -1,6 +1,49 @@
-<h1>Editing request</h1>
+<% provide(:title, "Edit request") %> 
+<h1>Edit the request</h1>
 
-<%= render 'form' %>
+<div class="row">
+  <div class="span6 offset3">
+	<%= form_for(@request) do |f| %>
+
+
+	    <%= f.label :group %><br />
+	    <%= f.text_field :group %>
+
+
+	    <%= f.label :location %><br />
+	    <%= f.text_field :location %>
+
+
+	    <%= f.label :skills_needed %><br />
+	    <%= f.text_field :skills_needed %>
+
+
+	    <%= f.label :start_date %><br />
+	    <%= f.date_select :start_date %>
+
+
+	    <%= f.label :stop_date %><br />
+	    <%= f.date_select :stop_date %>
+
+
+	    <%= f.label :request %><br />
+	    <%= f.text_field :request %>
+
+
+	    <%= f.label :client %><br />
+	    <%= f.text_field :client %>
+
+
+	    <%= f.label :project %><br />
+	    <%= f.text_field :project %>
+
+	  <div class="actions">
+	    <%= f.submit %>
+	  </div>
+  </div>
+</div>
+	<% end %>
+
 
 <%= link_to 'Show', @request %> |
 <%= link_to 'Back', requests_path %>

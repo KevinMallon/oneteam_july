@@ -1,4 +1,5 @@
 class RequestsController < ApplicationController
+
   # GET /requests
   # GET /requests.json
   def index
@@ -41,7 +42,6 @@ class RequestsController < ApplicationController
 
   # GET /requests/1/edit
   def edit
-    @request = Request.find(params[:id])
   end
 
   # POST /requests
@@ -65,10 +65,17 @@ class RequestsController < ApplicationController
   # PUT /requests/1.json
   def update
     @request = Request.find(params[:id])
+    if @request.update_attributes(params[:request])
+      flash[:success] = "Request updated."
+      sign_in @request
+      redirect_to @request
+    else
+      render 'edit'
+    end
 
     respond_to do |format|
       if @request.update_attributes(params[:request])
-        format.html { redirect_to @request, notice: 'Request was successfully updated.' }
+        format.html { redirect_to @request, notice: 'Request updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
