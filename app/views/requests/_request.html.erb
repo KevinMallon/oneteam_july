@@ -1,4 +1,22 @@
-<li>
-  <%= link_to request.request, request %>
+<table>
+  <tr>
+    <th>Request ID</th>
+    <th>Client</th>
+    <th>Project</th>
+    <th>Request</th>
+    <th>Skills Needed</th>
+  </tr>
 
-</li>
+  <tr>
+  	  <% @requests.each do |request| %>
+    <td><%= request.id %></td>
+    <td><%= request.client %></td>
+    <td><%= request.project %></td>
+    <td><%= request.request %></td>
+    <td><%= request.skills_needed %></td>
+    <% end %>
+  </tr>
+ 
+
+</table>
+

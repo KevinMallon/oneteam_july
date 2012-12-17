@@ -3,17 +3,7 @@ class RequestsController < ApplicationController
   # GET /requests
   # GET /requests.json
   def index
-    if defined? params[:employee_id]
-      @employee = Employee.find(params[:employee_id])
-      @requests = @employee.requests
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @requests }
-    end
-    else
-      @requests = Requests.all
-    end
+    @requests = Request.all
   end
 
   # GET /requests/1
