@@ -14,25 +14,11 @@
     <% if @employee.requests.any? %>
       <h3>Requests (<%= @employee.requests.count %>)</h3>
       <ol class="requests">
-        <%= render @requests %>
+        <%= @employee.requests %>
       </ol>
-      <%= will_paginate @requests %>
     <% end %>
   </div>
 
-<p>
-  <b>Email:</b>
-  <%= @employee.email %>
-</p>
-
-<p>
-  <b>Employee ID:</b>
-  <%= @employee.id %>
-</p>
-
-<div class="actions">
-  <%= link_to "Show my requests", requests_path %>
-</div> 
 
 <%= link_to 'Edit', edit_employee_path %> |
 <%= link_to 'Back', employees_path %>

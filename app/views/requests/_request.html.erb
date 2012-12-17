@@ -1,22 +1,7 @@
-<table>
-  <tr>
-    <th>Request ID</th>
-    <th>Client</th>
-    <th>Project</th>
-    <th>Request</th>
-    <th>Skills Needed</th>
-  </tr>
 
-  <tr>
-  	  <% @requests.each do |request| %>
-    <td><%= request.id %></td>
-    <td><%= request.client %></td>
-    <td><%= request.project %></td>
-    <td><%= request.request %></td>
-    <td><%= request.skills_needed %></td>
-    <% end %>
-  </tr>
- 
-
-</table>
-
+<li>
+  <span class="request"><%= request.request %></span>
+  <span class="timestamp">
+    Posted <%= time_ago_in_words(request.created_at) %> ago.
+  </span>
+</li>
