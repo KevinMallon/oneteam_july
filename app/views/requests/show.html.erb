@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Employee:</b>
-  <%= @request.employee_id %>
+  <b>Requested By:</b>
+  <%= @request.employee.name %>
 </p>
 
 <p>
@@ -45,9 +45,15 @@
   <%= @request.project %>
 </p>
 
-<div class="actions">
-  <%= link_to 'Respond', new_request_response_path(@request), class: "btn btn-small btn-primary" %>
-</div>
+<p>
+  <b>Responses to This Request:</b>   
+  <ul class="responses">
+    <%= render @responses %> 
+  </ul>
+</p>
 
+<p>
 <%= link_to 'Edit', edit_request_path(@request) %> |
 <%= link_to 'Back', requests_path %>
+</p>
+

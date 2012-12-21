@@ -19,6 +19,8 @@ class ResponsesController < ApplicationController
   # GET /responses/1.json
   def show
       @response = Response.find(params[:id])
+      @responses = @request.responses.build
+      @employee = Employee.find_by_id(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -40,7 +42,8 @@ class ResponsesController < ApplicationController
   # POST /responses.json
   def create
       @request = Request.find_by_id(params[:request_id])
-      @response = @request.responses.new(params[:response])
+      @response = @request.responses.build(params[:response])
+      @response.employee_id = current_employee.id
 
     respond_to do |format|
       if @response.save
@@ -85,4 +88,16 @@ class ResponsesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+      def signed_in_employee
+      unless signed_in?
+        store_location
+        redirect_to signin_url, notice: "Please sign in."
+      end
+    end
+
+    def correct_employee
+      @employee = Employee.find(params[:id])
+      redirect_to(root_path) unless current_employee?(@employee)
+    end
 end

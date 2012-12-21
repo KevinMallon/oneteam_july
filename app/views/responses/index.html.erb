@@ -17,4 +17,9 @@
   <% end %>
 </table>
 
+  <% @request.responses.each do |response| %>     
+  <tr> 
+      <td><%= response.employee.name %></td>
+  </tr>
+    <% end %>
 

@@ -1,9 +1,10 @@
 class RequestsController < ApplicationController
+  before_filter :signed_in_employee, only: [:create, :destroy]
 
   # GET /requests
   # GET /requests.json
   def index
-    @requests = Request.all
+         @requests = Request.all
   end
 
   # GET /requests/1
@@ -11,6 +12,8 @@ class RequestsController < ApplicationController
   def show
     @employee = Employee.find_by_id(params[:employee_id])
     @request = Request.find(params[:id])
+    @response = @request.responses.build
+    @responses = @request.responses
 
     respond_to do |format|
       format.html # show.html.erb
@@ -38,7 +41,7 @@ class RequestsController < ApplicationController
   # POST /requests.json
   def create
     @employee = Employee.find_by_id(params[:employee_id])
-    @request = Request.new(params[:request])
+    @request = current_employee.requests.build(params[:request])
 
     respond_to do |format|
       if @request.save
@@ -85,4 +88,16 @@ class RequestsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+    def signed_in_employee
+      unless signed_in?
+        store_location
+        redirect_to signin_url, notice: "Please sign in."
+      end
+    end
+
+    def correct_employee
+      @employee = Employee.find(params[:id])
+      redirect_to(root_path) unless current_employee?(@employee)
+    end
 end

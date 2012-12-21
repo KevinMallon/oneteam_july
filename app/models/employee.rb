@@ -11,7 +11,8 @@
 
 class Employee < ActiveRecord::Base
   attr_accessible :employee_id, :email, :name, :password, :password_confirmation
-  has_many :requests
+  has_many :requests, dependent: :destroy
+  has_many :responses, :through => :requests
   has_secure_password
 
   before_save { |employee| employee.email = email.downcase }

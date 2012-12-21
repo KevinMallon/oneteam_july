@@ -17,10 +17,13 @@
 #
 
 class Request < ActiveRecord::Base
-  attr_accessible :client, :employee_id, :group, :location, :project, :request, :skills_needed, :start_date, :stop_date
+  attr_accessible :employee_id, :client, :group, :location, :project, :request, :skills_needed, :start_date, :stop_date
+  
   belongs_to :employee
+  
   has_many :responses, :dependent => :destroy
   accepts_nested_attributes_for :responses
   has_many :employees, :through => :responses
-
+  
+  validates :employee_id, presence: true
 end
