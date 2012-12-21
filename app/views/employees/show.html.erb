@@ -7,50 +7,51 @@
         <%= @employee.name %>
       </h1>
       <%= link_to 'Edit Profile', edit_employee_path %>
-        <div class="row"> 
-    <%= link_to 'Back to employee list', employees_path %> 
-  </div> 
+      <div class="row"> 
+        <%= link_to 'Back to employee list', employees_path %> 
+      </div> 
     </section>
     <section>
-      <%= link_to 'Create a new request', new_request_path, class: "btn btn-small btn-primary" %></section>
+      <%= link_to 'Create a new request', new_request_path, class: "btn btn-small btn-primary" %>
+    </section>
   </aside>
 </div>
 
 
 
-  <div class="span8">
-    <% if @employee.requests.any? %>
-      <h3>Requests (<%= @employee.requests.count %>)</h3>
-<div class="requests">
-  <table>
-  <tr>
-    <th>Request ID</th>
-    <th>Request</th>
-    <th>Client</th>
-    <th>Project</th>
-    <th>Skills Needed</th>
-  </tr>
-
-  <% @employee.requests.each do |request| %>     
-  <tr> 
-      <td><%= request.id %></td>
-      <td><%= request.request %></td>
-      <td><%= request.client %></td>
-      <td><%= request.project %></td>
-      <td><%= request.skills_needed %></td>
-  </tr>
-
-
-  <tr> 
-  </tr>
+<div class="span8">
+  <% if @employee.requests.any? %>
+    <h3>Requests (<%= @employee.requests.count %>)</h3>
+    <div class="requests">
+      <table>
+        <tr>
+          <th>Client</th>
+          <th>Project</th>
+          <th>Location</th>
+          <th>Request</th>
+          <th>Skills Needed</th>
+          <th>Who Has Responded</th>          
+        </tr>
+<ul>
+        <% @employee.requests.each do |request| %>     
+        <tr>
+            <td><%= request.client %></td>
+            <td><%= request.project %></td>
+            <td><%= request.location %></td>
+            <td><%= request.request %></td>
+            <td><%= request.skills_needed %></td>
+            <td><li>      
+                <ul>
+                  <% request.responses.each do |response| %>
+                    <%= link_to response.employee.name, employee_path(response.employee) %>
+                  <% end %>
+                </ul></li>
+                </td>
+        </tr>
+        <% end %>
+</ul>        
+      </table>  
+    </div>
   <% end %>
-
- </table>
-
-  </div>
-    <% end %>
-
-
-
-  </div>
+</div>
 

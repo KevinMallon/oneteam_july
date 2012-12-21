@@ -10,10 +10,14 @@
 #
 
 class Employee < ActiveRecord::Base
-  attr_accessible :employee_id, :email, :name, :password, :password_confirmation
+  attr_accessible :employee_id, :name, :email, :password, :password_confirmation
   has_many :requests, dependent: :destroy
   has_many :responses, :through => :requests
   has_secure_password
+
+  def initialize(attributes = {})
+    @name  = attributes[:name]
+  end
 
   before_save { |employee| employee.email = email.downcase }
   before_save :create_remember_token
