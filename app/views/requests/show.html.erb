@@ -46,14 +46,9 @@
 </p>
 
 <p>
-  <b>Responses to This Request:</b>   
-  <ul class="responses">
-    <%= render @responses %> 
-  </ul>
-</p>
-
-<p>
-<%= link_to 'Edit', edit_request_path(@request) %> |
 <%= link_to 'Back', requests_path %>
 </p>
 
+<p>
+<%= link_to 'Respond', new_request_response_path(@request), class: "btn btn-small btn-primary" %>    
+</p>

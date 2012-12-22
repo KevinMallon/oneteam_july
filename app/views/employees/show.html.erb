@@ -11,18 +11,20 @@
         <%= link_to 'Back to employee list', employees_path %> 
       </div> 
     </section>
-    <section>
-      <%= link_to 'Create a new request', new_request_path, class: "btn btn-small btn-primary" %>
-    </section>
+
   </aside>
 </div>
 
+<div>
+  <section>
+    <%= link_to 'Create a new request', new_request_path, class: "btn btn-small btn-primary" %>
+  </section>
+</div>
 
-
-<div class="span8">
+<div>
   <% if @employee.requests.any? %>
     <h3>Requests (<%= @employee.requests.count %>)</h3>
-    <div class="requests">
+    <div>
       <table>
         <tr>
           <th>Client</th>
@@ -32,21 +34,23 @@
           <th>Skills Needed</th>
           <th>Who Has Responded</th>          
         </tr>
-<ul>
+
         <% @employee.requests.each do |request| %>     
-        <tr>
+        <ul><li><tr>
             <td><%= request.client %></td>
             <td><%= request.project %></td>
             <td><%= request.location %></td>
             <td><%= request.request %></td>
             <td><%= request.skills_needed %></td>
-            <td><li>      
-                <ul>
+            <td>      
                   <% request.responses.each do |response| %>
                     <%= link_to response.employee.name, employee_path(response.employee) %>
                   <% end %>
-                </ul></li>
+                </li></ul>
                 </td>
+        </tr>
+        <tr>
+
         </tr>
         <% end %>
 </ul>        
@@ -54,4 +58,6 @@
     </div>
   <% end %>
 </div>
+
+
 

@@ -1,26 +1,39 @@
 
 <% provide(:title, 'All requests') %>
-<h1>All requests</h1>
+<h1>All Requests</h1>
 
 <table>
+  <ul class="employees">
+  <li>
   <tr>
+    <th>Request ID</th>
     <th>Request</th>
     <th>Client</th>
     <th>Project</th>
+    <th>Location</th>
+    <th>Start - End</th>
     <th>Skills Needed</th>
-    <th>Request ID</th>
-  </tr>
+  </tr></li>
 
  <% @requests.each do |request| %> 
- <tr>     
+    <td><h5><%= request.id %></h5></td>
     <td><%= link_to request.request, request %></td>
     <td><%= request.client %></td>
     <td><%= request.project %></td>
+    <td><%= request.location %></td>
+    <td><%= request.start_date %> - <%= request.stop_date %></td>
     <td><%= request.skills_needed %></td>
-    <td><%= request.id %></td>
-    <td><%= link_to 'Respond', new_request_response_path(request), class: "btn btn-small btn-primary" %></td>    
-  </tr>
+    <td><%= link_to 'Respond', new_request_response_path(request), class: "btn btn-small btn-primary" %></td> 
+<tr>
+    <td></td>
+    <td>Who Has Responded: </td>
+    <% request.responses.each do |response| %>
+
+    <td><%= link_to response.employee.name, employee_path(response.employee) %>                  
+    </td>
+    <% end %>
+  </tr>   
+  </li>
+  </ul>
  <% end %>
-
 </table>
-

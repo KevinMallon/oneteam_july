@@ -19,7 +19,6 @@ class EmployeesController < ApplicationController
   def show
     @employee = Employee.find(params[:id])
     @requests = current_employee.requests.build if signed_in?
-    @request = current_employee.requests.build if signed_in?
 
     respond_to do |format|
       format.html # show.html.erb
@@ -86,11 +85,6 @@ class EmployeesController < ApplicationController
       format.html { redirect_to employees_url }
       format.json { head :no_content }
     end
-  end
-
-  def feed
-    # This is preliminary. See "Following users" for the full implementation.
-    Request.where("employee_id = ?", id)
   end
 
 private

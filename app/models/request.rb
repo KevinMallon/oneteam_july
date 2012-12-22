@@ -23,7 +23,6 @@ class Request < ActiveRecord::Base
   
   has_many :responses, :dependent => :destroy
   accepts_nested_attributes_for :responses
-  has_many :employees, :through => :responses
-  
-  validates :employee_id, presence: true
+  has_many :responders, :through => :responses, source: :employee_id  
+		
 end

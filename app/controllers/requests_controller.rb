@@ -4,16 +4,16 @@ class RequestsController < ApplicationController
   # GET /requests
   # GET /requests.json
   def index
-         @requests = Request.all
+    @requests = Request.all
+    @employee = Employee.find_by_id(params[:employee_id])
+    @response = Response.find_by_id(params[:id])
+    @responder = Employee.find_by_id(params[:employee_id])
   end
 
   # GET /requests/1
   # GET /requests/1.json
   def show
-    @employee = Employee.find_by_id(params[:employee_id])
     @request = Request.find(params[:id])
-    @response = @request.responses.build
-    @responses = @request.responses
 
     respond_to do |format|
       format.html # show.html.erb
