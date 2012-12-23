@@ -18,7 +18,7 @@ class EmployeesController < ApplicationController
   # GET /employees/1.json
   def show
     @employee = Employee.find(params[:id])
-    @requests = current_employee.requests.build if signed_in?
+    @requests = @employee.requests if signed_in?
 
     respond_to do |format|
       format.html # show.html.erb

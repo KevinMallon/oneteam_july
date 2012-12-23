@@ -6,58 +6,78 @@
         <%= gravatar_for @employee %>
         <%= @employee.name %>
       </h1>
-      <%= link_to 'Edit Profile', edit_employee_path %>
-      <div class="row"> 
-        <%= link_to 'Back to employee list', employees_path %> 
-      </div> 
     </section>
-
   </aside>
-</div>
-
-<div>
-  <section>
+  <div class="employees">
     <%= link_to 'Create a new request', new_request_path, class: "btn btn-small btn-primary" %>
-  </section>
+</div>
 </div>
 
-<div>
-  <% if @employee.requests.any? %>
-    <h3>Requests (<%= @employee.requests.count %>)</h3>
-    <div>
-      <table>
-        <tr>
-          <th>Client</th>
-          <th>Project</th>
-          <th>Location</th>
-          <th>Request</th>
-          <th>Skills Needed</th>
-          <th>Who Has Responded</th>          
-        </tr>
+<div class="employee">
 
-        <% @employee.requests.each do |request| %>     
-        <ul><li><tr>
-            <td><%= request.client %></td>
-            <td><%= request.project %></td>
-            <td><%= request.location %></td>
-            <td><%= request.request %></td>
-            <td><%= request.skills_needed %></td>
-            <td>      
-                  <% request.responses.each do |response| %>
-                    <%= link_to response.employee.name, employee_path(response.employee) %>
-                  <% end %>
-                </li></ul>
-                </td>
-        </tr>
-        <tr>
+<p>
+  <b>Email:</b>
+  <%= @employee.email %>
+</p>
 
-        </tr>
-        <% end %>
-</ul>        
-      </table>  
-    </div>
-  <% end %>
+<p>
+  <b>Skills:</b>
+  <%= @employee.skills %>
+</p>
+
+<p>
+  <b>Interests:</b>
+  <%= @employee.interests %>
+</p>
+
+<p>
+  <b>Group:</b>
+  <%= @employee.group %>
+</p>
+
+<p>
+  <b>Location:</b>
+  <%= @employee.location %>
+</p>
+
+<p>
+  <b>Current Project:</b>
+  <%= @employee.current_project %>
+</p>
 </div>
 
 
+<% if current_employee.id == @employee.id %>
+<div class="requests">
+<h2>My Requests</h2>
+</div>
 
+<table class="requests">
+  <tr>
+    <th>Request</th>
+    <th>Requested by</th>
+    <th>Client</th>
+    <th>Project</th>
+    <th>Location</th>
+    <th>Start - End</th>
+    <th>Skills Needed</th>
+    <th>Interested Employees</th>
+  </tr>
+
+ <% @requests.each do |request| %> 
+    <tr>
+    <td><%= request.request %></td>
+    <td><%= request.employee.name %></td>
+    <td><%= request.client %></td>
+    <td><%= request.project %></td>
+    <td><%= request.location %></td>
+    <td><%= request.start_date %> - <%= request.stop_date %></td>
+    <td><%= request.skills_needed %></td>
+    <td><ul class="noindent"><% request.responses.each do |response| %>
+            <li><%= link_to response.employee.name, employee_path(response.employee) %>: "<%= response.response %>"</li>
+        <% end %><ul>      
+    </td>
+    </tr>
+ <% end %>
+</table>
+<% end %>

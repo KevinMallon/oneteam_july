@@ -13,6 +13,10 @@ $lightGray: #999;
 
 /* universal */
 
+  td {
+  padding: 10px 0;
+    }
+    
 html {
   overflow-y: scroll;
 }
@@ -196,12 +200,40 @@ input {
 .requests {
   list-style: none;
   margin: 10px 0 0 0;
-
-  li {
-    padding: 10px 0;
-    border-top: 1px solid #e8e8e8;
+    ul.noindent {
+  margin: 0;
+  padding: 0;
   }
+
+h2 {
+  font-size: 1.7em;
+  letter-spacing: -1px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: normal;
 }
+
+  ul.noindent li {
+  list-type: none;
+  margin: 0;
+      overflow: auto;
+    padding: 10px 0;
+  }
+  }
+
+tr {
+  list-style: none;
+  padding: 10px 0;
+  border-top: 1px solid $grayDarker;
+  &:last-child {
+    border-bottom: 1px solid $grayDarker;
+    }
+
+td {
+  padding: 10px 0;
+    }
+}
+
 .request {
   display: block;
 }

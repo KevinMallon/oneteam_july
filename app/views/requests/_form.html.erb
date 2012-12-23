@@ -11,42 +11,46 @@
     </div>
   <% end %>
 
+<div class="row">
+  <div class="span6 offset3">
   <div class="field">
     <%= f.hidden_field :employee_id %>
   </div>
   <div class="field">
-    <%= f.label :group %><br />
+    <%= f.label :group %>
     <%= f.text_field :group %>
   </div>
   <div class="field">
-    <%= f.label :location %><br />
+    <%= f.label :location %>
     <%= f.text_field :location %>
   </div>
   <div class="field">
-    <%= f.label :skills_needed %><br />
+    <%= f.label :skills_needed %>
     <%= f.text_field :skills_needed %>
   </div>
   <div class="field">
-    <%= f.label :start_date %><br />
+    <%= f.label :start_date %>
     <%= f.date_select :start_date %>
   </div>
   <div class="field">
-    <%= f.label :stop_date %><br />
+    <%= f.label :stop_date %>
     <%= f.date_select :stop_date %>
   </div>
   <div class="field">
-    <%= f.label :request %><br />
+    <%= f.label :request %>
     <%= f.text_field :request %>
   </div>
   <div class="field">
-    <%= f.label :client %><br />
+    <%= f.label :client %>
     <%= f.text_field :client %>
   </div>
   <div class="field">
-    <%= f.label :project %><br />
+    <%= f.label :project %>
     <%= f.text_field :project %>
   </div>
   <div class="actions">
     <%= f.submit %>
   </div>
+</div>
+</div>
 <% end %>

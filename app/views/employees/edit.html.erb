@@ -18,8 +18,22 @@
 
         <%= f.label :password_confirmation, "Confirmation" %>
         <%= f.password_field :password_confirmation %>
-      </div>
 
+        <%= f.label :skills %>
+        <%= f.text_field :skills %>
+
+        <%= f.label :interests %>
+        <%= f.text_field :interests %>
+
+        <%= f.label :group %>
+        <%= f.text_field :group %>
+
+        <%= f.label :location %>
+        <%= f.text_field :location %>
+
+        <%= f.label :current_project %>
+        <%= f.text_field :current_project %>
+      </div>
       <div class="actions">
         <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
       </div>

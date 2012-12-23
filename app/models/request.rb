@@ -22,7 +22,5 @@ class Request < ActiveRecord::Base
   belongs_to :employee
   
   has_many :responses, :dependent => :destroy
-  accepts_nested_attributes_for :responses
-  has_many :responders, :through => :responses, source: :employee_id  
-		
+  accepts_nested_attributes_for :responses		
 end

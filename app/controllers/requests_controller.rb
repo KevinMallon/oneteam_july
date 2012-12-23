@@ -5,9 +5,6 @@ class RequestsController < ApplicationController
   # GET /requests.json
   def index
     @requests = Request.all
-    @employee = Employee.find_by_id(params[:employee_id])
-    @response = Response.find_by_id(params[:id])
-    @responder = Employee.find_by_id(params[:employee_id])
   end
 
   # GET /requests/1

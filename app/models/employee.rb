@@ -10,7 +10,7 @@
 #
 
 class Employee < ActiveRecord::Base
-  attr_accessible :employee_id, :name, :email, :password, :password_confirmation
+  attr_accessible :employee_id, :name, :email, :password, :password_confirmation, :skills, :interests, :group, :location, :current_project
   has_many :requests, dependent: :destroy
   has_secure_password
 
