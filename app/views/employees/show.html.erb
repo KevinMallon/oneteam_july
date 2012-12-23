@@ -45,8 +45,12 @@
 
 
 <% if current_employee.id == @employee.id %>
-<div class="requests">
 <h2>My Requests</h2>
+
+<div>
+  <section>
+    <%= link_to 'Create a new request', new_request_path, class: "btn btn-small btn-primary" %>
+  </section>
 </div>
 
 <table class="requests">
@@ -79,8 +83,3 @@
 </table>
 <% end %>
 
-<div class="employee">
-  <p>
-    <%= link_to 'Create a new request', new_request_path, class: "btn btn-small btn-primary" %>    
-  </p>
-</div>
