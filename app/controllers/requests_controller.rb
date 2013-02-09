@@ -1,16 +1,19 @@
 class RequestsController < ApplicationController
-  before_filter :signed_in_employee, only: [:create, :destroy]
+  before_filter :signed_in_employee, only: :create
+  before_filter :correct_employee,   only: [:edit, :update, :destroy]
+  before_filter :admin_employee,     only: :destroy
 
   # GET /requests
   # GET /requests.json
   def index
-    @requests = Request.all
+      @myrequests = current_employee.requests.paginate(page: params[:page])
+      @requests = Request.all
   end
 
   # GET /requests/1
   # GET /requests/1.json
   def show
-    @request = Request.find(params[:id])
+      @request = Request.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,6 +27,7 @@ class RequestsController < ApplicationController
     @employee = Employee.find_by_id(params[:employee_id])
     @request = Request.new
 
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @request }
@@ -31,7 +35,9 @@ class RequestsController < ApplicationController
   end
 
   # GET /requests/1/edit
+
   def edit
+      @request = Request.find(params[:id])
   end
 
   # POST /requests
@@ -42,7 +48,7 @@ class RequestsController < ApplicationController
 
     respond_to do |format|
       if @request.save
-        format.html { redirect_to @request, notice: 'Request was successfully created.' }
+        format.html { redirect_to requests_path, notice: 'Request was successfully created.' }
         format.json { render json: @request, status: :created, location: @request }
       else
         format.html { render action: "new" }

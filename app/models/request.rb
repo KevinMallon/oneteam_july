@@ -18,9 +18,8 @@
 
 class Request < ActiveRecord::Base
   attr_accessible :employee_id, :client, :group, :location, :project, :request, :skills_needed, :start_date, :stop_date
-  
-  belongs_to :employee
-  
+  belongs_to :employee  
+  has_many :selections
   has_many :responses, :dependent => :destroy
-  accepts_nested_attributes_for :responses		
+  accepts_nested_attributes_for :responses   
 end

@@ -19,9 +19,9 @@ OneteamApp::Application.routes.draw do
 
   resources :responses, :shallow => true do
     resources :employees
+    resources :selections
   end
-  
-  resources :responses
+
 
 end
 
