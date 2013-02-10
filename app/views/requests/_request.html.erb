@@ -8,3 +8,10 @@
   	Respondents' ID's: <%= request.responses.pluck(:id) %>
   </span>
 </li>
+  <div class="form_row">
+      <label for="status">Status:</label>
+      <% [ 'open', 'closed' ].each do |status| %>
+        <%= radio_button_tag 'Status', status, @status == status %>
+        <%= status.humanize %>
+      <% end %>
+  </div>

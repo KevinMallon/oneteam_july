@@ -16,10 +16,10 @@
     <th>Client</th>
     <th>Project</th>
     <th>Location</th>
-    <th>(** = underway) Start - End </th>
+    <th>Start - End</th>
     <th>Skills Needed</th>
     <th>Interested Employees</th>
-    <th></th>
+    <th>Change Status</th>
   </tr>
 
  <% @myrequests.each do |request| %> 
@@ -29,16 +29,24 @@
     <td><%= request.client %></td>
     <td><%= request.project %></td>
     <td><%= request.location %></td>
-    <td> <% if Date.today > request.start_date %>**<% end %><%= request.start_date %> - <%= request.stop_date %></td>
+    <% if Date.today > request.start_date %>
+        <td class="underway"> <%= request.start_date %> - <%= request.stop_date %></td>
+    <% else %>
+        <td> <%= request.start_date %> - <%= request.stop_date %></td>
+    <% end %>
     <td><%= request.skills_needed %></td>
     <td>
       <ul class="noindent"><% request.responses.each do |response| %>
                 </li>
-            <li><%= link_to response.employee.name, employee_path(response.employee) %>: "<%= response.response %>" <%= link_to 'Select', new_response_selection_path(response.id), class: "btn btn-small btn-primary" %>
-            <% end %>
+            <li><%= link_to response.employee.name, employee_path(response.employee) %>: "<%= response.response %>" 
+                <% if request.selections.empty? %>
+                    <%= link_to 'Select', new_response_selection_path(response.id), class: "btn btn-small btn-primary" %>
+                <% else %>
+                     <h5 class="selected"selected>Selected</h5>
+                <% end %></li>
+            <% end %>     
       <ul>
     </td>
-    <td></td>
     </tr>
  <% end %>
 </table>
@@ -54,25 +62,29 @@
     <th>Client</th>
     <th>Project</th>
     <th>Location</th>
-    <th>(** = underway) Start - End </th>
+    <th>Start - End </th>
     <th>Skills Needed</th>
-    <th></th>
   </tr>
 
 
  <% @requests.each do |request| %> 
     <% if request.employee != current_employee %> 
-    <% if Date.today < request.stop_date %> 
+    <% if Date.today < request.stop_date and request.selections.empty? %> 
         <tr>
-        <td><%= request.request %></td><td><%= request.client %></td>
+        <td><%= request.request %></td>
         <td><%= request.employee.name %></td>
+        <td><%= request.client %></td>
         <td><%= request.project %></td>
         <td><%= request.location %></td>
-        <td><% if Date.today > request.start_date %>**<% end %><%= request.start_date %> - <%= request.stop_date %></td>
+        <% if Date.today > request.start_date %>
+            <td class="underway"> <%= request.start_date %> - <%= request.stop_date %></td>
+        <% else %>
+            <td> <%= request.start_date %> - <%= request.stop_date %></td>
+        <% end %>
         <td><%= request.skills_needed %></td>
         <td><%= link_to 'Respond', new_request_response_path(request), class: "btn btn-small btn-primary" %></td> 
         </tr>
     <% end %>
     <% end %>
  <% end %>
-</table>
+</table> 
