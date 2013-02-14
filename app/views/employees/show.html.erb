@@ -3,43 +3,61 @@
   <aside class="span4">
     <section>
       <h1>
-        <%= gravatar_for @employee %>
-        <%= @employee.name %>
+        My Profile
       </h1>
+      <p><%= link_to 'Edit Profile', edit_employee_path(@employee) =%></p>
+      <p><%= gravatar_for @employee %>
+
+        <div class="employee">
+
+        <p>
+        First Name:
+        Last Name:
+        <%= @employee.name %>
+        </p>
+
+        <p>
+        Email:
+        <%= @employee.email %>
+        </p>
+
+        <p>
+        Skills:
+        <%= @employee.skills %>
+        </p>
+
+        <p>
+        Interests:
+        <%= @employee.interests %>
+        </p>
+
+        <p>
+        Group:
+        <%= @employee.group %>
+        </p>
+
+        <p>
+        Location:
+        <%= @employee.location %>
+        </p>
+
+        <p>
+        Current Project:
+        <%= @employee.current_project %>
+        </p>
+        </div>
+
+        </div>
+
+      </p>
     </section>
   </aside>
-</div>
 
-<div class="employee">
 
-<p>
-  <b>Email:</b>
-  <%= @employee.email %>
-</p>
 
-<p>
-  <b>Skills:</b>
-  <%= @employee.skills %>
-</p>
 
-<p>
-  <b>Interests:</b>
-  <%= @employee.interests %>
-</p>
 
-<p>
-  <b>Group:</b>
-  <%= @employee.group %>
-</p>
 
-<p>
-  <b>Location:</b>
-  <%= @employee.location %>
-</p>
 
-<p>
-  <b>Current Project:</b>
-  <%= @employee.current_project %>
-</p>
-</div>
+
 

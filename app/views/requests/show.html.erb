@@ -32,7 +32,7 @@
 
 <p>
   <b>Request:</b>
-  <%= @request.request %>
+  <%= @request.content %>
 </p>
 
 <p>
@@ -46,9 +46,9 @@
 </p>
 
 <p>
-<%= link_to 'Back', requests_path %>
+<%= link_to 'Back to Requests', requests_path %>
 </p>
 
 <p>
-<%= link_to 'Respond', new_request_response_path(@request), class: "btn btn-small btn-primary" %>    
+<%= link_to 'Apply', new_request_response_path(@request), class: "btn btn-small btn-primary" %>    
 </p>

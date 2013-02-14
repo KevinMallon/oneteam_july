@@ -7,52 +7,56 @@
   </section>
 </div>
 
-<% if !current_employee.requests.empty? %>
+<% unless current_employee.requests.empty? %>
 <h1>My Requests</h1>
 <table class="requests">
   <tr>
     <th>Request</th>
-    <th>Requested by</th>
     <th>Client</th>
     <th>Project</th>
     <th>Location</th>
     <th>Start - End</th>
     <th>Skills Needed</th>
     <th>Interested Employees</th>
-    <th>Change Status</th>
   </tr>
 
+
  <% @myrequests.each do |request| %> 
-    <tr>
-    <td><%= request.request %></td>
-    <td><%= request.employee.name %></td>
-    <td><%= request.client %></td>
-    <td><%= request.project %></td>
-    <td><%= request.location %></td>
-    <% if Date.today > request.start_date %>
-        <td class="underway"> <%= request.start_date %> - <%= request.stop_date %></td>
-    <% else %>
-        <td> <%= request.start_date %> - <%= request.stop_date %></td>
-    <% end %>
-    <td><%= request.skills_needed %></td>
-    <td>
-      <ul class="noindent"><% request.responses.each do |response| %>
-                </li>
-            <li><%= link_to response.employee.name, employee_path(response.employee) %>: "<%= response.response %>" 
-                <% if request.selections.empty? %>
-                    <%= link_to 'Select', new_response_selection_path(response.id), class: "btn btn-small btn-primary" %>
+
+        <tr>
+            <td><%= request.content %>  <%= link_to 'Edit', edit_request_path(request.id) %></td>
+            <td><%= request.client %></td>
+            <td><%= request.project %></td>
+            <td><%= request.location %></td> 
+                <% if Date.today > request.start_date %>
+                    <td class="underway"> <%= request.start_date %> - <%= request.stop_date %></td>
                 <% else %>
-                     <h5 class="selected"selected>Selected</h5>
-                <% end %></li>
-            <% end %>     
-      <ul>
-    </td>
-    </tr>
+                    <td> <%= request.start_date %> - <%= request.stop_date %></td>
+                <% end %>
+            <td><%= request.skills_needed %></td>
+                <% request.responses.each do |response| %>
+                            <% if !response.selections.empty? %>    
+                                <ul class="noindent">
+                                    <td><li>
+                                         <%= response.employee.name %>
+                                         <h5>Selected</h5>
+                                    </li></td>
+                    <% else %> 
+                                    <td><li> 
+                                         <%= link_to response.employee.name, employee_path(response.employee) %> <%= link_to 'Select', new_response_selection_path(response), 
+class: "btn btn-small btn-primary" %>
+                                    </li></td>
+                                </ul>
+                            
+                    <% end %>      
+                <% end %>
+     </tr>    
+                    
  <% end %>
 </table>
 <% else %>
 <p>You do not have any requests.</p>
-<% end %>
+<% end %> 
 
 <h1>Requests</h1>
 <table class="requests">
@@ -69,9 +73,9 @@
 
  <% @requests.each do |request| %> 
     <% if request.employee != current_employee %> 
-    <% if Date.today < request.stop_date and request.selections.empty? %> 
+    <% if Date.today < request.stop_date %> 
         <tr>
-        <td><%= request.request %></td>
+        <td><%= request.content %></td>
         <td><%= request.employee.name %></td>
         <td><%= request.client %></td>
         <td><%= request.project %></td>
@@ -82,7 +86,9 @@
             <td> <%= request.start_date %> - <%= request.stop_date %></td>
         <% end %>
         <td><%= request.skills_needed %></td>
-        <td><%= link_to 'Respond', new_request_response_path(request), class: "btn btn-small btn-primary" %></td> 
+        <td>
+            <%= link_to 'Apply', new_request_response_path(request), class: "btn btn-small btn-primary" %></td> 
+        </td>
         </tr>
     <% end %>
     <% end %>

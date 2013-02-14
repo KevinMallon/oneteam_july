@@ -13,6 +13,7 @@ class Employee < ActiveRecord::Base
   attr_accessible :employee_id, :name, :email, :password, :password_confirmation, :skills, :interests, :group, :location, :current_project
   has_many :requests, dependent: :destroy
   has_secure_password
+  has_many :responses
 
   before_save { |employee| employee.email = email.downcase }
   before_save :create_remember_token

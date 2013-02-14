@@ -1,13 +1,13 @@
 class RequestsController < ApplicationController
   before_filter :signed_in_employee, only: :create
-  before_filter :correct_employee,   only: [:edit, :update, :destroy]
+  before_filter :correct_employee,   only: :destroy
   before_filter :admin_employee,     only: :destroy
 
   # GET /requests
   # GET /requests.json
   def index
-      @myrequests = current_employee.requests.paginate(page: params[:page])
-      @requests = Request.all
+    @myrequests = current_employee.requests.paginate(page: params[:page])
+    @requests = Request.all
   end
 
   # GET /requests/1
@@ -24,7 +24,7 @@ class RequestsController < ApplicationController
   # GET /requests/new
   # GET /requests/new.json
   def new
-    @employee = Employee.find_by_id(params[:employee_id])
+    @employee = current_employee
     @request = Request.new
 
 
@@ -60,11 +60,9 @@ class RequestsController < ApplicationController
   # PUT /requests/1
   # PUT /requests/1.json
   def update
-    @request = Request.find(params[:id])
+      @request = Request.find(params[:id])
     if @request.update_attributes(params[:request])
-      flash[:success] = "Request updated."
-      sign_in @request
-      redirect_to @request
+      requests_path
     else
       render 'edit'
     end
@@ -83,6 +81,7 @@ class RequestsController < ApplicationController
   # DELETE /requests/1
   # DELETE /requests/1.json
   def destroy
+    @employee = @correct_employee.id
     @request = Request.find(params[:id])
     @request.destroy
 
@@ -103,4 +102,7 @@ class RequestsController < ApplicationController
       @employee = Employee.find(params[:id])
       redirect_to(root_path) unless current_employee?(@employee)
     end
+
 end
+
+

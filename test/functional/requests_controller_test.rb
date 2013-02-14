@@ -18,7 +18,7 @@ class RequestsControllerTest < ActionController::TestCase
 
   test "should create request" do
     assert_difference('Request.count') do
-      post :create, request: { client: @request.client, employee_id: @request.employee_id, group: @request.group, location: @request.location, project: @request.project, request: @request.request, skills_needed: @request.skills_needed, start_date: @request.start_date, stop_date: @request.stop_date }
+      post :create, request: { client: @request.client, employee_id: @request.employee_id, group: @request.group, location: @request.location, project: @request.project, request: @request.content, skills_needed: @request.skills_needed, start_date: @request.start_date, stop_date: @request.stop_date }
     end
 
     assert_redirected_to request_path(assigns(:request))
@@ -35,7 +35,7 @@ class RequestsControllerTest < ActionController::TestCase
   end
 
   test "should update request" do
-    put :update, id: @request, request: { client: @request.client, employee_id: @request.employee_id, group: @request.group, location: @request.location, project: @request.project, request: @request.request, skills_needed: @request.skills_needed, start_date: @request.start_date, stop_date: @request.stop_date }
+    put :update, id: @request, request: { client: @request.client, employee_id: @request.employee_id, group: @request.group, location: @request.location, project: @request.project, request: @request.content, skills_needed: @request.skills_needed, start_date: @request.start_date, stop_date: @request.stop_date }
     assert_redirected_to request_path(assigns(:request))
   end
 

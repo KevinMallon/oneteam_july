@@ -11,8 +11,13 @@
     </div>
   <% end %>
 
-<div class="row">
+  <div class="row">
   <div class="span6 offset3">
+  <p>
+    <div class="field">
+      <label for="active">Active:  <%= f.check_box :active, :checked=>"checked" %></label>
+    </div>
+  </p>
   <div class="field">
     <%= f.hidden_field :employee_id %>
   </div>
@@ -37,8 +42,8 @@
     <%= f.date_select :stop_date %>
   </div>
   <div class="field">
-    <%= f.label :request %>
-    <%= f.text_field :request %>
+    <%= f.label :content %>
+    <%= f.text_field :content %>
   </div>
   <div class="field">
     <%= f.label :client %>
