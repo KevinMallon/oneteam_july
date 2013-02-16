@@ -1,0 +1,23 @@
+<%= form_for [@response, @selection] do |f| -%>
+
+  <div class="field">
+    <%= f.hidden_field(:employee_id, :value=>@response.employee_id) %>
+  </div>
+
+  <div class="field">
+    <%= f.hidden_field(:response_id, :value=>@response.id) %>
+  </div>
+
+  <div class="field">
+    <%= f.hidden_field(:request_id, :value=>@response.request.id) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :comments %> 
+    <%= f.text_field :comments %>
+  </div>
+
+  <%= f.submit %>
+<% end -%>
+
+<%= link_to 'Back to requests', requests_path %>

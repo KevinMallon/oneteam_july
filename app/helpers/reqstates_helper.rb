@@ -1,0 +1,2 @@
+module ReqstatesHelper
+end

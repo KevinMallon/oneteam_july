@@ -6,8 +6,10 @@ class RequestsController < ApplicationController
   # GET /requests
   # GET /requests.json
   def index
+    debugger
     @myrequests = current_employee.requests.paginate(page: params[:page])
     @requests = Request.all
+    @employee = current_employee
   end
 
   # GET /requests/1
@@ -102,6 +104,8 @@ class RequestsController < ApplicationController
       @employee = Employee.find(params[:id])
       redirect_to(root_path) unless current_employee?(@employee)
     end
+
+
 
 end
 

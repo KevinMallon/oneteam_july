@@ -1,17 +1,10 @@
 @import "bootstrap";
 
-/* mixins, variables, etc. */
+
+/* universal */
 
 $grayMediumLight: #eaeaea;
 $lightGray: #999;
-
-@mixin box_sizing {
-  -moz-box-sizing: border-box; 
-  -webkit-box-sizing: border-box; 
-  box-sizing: border-box;
-}
-
-/* universal */
 
 td {
 padding: 10px 0;
@@ -122,6 +115,8 @@ footer {
   }
 }
 
+
+
 /* miscellaneous */
 
 .debug_dump {
@@ -129,8 +124,9 @@ footer {
   float: left;
   width: 100%;
   margin-top: 45px;
-  @include box_sizing;
 }
+
+
 
 /* sidebar */
 
@@ -169,7 +165,6 @@ input, textarea, select, .uneditable-input {
   width: 100%;
   padding: 2px;
   margin-bottom: 15px;
-  @include box_sizing;
 }
 
 input {
@@ -203,58 +198,19 @@ input {
   }
 }
 
- 
-
-/* requests */
-
-.requests {
-  list-style: none;
-  margin: 10px 0 0 0;
-    ul.noindent {
-  margin: 0;
-  padding: 0;
-  }
-
-h2 {
-  font-size: 1.7em;
-  letter-spacing: -1px;
-  margin-bottom: 30px;
-  text-align: center;
-  font-weight: normal;
+ #empColumn1 {
+  float:left;
+  width: 10px;
+  margin-top: 10px;
+  text-align:center;
 }
 
-  ul.noindent li {
-  list-type: none;
-  margin: 0;
-      overflow: auto;
-    padding: 10px 0;
-  }
-  }
-
-tr {
-  list-style: none;
-  padding: 10px 0;
-  border-top: 1px solid $grayDarker;
-  &:last-child {
-    border-bottom: 1px solid $grayDarker;
-    }
-
-td {
-  padding: 10px 0;
-    }
-
-td.limit {
-  width: 20px;
+#empColumn2 {
+  position:relative;
+  left: 150px;
+  width: 570px;
 }
 
-}
-
-.request {
-  display: block;
-}
-.timestamp {
-  color: $grayLight;
-}
 .gravatar {
   float: left;
   margin-right: 10px;
@@ -265,5 +221,8 @@ aside {
     margin-bottom: 5px;
   }
 }
+
+
+
 
 

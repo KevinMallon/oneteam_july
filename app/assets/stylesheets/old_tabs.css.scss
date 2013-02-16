@@ -1,0 +1,129 @@
+/* Tabs STYLING  */
+
+body {
+    background: none repeat scroll 0 0 #EEEEEE;
+    color: #555555;
+    font: 12px/18px Arial;
+    margin: 0 auto;
+    max-width: 1300px;
+    padding: 0 8%;
+}
+a {
+    color: teal;
+    text-decoration: none;
+}
+a:hover {
+    color: black;
+}
+.site-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0 0 8px;
+}
+.site-description {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0 0 20px;
+}
+.title {
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 25px;
+}
+strong {
+    font-weight: bold;
+}
+p {
+    margin: 0 0 10px;
+}
+.tab-area p {
+    color: #666666;
+    font-size: 11px;
+}
+h3 {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0 0 10px;
+}
+.intro {
+    margin: 50px 2%;
+    max-width: 550px;
+}
+.tab-area {
+    float: left;
+    margin: 2%;
+    width: 21%;
+}
+input {
+    display: none;
+}
+.tab-link {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background: none repeat scroll 0 0 #CCCCCC;
+    border-color: #BBBBBB #BBBBBB -moz-use-text-color -moz-use-text-color;
+    border-image: none;
+    border-style: solid solid none none;
+    border-width: 1px 1px 0 0;
+    color: #555555;
+    cursor: pointer;
+    display: block;
+    float: left;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 5px 0;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    width: 55px;
+}
+.tab-link:hover {
+    background: none repeat scroll 0 0 #EEEEEE;
+}
+.tab-link:nth-of-type(1) {
+    border-left: 1px solid #BBBBBB;
+}
+.tab-link:hover {
+    color: #666666;
+}
+.tab {
+    background: none repeat scroll 0 0 #DDDDDD;
+    border: 1px solid #BBBBBB;
+    clear: both;
+    display: none;
+    height: 180px;
+    padding: 25px;
+}
+.target-fix {
+    display: block;
+    left: 0;
+    position: fixed;
+    top: 0;
+}
+.tab-area {
+    float: left;
+    margin: 2% 2% 5%;
+    width: 46%;
+}
+.tab-area {
+    float: left;
+    margin: 0 0 5%;
+    width: 100%;
+}
+.intro {
+    margin: 50px 0;
+}
+.tabs-focus .tab-link:focus, .tabs-hover .tab-link:hover, #tabC:target ~ a:nth-of-type(3), #tabB:target ~ a:nth-of-type(2), #tabC:not(:target) ~ #tabB:not(:target) ~ a:nth-of-type(1), #tab-C:checked ~ label:nth-of-type(3), #tab-B:checked ~ label:nth-of-type(2), #tab-B:not(:checked) ~ #tab-C:not(:checked) ~ label:nth-of-type(1) {
+    background: none repeat scroll 0 0 #DDDDDD;
+}
+.tabs-focus .tab-link:focus:after, .tabs-hover .tab-link:hover:after, #tabC:target ~ a:nth-of-type(3):after, #tabB:target ~ a:nth-of-type(2):after, #tabC:not(:target) ~ #tabB:not(:target) ~ a:nth-of-type(1):after, #tab-C:checked ~ label:nth-of-type(3):after, #tab-B:checked ~ label:nth-of-type(2):after, #tab-B:not(:checked) ~ #tab-C:not(:checked) ~ label:nth-of-type(1):after {
+    background: none repeat scroll 0 0 #DDDDDD;
+    content: "";
+    display: block;
+    height: 1px;
+    margin: 5px 0 0;
+    position: absolute;
+    width: 55px;
+}

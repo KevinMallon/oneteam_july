@@ -17,9 +17,17 @@
 #
 
 class Request < ActiveRecord::Base
-  attr_accessible :employee_id, :client, :group, :location, :project, :request, :skills_needed, :start_date, :stop_date, :active
+  attr_accessible :employee_id, :client, :group, :location, :project, :content, :skills_needed, :start_date, :stop_date, :active
   belongs_to :employee  
   belongs_to :selections
   has_many :responses, :dependent => :destroy
   accepts_nested_attributes_for :responses   
+
+
+    def progress_status
+      if Date.today > start_date 
+        return "underway" 
+      end
+    end
+
 end

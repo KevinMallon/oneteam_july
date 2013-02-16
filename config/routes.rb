@@ -1,7 +1,7 @@
 OneteamApp::Application.routes.draw do 
   match '/employees/:employee_id/requests' => 'requests#index'
 
-  root to: 'static_pages#home'
+  root to: 'sessions#new'
   
   match '/home', to: 'static_pages#home'
   match '/help', to: 'static_pages#help'
