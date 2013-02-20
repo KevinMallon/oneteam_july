@@ -6,7 +6,6 @@ class RequestsController < ApplicationController
   # GET /requests
   # GET /requests.json
   def index
-    debugger
     @myrequests = current_employee.requests.paginate(page: params[:page])
     @requests = Request.all
     @employee = current_employee
@@ -28,7 +27,6 @@ class RequestsController < ApplicationController
   def new
     @employee = current_employee
     @request = Request.new
-
 
     respond_to do |format|
       format.html # new.html.erb

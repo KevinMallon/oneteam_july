@@ -1,4 +1,25 @@
+<head>
+<meta charset="utf-8" />
+<link href="/assets/application.css.scss" rel="stylesheet" media="screen">
+<head>
+<meta charset="utf-8" />
+<title>jQuery UI Datepicker - Default functionality</title>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="/resources/demos/style.css" />
+<script>
+$(function() {
+$( "#datepicker" ).datepicker();
+});
+</script>
+<link href="/assets/form.css" rel="stylesheet" media="screen">
+<link href="/assets/bootstrap.css" rel="stylesheet" media="screen">
+</head>
+
+ 
 <%= form_for(@request) do |f| %>
+
   <% if @request.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@request.errors.count, "error") %> prohibited this request from being saved:</h2>
@@ -11,52 +32,79 @@
     </div>
   <% end %>
 
-  <div class="row">
-  <div class="span6 offset3">
-  <p>
-    <div class="field">
-      <label for="active">Active:  <%= f.check_box :active, :checked=>"checked" %></label>
+  <div class="span1">
+      <%= f.label :title %></div>
+        <div class="span11" id="inputArea"><%= f.text_field :title %> </div>
+
+    <div class="field" id="inputArea">
+      <%= f.label :description %>
+      <%= f.text_area :content %>
     </div>
-  </p>
-  <div class="field">
-    <%= f.hidden_field :employee_id %>
-  </div>
-  <div class="field">
-    <%= f.label :group %>
-    <%= f.text_field :group %>
-  </div>
-  <div class="field">
-    <%= f.label :location %>
-    <%= f.text_field :location %>
-  </div>
-  <div class="field">
-    <%= f.label :skills_needed %>
-    <%= f.text_field :skills_needed %>
-  </div>
-  <div class="field">
-    <%= f.label :start_date %>
-    <%= f.date_select :start_date %>
-  </div>
-  <div class="field">
-    <%= f.label :stop_date %>
-    <%= f.date_select :stop_date %>
-  </div>
-  <div class="field">
-    <%= f.label :content %>
-    <%= f.text_field :content %>
-  </div>
-  <div class="field">
-    <%= f.label :client %>
-    <%= f.text_field :client %>
-  </div>
-  <div class="field">
-    <%= f.label :project %>
-    <%= f.text_field :project %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+
+    <div class="span2">
+      <%= f.label :start_date %> </div>
+        <div class="span10" id="inputArea"><input type="text" id="datepicker" />
+    </div>
+
+    <div class="span2">
+      <%= f.label :stop_date %> </div>
+        <div class="span10" id="inputArea"><input type="text" id="datepicker" />
+    </div>
+
+ <p id="inputArea">
+    <div class="span2" class="field" >
+     <%= f.label :group %></div>
+     <div class="span4" id="inputArea"><%= select_tag "group", "<option>Development
+    </option><option>Finance</option><option>Marketing</option>".html_safe %></div>
+     </p>
+ <p id="inputArea">
+    <div class="span2" class="field" id="inputArea">
+    <%= f.label :office %></div>
+    <div class="span4" id="inputArea"><%= select_tag "office", 
+     "<option>Atlanta
+    </option>
+    <option>Boston</option>
+    <option>Chicago</option>
+    <option>Dallas</option><option>New York</option> 
+    <option>Denver</option>
+    <option>Los Angeles</option>
+    <option>San Francisco</option>".html_safe %></div>
+ </p>
+
+<p>
+
+    <div class="field" class="field" id="inputArea">
+      <div class="span2" id="inputArea">Relevant skills </div>
+
+      <div class="span10 offset2" id="inputArea"><label for="skills_needed">PHP    <%= f.check_box :skills_needed  %></label></div> 
+      
+      <div class="span10 offset2" id="inputArea"><label for="skills_needed">MySQL    <%= f.check_box :skills_needed  %></label></div>
+      
+      <div class="span10 offset2" id="inputArea"><label for="skills_needed">C#    <%= f.check_box :skills_needed  %></label></div>
+      
+      <div class="span10 offset2" id="inputArea"><label for="skills_needed">Apache    <%= f.check_box :skills_needed  %></label></div>
+      
+      <div class="span10 offset2" id="inputArea"><label for="skills_needed">Ruby on Rails    <%= f.check_box :skills_needed  %></label></div>
+      
+      <div class="span10 offset2" id="inputArea"><label for="skills_needed">SQL Server   <%= f.check_box :skills_needed  %></label></div>
+      
+      <div class="span10 offset2" id="inputArea"><label for="skills_needed">Linux    <%= f.check_box :skills_needed  %></label></div>
+      
+    </div>
+</p>
+ 
+
+
+    <div>
+      <%= f.submit class: "btn btn-primary" %>
+
+    </div>
+
+
+
 </div>
+
 </div>
+
 <% end %>
-    
+
