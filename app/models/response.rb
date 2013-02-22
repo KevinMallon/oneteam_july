@@ -4,4 +4,3 @@ class Response < ActiveRecord::Base
   belongs_to :employee
   has_many :selections
 end
-

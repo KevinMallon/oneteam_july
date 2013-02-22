@@ -10,9 +10,6 @@
  *
  *= require_self
  */
-@import "bootstrap.css";
-@import "custom.css.scss";
-@import "form.css"
 
 application.css
 body {
@@ -139,17 +136,6 @@ table, td {
 	padding: 0 1em;
 }
 
-#tabs #selected {
-	padding-bottom: 1px; 
-	font-weight: bold;
-}
-
-#tabs #selected a {
-	padding-bottom: 1px; 
-	font-weight: bold;
-	text-decoration: none;
-	border-bottom: 15px solid white;
-}
 
 #note {
 	font-style: italic;
@@ -209,13 +195,8 @@ table, td {
 }
 
 
-link_to:link {text-decoration:none; color:red;}    /* unvisited link */
-link_to:visited {text-decoration:none;} /* visited link */
-link_to:hover {text-decoration:underline;}   /* mouse over link */
-link_to:active {text-decoration:underline;}  /* selected link */
+empColumn1 {
 
-
-#empColumn1 {
   float:left;
   width: 30px;
   margin-top: 10px;

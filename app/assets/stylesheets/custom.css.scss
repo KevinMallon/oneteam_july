@@ -14,17 +14,13 @@ td.underway {
   color: red;
 }
     
-html {
-  overflow-y: scroll;
-}
+
 
 body {
   padding-top: 60px;
 }
 
-section {
-  overflow: auto;
-}
+
 
 textarea {
   resize: vertical;
@@ -37,6 +33,8 @@ textarea {
 .center h1 {
   margin-bottom: 10px;
 }
+
+
 /* typography */
 
 h1, h2, h3, h4, h5, h6 {
@@ -57,6 +55,10 @@ h2 {
   text-align: center;
   font-weight: normal;
   color: $grayLight;
+}
+
+h3 {
+  text-decoration: underline;
 }
 
 .selected {
@@ -89,31 +91,7 @@ p {
   text-decoration: none;
 }
 
-/* footer */
 
-footer {
-  margin-top: 45px;
-  padding-top: 5px;
-  border-top: 1px solid $grayMediumLight;
-  color: $grayLight;
-  a {
-    color: $gray;
-    &:hover { 
-      color: $grayDarker;
-    }
-  }  
-  small { 
-    float: left; 
-  }
-  ul {
-    float: right;
-    list-style: none;
-    li {
-      float: left;
-      margin-left: 10px;
-    }
-  }
-}
 
 
 
@@ -158,6 +136,8 @@ aside {
   margin-right: 10px;
 }
 
+
+
 /* forms */
 
 input, textarea, select, .uneditable-input {
@@ -180,8 +160,63 @@ input {
 
 
 
+/* requests */
+
+.requests {
+  list-style: none;
+  margin: 10px 0 0 0;
+  li {
+    overflow: auto;
+    padding: 10px 0;
+    border-top: 1px solid $lightGray;
+    &:last-child {
+    border-bottom: 1px solid $lightGray;
+    }
+  h3 {
+    font-size: 1.7em;
+    letter-spacing: -1px;
+    margin-bottom: 30px;
+    text-align: left;
+    font-weight: normal;
+    text-decoration: underline;
+    }
+  }
+  }
 
 
 
+  ul.noindent li {
+  list-type: none;
+  margin: 0;
+      overflow: auto;
+    padding: 10px 0;
+  }
 
+
+tr {
+  list-style: none;
+  padding: 10px 0;
+  border-top: 1px solid $grayDarker;
+  &:last-child {
+    border-bottom: 1px solid $grayDarker;
+    }
+ }
+
+td {
+  padding: 10px 0;
+    }
+
+td.limit {
+  width: 20px;
+}
+
+.request {
+  display: block;
+}
+
+.timestamp {
+  color: $lightGray;
+}
+
+ 
 

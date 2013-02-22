@@ -24,10 +24,23 @@ class Request < ActiveRecord::Base
   accepts_nested_attributes_for :responses   
 
 
-    def progress_status
-      if Date.today > start_date 
-        return "underway" 
+  def progress_status
+    if Date.today > start_date 
+      return "In Progress"
+    else 
+      return "Not Started" 
+    end
+  end
+
+  def applied_status(an_employee)
+    responses.each do |response| 
+      if response.employee == an_employee
+        return "applied"
+      else
+        return "apply"
       end
     end
-
+  end
+  
 end
+

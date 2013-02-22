@@ -1,6 +1,8 @@
 
 <% provide(:title, 'All requests') %>
 
+<!doctype html>
+ 
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -15,150 +17,151 @@
   });
   </script>
 </head>
+
+
+ <div>
+  <section>
+    <%= link_to 'Create a new request', new_request_path, class: "btn btn-small btn-primary" %>
+  </section>
+</div>
+
 <body>
- 
+  
 <div id="tabs">
   <ul>
-    <li><a href="#tabs-1">All Requests</a></li>
+    <li><a href="#tabs-1">Requests</a></li>
     <li><a href="#tabs-2">My Profile</a></li>
-    <li><a href="#tabs-3">Requests I've Made</a></li>
-  </ul>
-
-
+    <li><a href="#tabs-3">Requests I've Posted</a></li>
+    </ul>
 <div id="tabs-1">
-<div  id="requests">
+
     <h3>All Requests</h3>
 </div>
-        
-<ul class="employees">
+
+    <ul  class="employees" id="bodycontent">
   
     <% @requests.each do |request| %>
-        <li> 
-            <% if request.employee != current_employee %> <% if Date.today < request.stop_date %>
+         
+          <% if request.employee != current_employee %> 
+            <% if Date.today < request.stop_date %>
+<li>
+              <p>
+                  <%= request.client %> <%= request.project %><%= request.start_date %> - <%= request.stop_date %>
+              </p>
+              <p>
+                  <%= request.employee.name %> for the <%= request.location %> office
+              </p>
+              <p>
+                  <%= request.content %> <%= request.skills_needed %>
+              </p>
 
-            <p>
-                <%= request.client %> <%= request.project %><span class="<%= request.progress_status %>"></span> <%= request.start_date %> - <%= request.stop_date %>
-            </p>
-            <p>
-                <%= request.employee.name %> for the <%= request.location %> office
-            </p>
-            <p>
-                <%= request.content %> <%= request.skills_needed %>
-            </p>
-            <%= link_to 'Apply', new_request_response_path(request), class: "btn" %>
-        </li>
-        
+                <% if request.applied_status (current_employee) == "apply" %>
+                     Applied 
+                <% else %>
+                     <%= link_to "Apply", new_request_response_path(request), class: "btn btn-primary" %>
+                <% end %>
+       </li>
+            <% end %>
+        <% end %>
+
     <% end %>
 
-    <% end %>
-<% end %>
-</ul> 
-
+</ul>    
 </div>
+
 
 <div id="tabs-2">
+  <h3>
+    My Profile
+  </h3>
+  <p>
+      <%= link_to 'Edit Profile', edit_employee_path(@employee) =%>
+  </p>
+    <section>
+      <div>
 
-        <section>
-                <div class="span2"><h1>
-                My Profile
-                </h1>
-                <p>
-                    <%= link_to 'Edit Profile', edit_employee_path(@employee) =%>
-                </p>
-                <p>
-                    <%= gravatar_for @employee %>
-                </p>
-            </div>
-                <div class="span10">
+      <%= gravatar_for @employee %>
 
-                <p>
-                    First Name:
-                    Last Name:
-                    <%= @employee.name %>
-                </p>
+      </div>
+      <div>
 
-                <p>
-                    Email:
-                    <%= @employee.email %>
-                </p>
+      <p>
+          First Name:
+          Last Name:
+          <%= @employee.name %>
+      </p>
 
-                <p>
-                    Skills:
-                    <%= @employee.skills %>
-                </p>
+      <p>
+          Email:
+          <%= @employee.email %>
+      </p>
 
-                <p>
-                    Interests:
-                    <%= @employee.interests %>
-                </p>
+      <p>
+          Skills:
+          <%= @employee.skills %>
+      </p>
 
-                <p>
-                    Group:
-                    <%= @employee.group %>
-                </p>
+      <p>
+          Interests:
+          <%= @employee.interests %>
+      </p>
 
-                <p>
-                    Location:
-                    <%= @employee.location %>
-                </p>
+      <p>
+          Group:
+          <%= @employee.group %>
+      </p>
 
-                <p>
-                    Current Project:
-                    <%= @employee.current_project %>
-                </p>
-            </div>
-          </p>
-        </section>
+      <p>
+          Location:
+          <%= @employee.location %>
+      </p>
 
-</div>
+      <p>
+          Current Project:
+          <%= @employee.current_project %>
+      </p>
 
-  <div id="tabs-3">
-    <% unless current_employee.requests.empty? %>
-<h1>My Requests</h1>
-
-
-
- <% @myrequests.each do |request| %> 
-
-<ul class="employees">
-  <li>
-           <p>
-                <%= request.client %> <%= request.project %><span class="<%= request.progress_status %>"></span> <%= request.start_date %> - <%= request.stop_date %>
-            </p>
-            <p>
-                <%= request.content %><%= request.skills_needed %>
-            </p>
-            <p>Applicants:</p>
-
-                <% request.responses.each do |response| %>
-                            <p>
-                                <% if !response.selections.empty? %>    
-                                         <%= response.employee.name %> Selected                                
-                                <% else %> 
-                                     
-                                         <%= link_to response.employee.name, employee_path(response.employee) %> <%= link_to 'Select', new_response_selection_path(response) %>
-                                <% end %>
-                            </p>
-                <% end %>
-     </tr>    
-           </li>         
- <% end %>
-  
-</ul>
-
-<% else %>
-<p>You do not have any requests.</p>
-<% end %> 
   </div>
+  </section>
 
 </div>
- 
- 
+
+
+
+<div id="tabs-3">
+  <% unless current_employee.requests.empty? %>
+    <h3>Requests I've Posted</h3>
+
+    <div><%= link_to 'New Request', new_request_path %></div>
+
+     <% @myrequests.each do |request| %> 
+
+    <ul  class="employees"id="bodycontent">
+      <li>
+             <p>
+                  <%= request.client %> <%= request.project %><span class="<%= request.progress_status %>"></span> <%= request.start_date %> - <%= request.stop_date %>
+              </p>
+              <p>
+                  <%= request.content %><%= request.skills_needed %>
+              </p>
+              <p>Applicants:</p>
+
+                  <% request.responses.each do |response| %>
+                      <p>
+                          <% if !response.selections.empty? %>    
+                                   <%= response.employee.name %> Selected                                
+                          <% else %> 
+                               
+                                   <%= link_to response.employee.name, employee_path(response.employee) %> <%= link_to 'Select', new_response_selection_path(response) %>
+                          <% end %>
+                      </p>
+                  <% end %>                       
+      </li>
+    </ul>
+    <% end %> 
+<% end %> 
+</div>
+
+</div>
 </body>
 </html>
-
-
-
-
-
-
