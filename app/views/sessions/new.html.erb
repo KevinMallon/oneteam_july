@@ -1,8 +1,23 @@
 <% provide(:title, "Sign in") %>
+
+<!DOCTYPE html>
+  <html>
+    <head>
+    <title>Bootstrap 101 Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    </head>
+  </html>
+
+
+
 <h1>Sign in</h1>
 
 <div class="row">
-  <div class="span6 offset3">
+     <div class="offset2">
     <%= form_for(:session, url: sessions_path) do |f| %>
 
       <%= f.label :email %>
@@ -11,9 +26,8 @@
       <%= f.label :password %>
       <%= f.password_field :password %>
 
-      <%= f.submit "Sign in", class: "btn btn-large btn-primary" %>
-    <% end %>
-
-    <p>New user? <%= link_to "Sign up now!", signup_path %></p>
-  </div>
+      <p><%= f.submit "Sign in", class: "btn btn-large btn-primary" %></p>
+    <% end %><p>New user? <%= link_to "Sign up now!", signup_path %></p>
 </div>
+</div>
+

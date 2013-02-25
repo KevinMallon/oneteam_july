@@ -1,28 +1,30 @@
 
 <% provide(:title, 'All requests') %>
 
-<!doctype html>
- 
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-  <meta charset="utf-8" />
-  <title>jQuery UI Tabs - Default functionality</title>
-  <link href="/assets/application.css.scss" rel="stylesheet" media="screen">
-  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
-  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-  <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
-  <script>
-  $(function() {
-    $( "#tabs" ).tabs();
-  });
-  </script>
+<meta charset="utf-8" />
+<title>jQuery UI Tabs - Default functionality</title>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="/resources/demos/style.css" />
+    <title>Bootstrap 101 Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+<script>
+$(function() {
+$( "#tabs" ).tabs();
+});
+</script>
 </head>
 
 
+
  <div>
-  <section>
     <%= link_to 'Create a new request', new_request_path, class: "btn btn-small btn-primary" %>
-  </section>
 </div>
 
 <body>
@@ -33,12 +35,12 @@
     <li><a href="#tabs-2">My Profile</a></li>
     <li><a href="#tabs-3">Requests I've Posted</a></li>
     </ul>
+
 <div id="tabs-1">
 
     <h3>All Requests</h3>
-</div>
 
-    <ul  class="employees" id="bodycontent">
+    <ul  class="employees">
   
     <% @requests.each do |request| %>
          
@@ -55,8 +57,13 @@
                   <%= request.content %> <%= request.skills_needed %>
               </p>
 
-                <% if request.applied_status (current_employee) == "apply" %>
-                     Applied 
+
+<p>employee: <%= current_employee.name %> 
+  status: <%= request.applied_status(current_employee) %>
+  test: <%= request.applied_status(current_employee) == "applied" %>
+</p>
+                <% if request.applied_status (current_employee) == "applied" %>
+                     Applied
                 <% else %>
                      <%= link_to "Apply", new_request_response_path(request), class: "btn btn-primary" %>
                 <% end %>
@@ -77,13 +84,15 @@
   <p>
       <%= link_to 'Edit Profile', edit_employee_path(@employee) =%>
   </p>
-    <section>
+  
       <div>
 
       <%= gravatar_for @employee %>
 
       </div>
-      <div>
+    <div class="offset2">
+
+      <div class="employees">
 
       <p>
           First Name:
@@ -122,7 +131,7 @@
       </p>
 
   </div>
-  </section>
+  </div>
 
 </div>
 
@@ -136,7 +145,7 @@
 
      <% @myrequests.each do |request| %> 
 
-    <ul  class="employees"id="bodycontent">
+    <ul  class="employees">
       <li>
              <p>
                   <%= request.client %> <%= request.project %><span class="<%= request.progress_status %>"></span> <%= request.start_date %> - <%= request.stop_date %>

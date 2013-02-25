@@ -32,15 +32,15 @@ class Request < ActiveRecord::Base
     end
   end
 
+
   def applied_status(an_employee)
     responses.each do |response| 
       if response.employee == an_employee
-        return "applied"
-      else
-        return "apply"
+        return "applied" 
       end
     end
+  return "apply"
   end
-  
+
 end
 

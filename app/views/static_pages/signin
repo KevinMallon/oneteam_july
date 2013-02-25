@@ -1,8 +1,17 @@
 <% provide(:title, 'Sign In') %>
+<!DOCTYPE html>
+ 
+<head>
+
+</head>
+
   <body>
 <p>
   This is the home page for the OneTeam system. 
 </p>
+
+<div class="row">
+  <div class="span6 offset3">
 <div class="center hero-unit">
 
   <%= link_to "Sign In", signin_path, class: "btn btn-large btn-primary" %>
@@ -11,4 +20,7 @@
 <div>
 	<p>Not a member? <%= link_to "Sign up now!", signup_path %></p>
 </div>
+</div>
+</div>
   </body>
+</html>

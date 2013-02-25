@@ -10,6 +10,12 @@
  *
  *= require_self
  */
+<<<<<<< HEAD
+@import "bootstrap.css";
+@import "custom.css.scss";
+@import "form.css"
+=======
+>>>>>>> stylesheet2-21
 
 application.css
 body {
@@ -195,8 +201,7 @@ table, td {
 }
 
 
-empColumn1 {
-
+#empColumn1 {
   float:left;
   width: 30px;
   margin-top: 10px;
