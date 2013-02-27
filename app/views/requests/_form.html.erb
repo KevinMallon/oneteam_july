@@ -1,20 +1,18 @@
 <head>
 <meta charset="utf-8" />
-<link href="/assets/application.css.scss" rel="stylesheet" media="screen">
-<head>
-<meta charset="utf-8" />
 <title>jQuery UI Datepicker - Default functionality</title>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
-<link rel="stylesheet" href="/resources/demos/style.css" />
-    <title>Bootstrap 101 Template</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+
 <script>
 $(function() {
-$( "#datepicker" ).datepicker();
+$( "#startdatepicker" ).datepicker();
+});
+</script>
+<script>
+$(function() {
+$( "#enddatepicker" ).datepicker();
 });
 </script>
 </head>
@@ -34,102 +32,109 @@ $( "#datepicker" ).datepicker();
     </div>
   <% end %>
 
-<div class="row">
-    <div class="span2">
-      <%= f.label :title %>
-    </div>
-    <div class="span10">
-      <%= f.text_field :title %> 
-    </div>
-</div>
-
-
-<div class="controls controls-row">
-      <div><%= f.label :description %></div>
-      <div><textarea class="span5" rows="4" type="text" name="content" ></textarea></div>
-</div>
-
-
-<div class="row">
-    <div class="span2">
-      <%= f.label :start_date %> </div>
-        <div class="span10"><input type="text" id="datepicker" />
-    </div>
-</div>
-
-<div class="row">
-    <div class="span2">
-      <%= f.label :stop_date %> </div>
-        <div class="span10"><input type="text" id="datepicker" />
-    </div>
-</div>
-
-<div class="controls controls-row">
-  <div class="row">
-<div class="span2"><label class="text-left">Group</label></div>
-<div class="span3"><select class="span2" name="group">"<option>Development</option><option>Finance</option><option>Marketing</option>"
-</select></div>
-
-<!--Body content-->
-<div class="span1  offset2"><%= f.label :office %></div>
-<select class="span2" name="office"> 
-"<option>Atlanta</option>
-<option>Boston</option>
-<option>Chicago</option>
-<option>Dallas</option><option>New York</option> 
-<option>Denver</option>
-<option>Los Angeles</option>
-<option>San Francisco</option>"
-</select>
-</div>
-</div>   
-    
-<div class="controls controls-row">
-<div class="row">
-<div class="span2"><label class="text-left">Relevant skills</label>
-</div>
-</div>
-
-<div class="offset2" >
-<div class="row">      
-  <div class="span1" ><%= f.check_box :skills_needed  %></div><label for="skills_needed"> PHP</label> </div>
-      
-<div class="row">      
-  <div class="span1" ><%= f.check_box :skills_needed  %></div><div><label for="skills_needed">MySQL</label>
-</div>
-      
-<div class="row">      
-  <div class="span1" ><%= f.check_box :skills_needed  %></div><div><label for="skills_needed">C#</label>
-</div>
-
-<div class="row">      
-  <div class="span1" ><%= f.check_box :skills_needed  %></div><div><label for="skills_needed">Apache</label>
-</div>
-      
-<div class="row">      
-  <div class="span1" ><%= f.check_box :skills_needed  %></div><div><label for="skills_needed">Ruby on Rails    </label>
-</div>
-      
-<div class="row">      
-  <div class="span1" ><%= f.check_box :skills_needed  %></div><div><label for="skills_needed">SQL Server   </label>
-</div>
-      
-<div class="row">      
-  <div class="span1" ><%= f.check_box :skills_needed  %></div><div><label for="skills_needed">Linux    </label>
-</div>
-      
-</div>
-</div>
 
 
 <p>
-<div class="row">
-    <div>
-      <%= f.submit class: "btn btn-primary" %>
-
-    </div>
-</row>
+<div id="Container1" > 
+      <%= f.label :title %>
 </div>
+<div id="Container2" >
+      <%= f.text_field :project %> 
+</div>
+</p>
+
+<p>     
+  <div>
+    <%= f.label :description %></div>
+    <%= f.text_area :content, :size => "25x10" %>
+</p> 
+
+<p>
+<div id="Container1" > 
+      <%= f.label :start_date %> 
+</div>
+<div id="Container2" ><input name="request[start_date]" type="string" id="startdatepicker" />
+</div>
+</p>
+
+<div id="Container1" >  
+      <%= f.label :end_date %> </div>
+<div id="Container2" > <input name="request[stop_date]" type="string" id="enddatepicker" />
+    </div>
+
+<div id="Container1" >  
+    <%= f.label :group %>
+</div>
+
+<div id="Container2" >  
+    <%= f.select :group, ['Development','Finance','Marketing'] %>
+</div>
+
+<div id="Container1" >  
+    <%= f.label :office %>
+</div>
+
+<div id="Container2" >  
+    <%= f.select :location, ['Atlanta',
+    'Boston', 'Chicago', 'Dallas', 'New York', 'Denver', 'Los Angeles','San Francisco'] %>
+</div>
+
+<p>
+
+<div id="Container1" >    
+<label class="text-left">Relevant skills</label>
+
+</div>
+
+<div id="Container2" >
+
+    <div class="row">      
+      <div class="span1" ><%= f.check_box :skills_needed  %></div>
+      <label for="skills_needed" > PHP</label> 
+    </div>
+          
+    <div class="row">      
+      <div class="span1" ><%= f.check_box :skills_needed  %></div>
+      <label for="skills_needed">MySQL</label>
+    </div>
+          
+    <div class="row">      
+      <div class="span1" ><%= f.check_box :skills_needed  %></div>
+      <label for="skills_needed">C#</label>
+    </div>
+
+    <div class="row">      
+      <div class="span1" ><%= f.check_box :skills_needed  %></div>
+      <label for="skills_needed">Apache</label>
+    </div>
+          
+    <div class="row">      
+      <div class="span1" ><%= f.check_box :skills_needed  %></div>
+      <label for="skills_needed">Ruby on Rails</label>
+    </div>
+          
+    <div class="row">      
+      <div class="span1" ><%= f.check_box :skills_needed  %></div>
+      <label for="skills_needed">SQL Server</label>
+    </div>
+          
+    <div class="row">      
+      <div class="span1" ><%= f.check_box :skills_needed  %></div>
+      <label for="skills_needed">Linux</label>
+    </div>
+      
+</div>
+
+</p>
+
+<p>
+  <%= f.check_box :active, :checked => true, :style => 'visibility: hidden' %>
+</p>
+
+<p>
+  <div>
+    <%= f.submit class: "btn btn-primary" %>
+  </div>
 </p>
 
 </div>

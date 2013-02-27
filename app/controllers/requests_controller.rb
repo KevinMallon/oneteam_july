@@ -78,6 +78,28 @@ class RequestsController < ApplicationController
     end
   end
 
+  # PUT /requests/1
+  # PUT /requests/1.json
+  def cancel_active
+      @request = Request.find(params[:id])
+    if @request.update_attributes(params[:request])
+      requests_path
+    else
+      render 'edit'
+    end
+
+    respond_to do |format|
+      if @request.update_attributes(active: "0")
+        format.html { redirect_to @request, notice: 'Request cancelled.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @request.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+
   # DELETE /requests/1
   # DELETE /requests/1.json
   def destroy

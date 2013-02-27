@@ -9,11 +9,7 @@
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
-<link rel="stylesheet" href="/resources/demos/style.css" />
-    <title>Bootstrap 101 Template</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="/assets/custom.css?body=1" media="all" rel="stylesheet" type="text/css" />
 <script>
 $(function() {
 $( "#tabs" ).tabs();
@@ -22,10 +18,6 @@ $( "#tabs" ).tabs();
 </head>
 
 
-
- <div>
-    <%= link_to 'Create a new request', new_request_path, class: "btn btn-small btn-primary" %>
-</div>
 
 <body>
   
@@ -40,32 +32,24 @@ $( "#tabs" ).tabs();
 
     <h3>All Requests</h3>
 
-    <ul  class="employees">
+    <ul class="employees">
   
     <% @requests.each do |request| %>
          
           <% if request.employee != current_employee %> 
             <% if Date.today < request.stop_date %>
 <li>
-              <p>
-                  <%= request.client %> <%= request.project %><%= request.start_date %> - <%= request.stop_date %>
-              </p>
-              <p>
-                  <%= request.employee.name %> for the <%= request.location %> office
-              </p>
-              <p>
-                  <%= request.content %> <%= request.skills_needed %>
-              </p>
 
+      <p><b><%= request.project %>:</b> <%= request.start_date %> to <%= request.stop_date %> </br>
 
-<p>employee: <%= current_employee.name %> 
-  status: <%= request.applied_status(current_employee) %>
-  test: <%= request.applied_status(current_employee) == "applied" %>
-</p>
-                <% if request.applied_status (current_employee) == "applied" %>
+        Posted by: <%= request.employee.name %> in <%= request.employee.location %> Office (Group: <%= request.employee.group %>) </br>
+        Description: <%= request.content %></br>
+      </p> 
+
+                <% if request.applied_status(current_employee) == "applied" %>
                      Applied
                 <% else %>
-                     <%= link_to "Apply", new_request_response_path(request), class: "btn btn-primary" %>
+                     <%= link_to "Apply", new_request_response_path(request), class: "btn" %>
                 <% end %>
        </li>
             <% end %>
@@ -81,7 +65,7 @@ $( "#tabs" ).tabs();
   <h3>
     My Profile
   </h3>
-  <p>
+  <p class="employees">
       <%= link_to 'Edit Profile', edit_employee_path(@employee) =%>
   </p>
   
@@ -141,33 +125,35 @@ $( "#tabs" ).tabs();
   <% unless current_employee.requests.empty? %>
     <h3>Requests I've Posted</h3>
 
-    <div><%= link_to 'New Request', new_request_path %></div>
+    <ul  class="employees"><li><%= link_to 'New Request', new_request_path %></li></ul>
 
      <% @myrequests.each do |request| %> 
 
-    <ul  class="employees">
-      <li>
-             <p>
-                  <%= request.client %> <%= request.project %><span class="<%= request.progress_status %>"></span> <%= request.start_date %> - <%= request.stop_date %>
-              </p>
-              <p>
-                  <%= request.content %><%= request.skills_needed %>
-              </p>
-              <p>Applicants:</p>
+        <ul  class="employees">
+          <li>
+           <p>
+              <%= request.client %> <%= request.start_date %> - <%= request.stop_date %></br>
+    Description: <%= request.content %></br>
 
-                  <% request.responses.each do |response| %>
-                      <p>
-                          <% if !response.selections.empty? %>    
-                                   <%= response.employee.name %> Selected                                
-                          <% else %> 
-                               
-                                   <%= link_to response.employee.name, employee_path(response.employee) %> <%= link_to 'Select', new_response_selection_path(response) %>
-                          <% end %>
-                      </p>
-                  <% end %>                       
-      </li>
-    </ul>
-    <% end %> 
+              Active <%= link_to 'Cancel', request, method: :delete, data: { confirm: 'Are you sure?' } %> <%= link_to 'Edit', edit_request_path(request) %>
+          </p>
+
+          <p>Applicants:</br>
+
+          <% request.responses.each do |response| %>
+                <% if !response.selections.empty? %>    
+                         <%= link_to response.employee.name, employee_path(response.employee) %> Selected                                
+                <% else %> 
+                         <%= link_to response.employee.name, employee_path(response.employee) %> <%= link_to 'Select', new_response_selection_path(response) %>
+                <% end %>
+</br>
+
+          <% end %>                       
+
+         </li>
+        </ul>
+    <% end %>
+
 <% end %> 
 </div>
 
