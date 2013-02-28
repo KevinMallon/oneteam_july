@@ -17,7 +17,12 @@
   }
 }
 
-
+#emp_update_form ul li
+{
+  display: inline;
+  list-style-type: none;
+  margin:10;
+}
 
 .emp-cancel-update {
   position:relative;
@@ -64,8 +69,6 @@
 #profile ul li {
   list-style: none;
 }
-
-
 
 #profile_pic {
   width: 150px;

@@ -3,22 +3,13 @@
 <!DOCTYPE html>
   <html>
     <head>
-    <title>Bootstrap 101 Template</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <script src="http://code.jquery.com/jquery.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <link href="css/employees.css.scss" rel="stylesheet">
+
     </head>
   </html>
 
 <h1>Update your profile</h1>
 
-<div id="emp-form">
-
-<%= hidden_field_tag "employee[current_skills][]", "" %>
-<%= hidden_field_tag "employee[skills_interested_in][]", "" %>
+<form class="form-inline">
 
 <%= form_for(@employee) do |f| %>
   <% if @employee.errors.any? %>
@@ -32,79 +23,157 @@
     </div>
   <% end %>
 
-<div id="emp-first">
-  <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </div>
-</div>
+ 
+<p class="form-inline">
+  <%= f.label :name %>
+  <%= f.text_field :name, :maxlength => 15 %>
+</p>
 
-
-<div id="emp-third">
-  <div class="field">
+<p id="row">
+<div class="form-inline">
     <%= f.label :email %>
     <%= f.text_field :email %>
-  </div>
-</div>
-<div id="emp-fourth">  
-  <div class="field">
+
     <%= f.label :office %>
-    <%= f.select :location, ['New York', 'Chicago', 'Los Angeles', 'Atlanta', 'Detroit', 'Boston', 'Mumbai', 'Houston'] %>
-  </div>
-</div>
+    <%= f.select :location, ['Atlanta', 'Boston', 'Chicago', 'Dallas', 'New York', 'Denver', 'Los Angeles','San Francisco'] %>
 
-<div id="emp-fifth">  
-  <div class="field">
-    <%= f.label :name %>
-    <%= f.select :name, ['IT', 'HR', 'R&D'] %>
-  </div>
-</div>
+    <%= f.label :department %>
+    <%= f.select :department, ['IT', 'HR', 'R&D'] %>
 
-<div id="emp-sixth">
-  <div class="field">
-    <%= f.label :group %>
-    <%= f.select :group, ['Development', 'Design', 'QA'] %>
-  </div>
+    <%= f.label :group%>
+    <%= f.select :group, ['Development','Finance','Marketing'] %>
 </div>
+</p>
 
-<div id="emp-seventh">
- <div class="field">
+<p id="row">
+<div class="form-inline">
     <%= f.label :job_title %>
-    <%= f.select :name, ['Engineer', 'Analyst', 'Supervisor'] %>
-  </div>
-</div>
-<div id="emp-eighth">  
-  <div class="field">
+    <%= f.select :name, ['Developer', 'Analyst', 'Manager'] %>
+
     <%= f.label :immediate_supervisor %>
-    <%= f.text_field :name %>
-  </div>
-</div>
-<div id="emp-ninth">  
-  <div class="field">
+    <%= f.text_field :supervisor %>
+
     <%= f.label :years_with_company %>
-    <%= f.select :name, ['1','2','3','4','5','6','7','8','9','10-15','16-20', '21-25', '25-30'] %>
+    <%= f.select :years_at_company, ['1','2','3','4','5','6','7','8','9','10-20','20-30', '>30'] %>
   </div>
-</div>
-<div id="emp-tenth">     
-  <div id="emp-description">
-    <div class="field">
-      <%= f.label :description %><br/>
-      <%= f.text_area :name, :size => "35x4" %>
-    </div>
+</p>
+</form>  
+
+<p id="row" >
+  <div id="Container3" class="span12"> 
+      <%= f.label :Write_a_little_about_yourself %>
+      <%= f.text_area :description, :size => "65x4" %>
   </div>
+
+  <div id="container4">
+      <div>
+
+      <%= gravatar_for @employee %>
+
+      </div>
+  </div>
+
+</p>
+
+<p id="row" >
+
+  <div id="Container3" >    
+
+    <label class="text-left">Current Skills</label>
+
+      <div class="row">      
+        <div class="span1" ><%= f.check_box :current_skills  %></div>
+        <label for="current_skills" > PHP</label> 
+      </div>
+            
+      <div class="row">      
+        <div class="span1" ><%= f.check_box :current_skills  %></div>
+        <label for="current_skills">MySQL</label>
+      </div>
+            
+      <div class="row">      
+        <div class="span1" ><%= f.check_box :current_skills  %></div>
+        <label for="current_skills">C#</label>
+      </div>
+
+      <div class="row">      
+        <div class="span1" ><%= f.check_box :current_skills %></div>
+        <label for="current_skills">Apache</label>
+      </div>
+            
+      <div class="row">      
+        <div class="span1" ><%= f.check_box :current_skills  %></div>
+        <label for="current_skills">Ruby on Rails</label>
+      </div>
+            
+      <div class="row">      
+        <div class="span1" ><%= f.check_box :current_skills  %></div>
+        <label for="current_skills">SQL Server</label>
+      </div>
+            
+      <div class="row">      
+        <div class="span1" ><%= f.check_box :current_skills  %></div>
+        <label for="current_skills">Linux</label>
+      </div></br></br>
+
+     <p id="row" class="employees">
+      <%= f.submit "Update Profile", :action => 'update', class: "btn btn-large btn-primary" %>
+      <%= link_to 'Cancel', requests_path,  class: "btn btn-large" %>
+    </p>
+  </div>
+
+  <div id="Container4" >    
+
+    <label class="text-left">Desired Skills</label>
+
+      <div class="row">      
+        <div class="span1" ><%= f.check_box :skills_interested_in  %></div>
+        <label for="skills_interested_in" > PHP</label> 
+      </div>
+            
+      <div class="row">      
+        <div class="span1" ><%= f.check_box :skills_interested_in  %></div>
+        <label for="skills_interested_in">MySQL</label>
+      </div>
+            
+      <div class="row">      
+        <div class="span1" ><%= f.check_box :skills_interested_in  %></div>
+        <label for="skills_interested_in">C#</label>
+      </div>
+
+      <div class="row">      
+        <div class="span1" ><%= f.check_box :skills_interested_in %></div>
+        <label for="skills_interested_in">Apache</label>
+      </div>
+            
+      <div class="row">      
+        <div class="span1" ><%= f.check_box :skills_interested_in  %></div>
+        <label for="skills_interested_in">Ruby on Rails</label>
+      </div>
+            
+      <div class="row">      
+        <div class="span1" ><%= f.check_box :skills_interested_in  %></div>
+        <label for="skills_interested_in">SQL Server</label>
+      </div>
+            
+      <div class="row">      
+        <div class="span1" ><%= f.check_box :skills_interested_in  %></div>
+        <label for="skills_interested_in">Linux</label>
+      </div></br></br>
+
+  <p id="row" >
+
+
+  </p>
+
+  </p>
+
+</p>
+
+
 </div>
 
-   
-<div id="emp-fourteenth">
-  <div id="emp-update">
-    <%= f.submit "Update Profile", class: "btn btn-large btn-primary" %>
-    <div id="emp-cancel-update">
-      <%= f.submit 'Cancel', :action => 'update', :name => 'cancel_button' %>
-    </div>
-  <% end %>
-  </div>
-    
-</div>
 
-</div> 
 
+
+<% end %>

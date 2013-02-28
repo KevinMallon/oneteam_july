@@ -1,42 +1,158 @@
 <% provide(:title, 'Sign up') %>
 
-<div class="row">
-  <div class="span6 offset3">
-    <%= form_for(@employee) do |f| %>
-      <%= render 'shared/error_messages' %>
+<!DOCTYPE html>
+  <html>
+    <head>
+    </head>
+  </html>
 
-      <div class="field">
-        <%= f.label :name %>
-        <%= f.text_field :name %>
+<form class="form-inline">
 
-        <%= f.label :email %>
-        <%= f.text_field :email %>
+<%= form_for(@employee) do |f| %>
+  <% if @employee.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@employee.errors.count, "error") %> prohibited this employee from being saved:</h2>
+      <ul>
+      <% @employee.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-        <%= f.label :password %>
-        <%= f.password_field :password %>
+ 
+<p class="form-inline">
+  <%= f.label :name %>
+  <%= f.text_field :name, :maxlength => 5 %>
+</p>
 
-        <%= f.label :password_confirmation, "Confirmation" %>
-        <%= f.password_field :password_confirmation %>
+<p id="row">
+<div class="form-inline">
+    <%= f.label :email %>
+    <%= f.text_field :email %>
 
-        <%= f.label :skills %>
-        <%= f.text_field :skills %>
+    <%= f.label :office %>
+    <%= f.select :location, ['Atlanta', 'Boston', 'Chicago', 'Dallas', 'New York', 'Denver', 'Los Angeles','San Francisco'] %>
 
-        <%= f.label :interests %>
-        <%= f.text_field :interests %>
+    <%= f.label :department %>
+    <%= f.select :department, ['IT', 'HR', 'R&D'] %>
 
-        <%= f.label :group %>
-        <%= f.text_field :group %>
+    <%= f.label :group%>
+    <%= f.select :group, ['Development','Finance','Marketing'] %>
+</div>
+</p>
 
-        <%= f.label :location %>
-        <%= f.text_field :location %>
+<p id="row">
+<div class="form-inline">
+    <%= f.label :job_title %>
+    <%= f.select :name, ['Developer', 'Analyst', 'Manager'] %>
 
-        <%= f.label :current_project %>
-        <%= f.text_field :current_project %>
+    <%= f.label :immediate_supervisor %>
+    <%= f.text_field :supervisor %>
+
+    <%= f.label :years_with_company %>
+    <%= f.select :years_at_company, ['1','2','3','4','5','6','7','8','9','10-20','20-30', '>30'] %>
+  </div>
+</p>
+</form>  
+
+<p id="row" >
+  <div id="Container3" class="span12" class="form-inline"> 
+      <%= f.label :Write_a_little_about_yourself %>
+      <%= f.text_area :description, :size => "65x4" %>
+  </div>
+
+
+</p>
+
+<p id="row" >
+
+  <div id="Container3" >    
+
+    <label class="text-left">Current Skills</label>
+
+      <div class="row">      
+        <div class="span1" ><%= f.check_box :current_skills  %></div>
+        <label for="current_skills" > PHP</label> 
+      </div>
+            
+      <div class="row">      
+        <div class="span1" ><%= f.check_box :current_skills  %></div>
+        <label for="current_skills">MySQL</label>
+      </div>
+            
+      <div class="row">      
+        <div class="span1" ><%= f.check_box :current_skills  %></div>
+        <label for="current_skills">C#</label>
       </div>
 
+      <div class="row">      
+        <div class="span1" ><%= f.check_box :current_skills %></div>
+        <label for="current_skills">Apache</label>
+      </div>
+            
+      <div class="row">      
+        <div class="span1" ><%= f.check_box :current_skills  %></div>
+        <label for="current_skills">Ruby on Rails</label>
+      </div>
+            
+      <div class="row">      
+        <div class="span1" ><%= f.check_box :current_skills  %></div>
+        <label for="current_skills">SQL Server</label>
+      </div>
+            
+      <div class="row">      
+        <div class="span1" ><%= f.check_box :current_skills  %></div>
+        <label for="current_skills">Linux</label>
+      </div></br></br>
+
+    <p id="row" >
       <div class="actions">
         <%= f.submit "Create my account", class: "btn btn-large btn-primary" %>
       </div>
-  <% end %>
+  </p>
   </div>
+
+  <div id="Container4" >    
+
+    <label class="text-left">Desired Skills</label>
+
+      <div class="row">      
+        <div class="span1" ><%= f.check_box :skills_interested_in  %></div>
+        <label for="skills_interested_in" > PHP</label> 
+      </div>
+            
+      <div class="row">      
+        <div class="span1" ><%= f.check_box :skills_interested_in  %></div>
+        <label for="skills_interested_in">MySQL</label>
+      </div>
+            
+      <div class="row">      
+        <div class="span1" ><%= f.check_box :skills_interested_in  %></div>
+        <label for="skills_interested_in">C#</label>
+      </div>
+
+      <div class="row">      
+        <div class="span1" ><%= f.check_box :skills_interested_in %></div>
+        <label for="skills_interested_in">Apache</label>
+      </div>
+            
+      <div class="row">      
+        <div class="span1" ><%= f.check_box :skills_interested_in  %></div>
+        <label for="skills_interested_in">Ruby on Rails</label>
+      </div>
+            
+      <div class="row">      
+        <div class="span1" ><%= f.check_box :skills_interested_in  %></div>
+        <label for="skills_interested_in">SQL Server</label>
+      </div>
+            
+      <div class="row">      
+        <div class="span1" ><%= f.check_box :skills_interested_in  %></div>
+        <label for="skills_interested_in">Linux</label>
+      </div></br></br>
+
 </div>
+
+
+<% end %>

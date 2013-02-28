@@ -17,8 +17,6 @@ $( "#tabs" ).tabs();
 </script>
 </head>
 
-
-
 <body>
   
 <div id="tabs">
@@ -79,8 +77,7 @@ $( "#tabs" ).tabs();
       <div class="employees">
 
       <p>
-          First Name:
-          Last Name:
+          Name:
           <%= @employee.name %>
       </p>
 
@@ -91,12 +88,12 @@ $( "#tabs" ).tabs();
 
       <p>
           Skills:
-          <%= @employee.skills %>
+          <%= @employee.current_skills %>
       </p>
 
       <p>
           Interests:
-          <%= @employee.interests %>
+          <%= @employee.skills_interested_in %>
       </p>
 
       <p>
