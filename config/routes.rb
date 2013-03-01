@@ -1,4 +1,6 @@
 OneteamApp::Application.routes.draw do 
+  get "skills/new"
+
   match '/employees/:employee_id/requests' => 'requests#index'
 
   root to: 'sessions#new'
