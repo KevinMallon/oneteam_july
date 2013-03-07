@@ -17,12 +17,13 @@
 #
 
 class Request < ActiveRecord::Base
-  attr_accessible :employee_id, :title, :client, :group, :location, :project, :content, :skills_needed, :start_date, :stop_date, :active
+  attr_accessible :employee_id, :title, :client, :group, :location, :project
+  attr_accessible :content, :skills_needed, :start_date, :stop_date, :active
   belongs_to :employee  
   belongs_to :selections
   has_many :responses, :dependent => :destroy
-  accepts_nested_attributes_for :responses   
-
+  accepts_nested_attributes_for :responses  
+  has_many :skills, :through => :request_skills
 
   def progress_status
     if Date.today > start_date 

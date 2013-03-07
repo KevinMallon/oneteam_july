@@ -38,7 +38,7 @@ $( "#tabs" ).tabs();
             <% if Date.today < request.stop_date %>
 <li>
 
-      <p><b><%= request.project %>:</b> <%= request.start_date %> to <%= request.stop_date %> </br>
+      <p><b><%= request.project %>:</b> <%= request.start_date %> to <%= request.stop_date %> (Status: <%= request.progress_status %>) </br>
 
         Posted by: <%= request.employee.name %> in <%= request.employee.location %> Office (Group: <%= request.employee.group %>) </br>
         Description: <%= request.content %></br>
@@ -86,15 +86,6 @@ $( "#tabs" ).tabs();
           <%= @employee.email %>
       </p>
 
-      <p>
-          Skills:
-          <%= @employee.current_skills %>
-      </p>
-
-      <p>
-          Interests:
-          <%= @employee.skills_interested_in %>
-      </p>
 
       <p>
           Group:
@@ -107,10 +98,24 @@ $( "#tabs" ).tabs();
       </p>
 
       <p>
-          Current Project:
-          <%= @employee.current_project %>
+          Current Skills:
+          <%= @employee.current_skills %>
       </p>
 
+      <p>
+          Desired Skills:
+          <%= @employee.skills_interested_in %>
+      </p>
+
+      <p>
+          Short Description about <%= @employee.name %>:
+          <%= @employee.description %>
+      </p>
+
+      <p>
+          Projects I've Worked on:
+          <%= @employee.current_project %>
+      </p>
   </div>
   </div>
 

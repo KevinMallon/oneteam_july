@@ -9,7 +9,7 @@
 
 <h1>Update your profile</h1>
 
-<form class="form-inline">
+
 
 <%= form_for(@employee) do |f| %>
   <% if @employee.errors.any? %>
@@ -23,16 +23,21 @@
     </div>
   <% end %>
 
- 
+
 <p class="form-inline">
   <%= f.label :name %>
-  <%= f.text_field :name, :maxlength => 15 %>
+  <%= f.text_field :name %>
 </p>
 
+<%= hidden_field_tag "employee[employee_skills_ids][]", "" %>
+<%= hidden_field_tag "employee[target_skills_ids][]", "" %>
+
+      <%= f.hidden_field :email %>
+
+      <%= f.hidden_field :password %>
+
 <p id="row">
-<div class="form-inline">
-    <%= f.label :email %>
-    <%= f.text_field :email %>
+  <div class="form-inline">
 
     <%= f.label :office %>
     <%= f.select :location, ['Atlanta', 'Boston', 'Chicago', 'Dallas', 'New York', 'Denver', 'Los Angeles','San Francisco'] %>
@@ -42,13 +47,13 @@
 
     <%= f.label :group%>
     <%= f.select :group, ['Development','Finance','Marketing'] %>
-</div>
+  </div>
 </p>
 
 <p id="row">
-<div class="form-inline">
+  <div class="form-inline">
     <%= f.label :job_title %>
-    <%= f.select :name, ['Developer', 'Analyst', 'Manager'] %>
+    <%= f.select :job_title, ['Developer', 'Analyst', 'Manager'] %>
 
     <%= f.label :immediate_supervisor %>
     <%= f.text_field :supervisor %>
@@ -57,8 +62,7 @@
     <%= f.select :years_at_company, ['1','2','3','4','5','6','7','8','9','10-20','20-30', '>30'] %>
   </div>
 </p>
-</form>  
-
+  
 <p id="row" >
   <div id="Container3" class="span12"> 
       <%= f.label :Write_a_little_about_yourself %>
@@ -72,108 +76,42 @@
 
       </div>
   </div>
-
 </p>
 
 <p id="row" >
 
-  <div id="Container3" >    
-
-    <label class="text-left">Current Skills</label>
-
-      <div class="row">      
-        <div class="span1" ><%= f.check_box :current_skills  %></div>
-        <label for="current_skills" > PHP</label> 
-      </div>
-            
-      <div class="row">      
-        <div class="span1" ><%= f.check_box :current_skills  %></div>
-        <label for="current_skills">MySQL</label>
-      </div>
-            
-      <div class="row">      
-        <div class="span1" ><%= f.check_box :current_skills  %></div>
-        <label for="current_skills">C#</label>
-      </div>
-
-      <div class="row">      
-        <div class="span1" ><%= f.check_box :current_skills %></div>
-        <label for="current_skills">Apache</label>
-      </div>
-            
-      <div class="row">      
-        <div class="span1" ><%= f.check_box :current_skills  %></div>
-        <label for="current_skills">Ruby on Rails</label>
-      </div>
-            
-      <div class="row">      
-        <div class="span1" ><%= f.check_box :current_skills  %></div>
-        <label for="current_skills">SQL Server</label>
-      </div>
-            
-      <div class="row">      
-        <div class="span1" ><%= f.check_box :current_skills  %></div>
-        <label for="current_skills">Linux</label>
-      </div></br></br>
-
-     <p id="row" class="employees">
-      <%= f.submit "Update Profile", :action => 'update', class: "btn btn-large btn-primary" %>
-      <%= link_to 'Cancel', requests_path,  class: "btn btn-large" %>
-    </p>
-  </div>
-
-  <div id="Container4" >    
-
-    <label class="text-left">Desired Skills</label>
-
-      <div class="row">      
-        <div class="span1" ><%= f.check_box :skills_interested_in  %></div>
-        <label for="skills_interested_in" > PHP</label> 
-      </div>
-            
-      <div class="row">      
-        <div class="span1" ><%= f.check_box :skills_interested_in  %></div>
-        <label for="skills_interested_in">MySQL</label>
-      </div>
-            
-      <div class="row">      
-        <div class="span1" ><%= f.check_box :skills_interested_in  %></div>
-        <label for="skills_interested_in">C#</label>
-      </div>
-
-      <div class="row">      
-        <div class="span1" ><%= f.check_box :skills_interested_in %></div>
-        <label for="skills_interested_in">Apache</label>
-      </div>
-            
-      <div class="row">      
-        <div class="span1" ><%= f.check_box :skills_interested_in  %></div>
-        <label for="skills_interested_in">Ruby on Rails</label>
-      </div>
-            
-      <div class="row">      
-        <div class="span1" ><%= f.check_box :skills_interested_in  %></div>
-        <label for="skills_interested_in">SQL Server</label>
-      </div>
-            
-      <div class="row">      
-        <div class="span1" ><%= f.check_box :skills_interested_in  %></div>
-        <label for="skills_interested_in">Linux</label>
-      </div></br></br>
-
-  <p id="row" >
-
-
+<div id="Container3" >    
+  <p>
+      <label class="text-left">
+      <%= f.label :current_skills %></label>
+      <% Skill.all.each do |skill| %>
+      <div>
+            <%= check_box_tag "employee[employee_skills_ids][]", skill.id,
+        @employee.current_skills.include?(skill.name) %>
+              <%= skill.name %>      
+        </div>
+      <% end %>
   </p>
 
+   <p id="row" class="employees">
+    <%= f.submit "Update Profile", class: "btn btn-large btn-primary" %>
+    <%= link_to 'Cancel', requests_path,  class: "btn btn-large" %>
   </p>
-
-</p>
-
-
 </div>
 
+<div id="Container4" >    
 
+  <p>
+      <label class="text-left">
+      <%= f.label :desired_skills %></label>
+      <% Skill.all.each do |skill| %>
+      <div>
+            <%= check_box_tag "employee[target_skills_ids][]", skill.id,
+        @employee.skills_interested_in.include?(skill.name) %>
+              <%= skill.name %>      
+        </div>
+      <% end %>
+  </p>
 
 
 <% end %>

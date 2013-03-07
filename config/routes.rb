@@ -1,4 +1,10 @@
 OneteamApp::Application.routes.draw do 
+  resources :target_skills
+
+
+  resources :employee_skills
+
+
   get "skills/new"
 
   match '/employees/:employee_id/requests' => 'requests#index'
@@ -14,6 +20,7 @@ OneteamApp::Application.routes.draw do
   resources :employees
   resources :static_pages
   resources :sessions, only: [:new, :create, :destroy]
+  resources :skills
 
   resources :requests, :shallow => true do
     resources :responses

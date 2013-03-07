@@ -46,7 +46,6 @@ class EmployeesController < ApplicationController
   # POST /employees.json
   def create
     @employee = Employee.new(params[:employee])
-
     respond_to do |format|
       if @employee.save
         flash[:success] = "Welcome to OneTeam! Profile was successfully created."
@@ -63,10 +62,10 @@ class EmployeesController < ApplicationController
   # PUT /employees/1
   # PUT /employees/1.json
   def update
+    @employee = Employee.find(params[:id])
     respond_to do |format|
       if @employee.update_attributes(params[:employee])
         flash[:success] = "Profile updated."
-        sign_in @employee
         format.html { redirect_to @employee }
         format.json { head :no_content }
       else

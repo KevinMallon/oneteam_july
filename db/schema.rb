@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130301153321) do
+ActiveRecord::Schema.define(:version => 20130305151904) do
+
+  create_table "employee_skills", :force => true do |t|
+    t.integer  "employee_id"
+    t.integer  "skill_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "employees", :force => true do |t|
     t.string   "name"
@@ -34,6 +41,14 @@ ActiveRecord::Schema.define(:version => 20130301153321) do
   end
 
   add_index "employees", ["remember_token"], :name => "index_employees_on_remember_token"
+
+  create_table "request_skills", :force => true do |t|
+    t.integer  "request_id"
+    t.integer  "skill_id"
+    t.boolean  "skills_needed"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
 
   create_table "requests", :force => true do |t|
     t.integer  "employee_id"
@@ -71,6 +86,13 @@ ActiveRecord::Schema.define(:version => 20130301153321) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "target_skills", :force => true do |t|
+    t.integer  "employee_id"
+    t.integer  "skill_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
 end
