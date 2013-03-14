@@ -1,7 +1,7 @@
 @import "bootstrap";
+@import "bootstrap-responsive";
 
-
-/* universal */
+ /* universal */
 
 
 $grayMediumLight: #eaeaea;
@@ -139,42 +139,6 @@ aside {
   float: left;
   margin-right: 10px;
 }
-
-
-
-/* forms */
-
-
-input, textarea, select, .uneditable-input {
-  border: 1px solid #bbb;
-  width: 20%;
-  padding: 2px;
-  margin-bottom: 15px;
-}
-
-input {
-  height: auto !important;
-}
-
-#error_explanation {
-  color: #f00;
-  ul {
-    list-style: none;
-    margin: 0 0 18px 0;
-  }
-}
-
-.field_with_errors {
-  @extend .control-group;
-  @extend .error;
- }
-
-.fixedwidth
-{
-  width:200px;
-  float:left;
-}
-
 
 
 

@@ -25,6 +25,7 @@ class RequestsController < ApplicationController
   # GET /requests/new
   # GET /requests/new.json
   def new
+
     @employee = current_employee
     @request = Request.new
 
@@ -42,8 +43,8 @@ class RequestsController < ApplicationController
 
   # POST /requests
   # POST /requests.json
+ 
   def create
-    @employee = Employee.find_by_id(params[:employee_id])
     @request = current_employee.requests.build(params[:request])
 
     respond_to do |format|
@@ -51,8 +52,7 @@ class RequestsController < ApplicationController
         format.html { redirect_to requests_path, notice: 'Request was successfully created.' }
         format.json { render json: @request, status: :created, location: @request }
       else
-        format.html { render action: "new" }
-        format.json { render json: @request.errors, status: :unprocessable_entity }
+        redirect_to my_requests_path(current_user.id), :alert => "Unable to update request."
       end
     end
   end

@@ -19,11 +19,19 @@
 class Request < ActiveRecord::Base
   attr_accessible :employee_id, :title, :client, :group, :location, :project
   attr_accessible :content, :skills_needed, :start_date, :stop_date, :active
+  attr_accessible :skills_needed_ids
+
   belongs_to :employee  
   belongs_to :selections
+
   has_many :responses, :dependent => :destroy
-  accepts_nested_attributes_for :responses  
-  has_many :skills, :through => :request_skills
+  has_many :skills, dependent: :destroy, :source => :skill
+  has_many :request_skills, dependent: :destroy
+  has_many :skills_needed, :through => :request_skills, :source => :skill
+
+  accepts_nested_attributes_for :skills
+  accepts_nested_attributes_for :request_skills
+
 
   def progress_status
     if Date.today > start_date 
@@ -33,7 +41,6 @@ class Request < ActiveRecord::Base
     end
   end
 
-
   def applied_status(an_employee)
     responses.each do |response| 
       if response.employee == an_employee
@@ -42,6 +49,12 @@ class Request < ActiveRecord::Base
     end
   return "apply"
   end
+
+
+
+def skills_needed_ids=(skills_needed_ids)
+  skills_needed_ids.delete_if(&:empty?)
+end
 
 end
 

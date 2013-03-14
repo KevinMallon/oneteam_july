@@ -13,95 +13,49 @@ $( "#stop_datepicker" ).datepicker();
 </script>
 </head>
 
- 
-<%= form_for(@request) do |f| %>
 
-  <% if @request.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@request.errors.count, "error") %> prohibited this request from being saved:</h2>
+<form>
+  <%= simple_form_for @request do |f|  %>
 
-      <ul>
-      <% @request.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+<%= hidden_field_tag "@employee.request[request_skills_ids][]", "" %>
+
+    <%= f.error_notification %>
+
+    <%= f.input :project, :inline_label => 'Title:' %>
+
+    <%= f.input :content, :inline_label => 'Description:', :as => :text, :input_html => {:rows => "3", :class => "span4" } %>
+
+    <%= f.input :start_date, :as => :datepicker %>
+
+    <%= f.input :stop_date, :as => :datepicker %>
+
+    <div class="row-fluid">
+      <div class="span4">
+      <%= f.input :group, as: :select, collection: ['Development','Finance','Marketing'], :label => "Group"  %>
+      </div>
+
+      <div class="span4">
+      <%= f.input :location, :label => "Office", as: :select, collection: ['Atlanta',
+      'Boston', 'Chicago', 'Dallas', 'New York', 'Denver', 'Los Angeles','San Francisco'], :label => "Office" %>
+      </div>
+      <div class="span4"></div>
+    </div>
+
+    <div class="row-fluid">
+
+
+      <div class="span6"><p>Full Code</p>
+      <% Skill.all.each do |skill| %>
+      <div>
+            <%= check_box_tag "@employee.request[skills_needed_ids][]", skill.id,
+        @request.skills_needed.include?(skill.id) %>
+              <%= skill.name %>      
+        </div>
       <% end %>
-      </ul>
     </div>
-  <% end %>
-
-
-
-<p>
-<div id="Container1" > 
-      <%= f.label :title %>
-</div>
-<div id="Container2" >
-      <%= f.text_field :project %> 
-</div>
-</p>
-
-<p>     
-  <div>
-    <%= f.label :description %></div>
-    <%= f.text_area :content, :size => "65x10" %>
-</p> 
-
-<p>
-<div id="Container1" > 
-      <%= f.label :start_date %> 
-</div>
-<div id="Container2" ><input name="request[start_date]" type="text" id="start_datepicker" />
-</div>
-</p>
-
-<div id="Container1" >  
-      <%= f.label :end_date %> 
-    </div>
-<div id="Container2" > <input name="request[stop_date]" type="text" id="stop_datepicker" />
     </div>
 
-<div id="Container1" >  
-    <%= f.label :group %>
-</div>
-
-<div id="Container2" >  
-    <%= f.select :group, ['Development','Finance','Marketing'] %>
-</div>
-
-<div id="Container1" >  
-    <%= f.label :office %>
-</div>
-
-<div id="Container2" >  
-    <%= f.select :location, ['Atlanta',
-    'Boston', 'Chicago', 'Dallas', 'New York', 'Denver', 'Los Angeles','San Francisco'] %>
-</div>
-
-<p>
-
-<div id="Container1" >    
-<label class="text-left">Relevant skills</label>
-
-</div>
-
-<div id="Container2" >
-
-
-
-
-
-</p>
-
-<p>
-  <%= f.check_box :active, :checked => true, :style => 'visibility: hidden' %>
-</p>
-
-<p>
-  <div>
-    <%= f.submit class: "btn btn-primary" %>
-  </div>
-</p>
-
-</div>
-
+    <%= f.button :submit %>
+</form>
 <% end %>
 

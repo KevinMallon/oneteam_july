@@ -1,117 +1,85 @@
-<% provide(:title, "Edit employee") %> 
+<%= simple_form_for @employee do |f| %> 
 
-<!DOCTYPE html>
-  <html>
-    <head>
+  <%= f.error_notification %>
 
-    </head>
-  </html>
-
-<h1>Update your profile</h1>
-
-
-
-<%= form_for(@employee) do |f| %>
-  <% if @employee.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@employee.errors.count, "error") %> prohibited this employee from being saved:</h2>
-      <ul>
-      <% @employee.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-
-<p class="form-inline">
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-</p>
-
-<%= hidden_field_tag "employee[employee_skills_ids][]", "" %>
-<%= hidden_field_tag "employee[target_skills_ids][]", "" %>
-
-      <%= f.hidden_field :email %>
-
-      <%= f.hidden_field :password %>
-
-<p id="row">
-  <div class="form-inline">
-
-    <%= f.label :office %>
-    <%= f.select :location, ['Atlanta', 'Boston', 'Chicago', 'Dallas', 'New York', 'Denver', 'Los Angeles','San Francisco'] %>
-
-    <%= f.label :department %>
-    <%= f.select :department, ['IT', 'HR', 'R&D'] %>
-
-    <%= f.label :group%>
-    <%= f.select :group, ['Development','Finance','Marketing'] %>
-  </div>
-</p>
-
-<p id="row">
-  <div class="form-inline">
-    <%= f.label :job_title %>
-    <%= f.select :job_title, ['Developer', 'Analyst', 'Manager'] %>
-
-    <%= f.label :immediate_supervisor %>
-    <%= f.text_field :supervisor %>
-
-    <%= f.label :years_with_company %>
-    <%= f.select :years_at_company, ['1','2','3','4','5','6','7','8','9','10-20','20-30', '>30'] %>
-  </div>
-</p>
-  
-<p id="row" >
-  <div id="Container3" class="span12"> 
-      <%= f.label :Write_a_little_about_yourself %>
-      <%= f.text_area :description, :size => "65x4" %>
-  </div>
-
-  <div id="container4">
-      <div>
-
-      <%= gravatar_for @employee %>
-
-      </div>
-  </div>
-</p>
-
-<p id="row" >
-
-<div id="Container3" >    
-  <p>
-      <label class="text-left">
-      <%= f.label :current_skills %></label>
-      <% Skill.all.each do |skill| %>
-      <div>
-            <%= check_box_tag "employee[employee_skills_ids][]", skill.id,
-        @employee.current_skills.include?(skill.name) %>
-              <%= skill.name %>      
-        </div>
-      <% end %>
-  </p>
-
-   <p id="row" class="employees">
-    <%= f.submit "Update Profile", class: "btn btn-large btn-primary" %>
-    <%= link_to 'Cancel', requests_path,  class: "btn btn-large" %>
-  </p>
+<div class="row-fluid">
+<div class="span12">
+    <%= f.input :name, :label => 'Name' %>
+</div>
 </div>
 
-<div id="Container4" >    
+<div class="row-fluid">
 
-  <p>
-      <label class="text-left">
-      <%= f.label :desired_skills %></label>
+<div class="span3">
+  <%= f.input :email %>
+</div>
+
+<div class="span3">
+  <%= f.input :location, as: :select, collection: ['Atlanta', 'Boston', 'Chicago', 'Dallas', 'New York', 'Denver', 'Los Angeles','San Francisco'], :label => "Office" %>  
+</div>
+
+<div class="span3">
+  <%= f.input :department,  as: :select, collection: ['IT', 'UI', 'R&D', 'Maintenance'], :label => "Department" %>
+</div>
+
+<div class="span3">
+  <%= f.input :group, as: :select, collection: ['Development','Finance','Marketing'], :label => "Group" %>
+</div>
+</div>
+
+
+<div class="row-fluid">
+<div class="span4">
+  <%= f.input :job_title, as: :select, collection: ['Developer', 'Analyst', 'Manager'], :label => "Job Title"  %>
+</div>
+
+<div class="span4">
+  <%= f.input :supervisor, :label => 'Immediate Supervisor' %>
+</div>
+
+<div class="span4">
+  <%= f.input :years_at_company,   as: :select, collection: ['1','2','3','4','5','6','7','8','9','10-20','20-30', '>30']  %>
+</div>
+</div>
+
+<div class="row-fluid">
+<div class="span6">
+  <%= f.label :Write_a_short_description_about_yourself %>
+  <%= f.text_area :description, :size => "100x4" %>
+</div>
+
+<div class="span6">
+  <%= f.label :image, "Upload your photo at Gravatar" %><%= gravatar_for @employee %>
+</div>
+</div>
+
+<p>
+<div class="row-fluid">
+<div class="span2">
+      <%= f.label :current_skills %></label>
+</div>
+<div class="span3">
       <% Skill.all.each do |skill| %>
-      <div>
-            <%= check_box_tag "employee[target_skills_ids][]", skill.id,
-        @employee.skills_interested_in.include?(skill.name) %>
-              <%= skill.name %>      
-        </div>
-      <% end %>
-  </p>
+            <%= check_box_tag "employee[employee_skills_ids][]", skill.id,
+        @employee.employee_skill.include?(skill.name) %>
+              <%= skill.name %></br>
+<% end %>
+</div>
 
+<div class="span2">
+      <%= f.label :desired_skills %></label>
+</div>
+<div class="span3">
+
+</div>
+
+</div>
+</p>
+
+<div class="row-fluid">
+<div class="span12">
+  <%= f.button :submit, 'Update', :class => 'btn-primary' %>
+</div>
+</div>
 
 <% end %>
