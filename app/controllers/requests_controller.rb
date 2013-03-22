@@ -25,11 +25,11 @@ class RequestsController < ApplicationController
   # GET /requests/new
   # GET /requests/new.json
   def new
-
     @employee = current_employee
     @request = Request.new
 
     respond_to do |format|
+
       format.html # new.html.erb
       format.json { render json: @request }
     end
@@ -48,6 +48,7 @@ class RequestsController < ApplicationController
     @request = current_employee.requests.build(params[:request])
 
     respond_to do |format|
+
       if @request.save
         format.html { redirect_to requests_path, notice: 'Request was successfully created.' }
         format.json { render json: @request, status: :created, location: @request }

@@ -17,7 +17,7 @@ $( "#stop_datepicker" ).datepicker();
 <form>
   <%= simple_form_for @request do |f|  %>
 
-<%= hidden_field_tag "@employee.request[request_skills_ids][]", "" %>
+
 
     <%= f.error_notification %>
 
@@ -47,7 +47,7 @@ $( "#stop_datepicker" ).datepicker();
       <div class="span6"><p>Full Code</p>
       <% Skill.all.each do |skill| %>
       <div>
-            <%= check_box_tag "@employee.request[skills_needed_ids][]", skill.id,
+            <%= check_box_tag "@employee.request[skills_needed][]", skill.id,
         @request.skills_needed.include?(skill.id) %>
               <%= skill.name %>      
         </div>

@@ -21,6 +21,11 @@ OneteamApp::Application.routes.draw do
   resources :static_pages
   resources :sessions, only: [:new, :create, :destroy]
   resources :skills
+  resources :employee_skills
+  resources :target_skills
+  resources :request_skills  
+
+
 
   resources :requests, :shallow => true do
     resources :responses

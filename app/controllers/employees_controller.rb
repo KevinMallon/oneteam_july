@@ -63,13 +63,14 @@ class EmployeesController < ApplicationController
   # PUT /employees/1.json
   def update
     @employee = Employee.find(params[:id])
+
     respond_to do |format|
       if @employee.update_attributes(params[:employee])
         flash[:success] = "Profile updated."
         format.html { redirect_to @employee }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { render action: "show" }
         format.json { render json: @employee.errors, status: :unprocessable_entity }
       end
     end

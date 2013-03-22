@@ -8,6 +8,6 @@ class Skill < ActiveRecord::Base
   has_many :requests, through: :request_skills
 
   has_many :target_skills, dependent: :destroy
-  has_many :users, through: :target_skills
+  has_many :employees, through: :target_skills
 
 end

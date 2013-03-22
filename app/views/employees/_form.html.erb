@@ -67,7 +67,7 @@
 <div class="span3">
       <% Skill.all.each do |skill| %>
             <%= check_box_tag "employee[employee_skills_ids][]", skill.id,
-        @employee.employee_skills.include?(skill.name) %>
+        @employee.employee_skills.include?(skill) %>
               <%= skill.name %></br>
 <% end %>
 </div>
@@ -77,10 +77,10 @@
 </div>
 <div class="span3">
       <% Skill.all.each do |skill| %>
-            <%= check_box_tag "employee[employee_skills_ids][]", skill.id,
-        @employee.current_skills.include?(skill.name) %>
-              <%= skill.name %>   </br>    
-      <% end %>
+            <%= check_box_tag "employee[target_skills_ids][]", skill.id,
+        @employee.target_skills.include?(skill) %>
+              <%= skill.name %></br>
+<% end %>
 </div>
 <div class="span2">
 </div>  
@@ -89,7 +89,7 @@
 
 <div class="row-fluid">
 <div class="span12">
-  <%= f.button :submit, 'Update', :class => 'btn-primary' %>
+  <%= f.button :submit, :class => 'btn-primary' %>
 </div>
 </div>
 
