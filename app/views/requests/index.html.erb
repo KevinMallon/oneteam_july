@@ -43,12 +43,13 @@ $( "#tabs" ).tabs();
         Posted by: <%= request.employee.name %> in <%= request.employee.location %> Office (Group: <%= request.employee.group %>) </br>
         Description: <%= request.content %></br>
       </p> 
-
-                <% if request.applied_status(current_employee) == "applied" %>
-                     Applied
-                <% else %>
-                     <%= link_to "Apply", new_request_response_path(request), class: "btn" %>
-                <% end %>
+        <p>
+          <% if request.applied_status(current_employee) == "applied" %>
+               Applied
+          <% else %>
+               <%= link_to "Apply", new_request_response_path(request), class: "btn" %>
+          <% end %>
+        </p>
        </li>
             <% end %>
         <% end %>
@@ -63,7 +64,7 @@ $( "#tabs" ).tabs();
   <h3>
     My Profile
   </h3>
-  <p class="employees">
+  <p>
       <%= link_to 'Edit Profile', edit_employee_path(@employee) =%>
   </p>
   
@@ -86,7 +87,6 @@ $( "#tabs" ).tabs();
           <%= @employee.email %>
       </p>
 
-
       <p>
           Group:
           <%= @employee.group %>
@@ -97,14 +97,15 @@ $( "#tabs" ).tabs();
           <%= @employee.location %>
       </p>
 
-      <p>
-          Current Skills:
-          <%= @employee.employee_skills %>
+      <p>  
+        Current Skills:  
+        <%= @employee.skills.map(&:name).join(", ") %>    
       </p>
 
-      <p>
-          Desired Skills:
-          <%= @employee.target_skills %>
+      <p>Desired Skills:
+          <% @employee.target_skills.each do |ts| %>    
+          <%= ts.skill.name %>    
+          <% end %>  
       </p>
 
       <p>
@@ -113,9 +114,22 @@ $( "#tabs" ).tabs();
       </p>
 
       <p>
-          Projects I've Worked on:
-          <%= @employee.current_project %>
-      </p>
+            <h5>Projects I've worked on:</h5>
+
+    <% @selections.each do |selection| %>          
+      <% if selection.employee_id == current_employee.id %>  
+        <p>                      
+            <%= Request.find(selection.request_id).project %>:
+            <%= Request.find(selection.request_id).start_date %> to 
+            <%= Request.find(selection.request_id).stop_date %> 
+            (Status: <%= Request.find(selection.request_id).progress_status %>)
+            <%= Request.find(selection.request_id).content %> 
+        </p>
+      <% end %>        
+    <% end %>
+  <% end %>   
+</p>
+
   </div>
   </div>
 
@@ -135,9 +149,9 @@ $( "#tabs" ).tabs();
           <li>
            <p>
               <%= request.client %> <%= request.start_date %> - <%= request.stop_date %></br>
-    Description: <%= request.content %></br>
+               Description: <%= request.content %></br>
 
-              Active <%= link_to 'Cancel', request, method: :delete, data: { confirm: 'Are you sure?' } %> <%= link_to 'Edit', edit_request_path(request) %>
+              Active <%= link_to 'Cancel', request, method: :delete, data: { confirm: 'Are you sure?' } %> <%= link_to 'Edit', edit_request_path(request) %></p>
           </p>
 
           <p>Applicants:</br>

@@ -3,12 +3,11 @@
 
  /* universal */
 
-
 $grayMediumLight: #eaeaea;
 $lightGray: #999;
 $grayLight: #999;
 $grayLighter: #999;
-$grayDarker: #999;
+$grayDarker: #999; 
 
 td {
 padding: 10px 0;
@@ -68,8 +67,8 @@ h3 {
 }
 
 p {
-  font-size: 1.1em;
-  line-height: 1.7em;
+  font-size: 0.8em;
+  line-height: 1.2em;
 }
 
 /* header */
@@ -256,5 +255,6 @@ td.limit {
   color: $lightGray;
 }
 
- 
+
+
 

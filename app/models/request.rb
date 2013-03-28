@@ -17,13 +17,14 @@
 #
 
 class Request < ActiveRecord::Base
-  attr_accessible :employee_id, :title, :client, :group, :location, :project
+  attr_accessible :employee_id, :client, :group, :location, :project
   attr_accessible :content, :skills_needed, :start_date, :stop_date, :active
-  attr_accessible :skills_needed_ids
-  attr_accessor :skills_needed_ids
-  
-  belongs_to :employee  
+  attr_accessible :skill_ids, :skills_needed_ids
+
+  belongs_to :employee , dependent: :destroy
   belongs_to :selections
+
+  validates_presence_of :employee_id
 
   has_many :responses, :dependent => :destroy
   
@@ -33,7 +34,7 @@ class Request < ActiveRecord::Base
 
   accepts_nested_attributes_for :skills
   accepts_nested_attributes_for :request_skills
-
+  
 
   def progress_status
     if Date.today > start_date 
@@ -52,9 +53,14 @@ class Request < ActiveRecord::Base
   return "apply"
   end
 
-def skills_needed_ids
-  [skills_needed].join(",")   #getter
-end
+  def skills_needed_ids
+    self.request_skills.map &:skill_id
+  end
+
+  def skills_needed_ids=(skills_needed_ids)
+    self.request_skills = skills_needed_ids.delete_if(&:empty?).map {|id| RequestSkill.new({:skill_id => id})}
+  end
+
 
 end
 

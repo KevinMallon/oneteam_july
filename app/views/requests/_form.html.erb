@@ -14,16 +14,18 @@ $( "#stop_datepicker" ).datepicker();
 </head>
 
 
-<form>
-  <%= simple_form_for @request do |f|  %>
 
-
+<%= simple_form_for @request do |f|  %>
 
     <%= f.error_notification %>
 
-    <%= f.input :project, :inline_label => 'Title:' %>
+    <%= f.check_box :active, :checked => true, :style => 'visibility: hidden' %>
 
-    <%= f.input :content, :inline_label => 'Description:', :as => :text, :input_html => {:rows => "3", :class => "span4" } %>
+    <%= hidden_field_tag "request[skills_needed_ids][]", "" %>
+
+    <%= f.input :project %>
+
+    <%= f.input :content, :inline_label => 'Description:', :as => :text, :input_html => {:rows => "3", :class => "span6" } %>
 
     <%= f.input :start_date, :as => :datepicker %>
 
@@ -41,21 +43,31 @@ $( "#stop_datepicker" ).datepicker();
       <div class="span4"></div>
     </div>
 
-    <div class="row-fluid">
+<div class="row-fluid">
+
+  <div class="span2">
+        <%= f.label :skills_needed %></label>
+  </div>
+
+  <div class="span3">
+        <% Skill.all.each do |skill| %>
+              <%= check_box_tag "request[skills_needed_ids][]", skill.id,
+          @request.skills_needed.include?(skill)  %>
+                <%= skill.name %></br>
+        <% end %>
+  </div>
+
+  <div class="span7">
+  </div>  
+
+</div>
+
+<div class="row-fluid">
+<div class="span12">
+  <%= f.button :submit, :class => 'btn-primary' %>
+</div>
+</div>
 
 
-      <div class="span6"><p>Full Code</p>
-      <% Skill.all.each do |skill| %>
-      <div>
-            <%= check_box_tag "@employee.request[skills_needed][]", skill.id,
-        @request.skills_needed.include?(skill.id) %>
-              <%= skill.name %>      
-        </div>
-      <% end %>
-    </div>
-    </div>
-
-    <%= f.button :submit %>
-</form>
 <% end %>
 

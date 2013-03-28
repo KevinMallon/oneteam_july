@@ -16,10 +16,11 @@ class Employee < ActiveRecord::Base
   attr_accessible :years_at_company, :description, :job_title
   attr_accessible :skill_ids, :employee_skills_ids, :target_skills_ids
   
-
   has_many :requests, dependent: :destroy
   has_secure_password
   has_many :responses, dependent: :destroy
+  has_many :selections, dependent: :destroy
+
 
   has_many :employee_skills, dependent: :destroy
   has_many :target_skills, dependent: :destroy

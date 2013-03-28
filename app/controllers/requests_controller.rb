@@ -9,6 +9,9 @@ class RequestsController < ApplicationController
     @myrequests = current_employee.requests.paginate(page: params[:page])
     @requests = Request.all
     @employee = current_employee
+    @selections = Selection.all    
+    @my_selections = Selection.order(:id).page(params[:page])    
+    @skills = Skill.all 
   end
 
   # GET /requests/1
@@ -27,6 +30,7 @@ class RequestsController < ApplicationController
   def new
     @employee = current_employee
     @request = Request.new
+    @skills = Skill.all 
 
     respond_to do |format|
 
@@ -39,6 +43,11 @@ class RequestsController < ApplicationController
 
   def edit
       @request = Request.find(params[:id])
+
+      skills_needed = params[:skills_needed]    
+      unless params[:skills_needed].nil?      
+        skills_needed = @request.skills_needed.split(", ")    
+      end
   end
 
   # POST /requests
@@ -46,6 +55,8 @@ class RequestsController < ApplicationController
  
   def create
     @request = current_employee.requests.build(params[:request])
+    @request.skills_needed = params[:skills_needed].to_a     
+    @request.skills_needed = @request.skills_needed.join(", ") 
 
     respond_to do |format|
 
@@ -53,7 +64,7 @@ class RequestsController < ApplicationController
         format.html { redirect_to requests_path, notice: 'Request was successfully created.' }
         format.json { render json: @request, status: :created, location: @request }
       else
-        redirect_to my_requests_path(current_user.id), :alert => "Unable to update request."
+        redirect_to my_requests_path(current_employee.id), :alert => "Unable to update request."
       end
     end
   end

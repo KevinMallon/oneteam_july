@@ -20,6 +20,13 @@ class EmployeesController < ApplicationController
     @employee = Employee.find(params[:id])
     @requests = @employee.requests if signed_in?
 
+    @employee_skills = EmployeeSkill.find_all_by_employee_id(current_employee.id)
+    @target_skills = TargetSkill.find_all_by_employee_id(current_employee.id)
+
+    @selections = Selection.all    
+    @my_selections = Selection.order(:id).page(params[:page])    
+    @skills = Skill.all 
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @employee }

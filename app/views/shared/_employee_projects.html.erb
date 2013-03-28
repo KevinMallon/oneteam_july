@@ -1,0 +1,15 @@
+    <h5>Projects I've worked on:</h5>
+    <% if Selection.employee_id.include? '@employee' %>
+    <% @selections.each do |selection| %>          
+      <% if selection.employee_id == current_employee.id %>  
+      <p>                      
+          <%= Request.find(selection.request_id).project %>:
+          <%= Request.find(selection.request_id).start_date %> to 
+          <%= Request.find(selection.request_id).stop_date %> 
+          (Status: <%= Request.find(selection.request_id).progress_status %>)
+          <%= Request.find(selection.request_id).content %> 
+      </p>
+      <% end %>        
+  	<% end %>
+        <% end %>         
+     

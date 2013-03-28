@@ -28,8 +28,7 @@
       <div class="employees">
 
       <p>
-          First Name:
-          Last Name:
+          Name:
           <%= @employee.name %>
       </p>
 
@@ -38,15 +37,20 @@
           <%= @employee.email %>
       </p>
 
-      <p>
-          Skills:
-          <%= @employee.employee_skills_ids %>
+      <p>  
+        Employee Skills:
+        <% @employee.employee_skills.each do |es| %>    
+        <%= es.skill.name %> 
+        <% end %>  
       </p>
 
-      <p>
-          Interests:
-          <%= @employee.target_skills_ids %>
-      </p>
+        <p>Target Skills:
+          <% @employee.target_skills.each do |ts| %>    
+          <%= ts.skill.name %>  
+          <% end %>  
+        </p>
+
+
 
       <p>
           Group:
@@ -59,9 +63,25 @@
       </p>
 
       <p>
-          Current Project:
-          <%= @employee.current_project %>
+                    <h5>Projects I've worked on:</h5>
+
+    <% Selection.all.each do |selection| %>          
+      <% if selection.employee_id == current_employee.id %>  
+      <p>                      
+          <%= Request.find(selection.request_id).project %>:
+          <%= Request.find(selection.request_id).start_date %> to 
+          <%= Request.find(selection.request_id).stop_date %> 
+          (Status: <%= Request.find(selection.request_id).progress_status %>)
+          <%= Request.find(selection.request_id).content %> 
       </p>
+      <% end %>        
+    <% end %>
+
+      </p>
+
+  
+
+
 
 
 
