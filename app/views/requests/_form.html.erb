@@ -21,7 +21,6 @@ $( "#stop_datepicker" ).datepicker();
 
     <%= f.check_box :active, :checked => true, :style => 'visibility: hidden' %>
 
-    <%= hidden_field_tag "request[skills_needed_ids][]", "" %>
 
     <%= f.input :project %>
 
@@ -37,8 +36,7 @@ $( "#stop_datepicker" ).datepicker();
       </div>
 
       <div class="span4">
-      <%= f.input :location, :label => "Office", as: :select, collection: ['Atlanta',
-      'Boston', 'Chicago', 'Dallas', 'New York', 'Denver', 'Los Angeles','San Francisco'], :label => "Office" %>
+      <%= f.input :location, :label => "Office", as: :select, collection: ['New York', 'Chicago', 'Los Angeles', 'Atlanta', 'Detroit', 'Boston', 'Mumbai', 'Houston'], :label => "Office" %>
       </div>
       <div class="span4"></div>
     </div>

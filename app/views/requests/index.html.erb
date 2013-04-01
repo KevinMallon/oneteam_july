@@ -34,15 +34,16 @@ $( "#tabs" ).tabs();
   
     <% @requests.each do |request| %>
          
-          <% if request.employee != current_employee %> 
-            <% if Date.today < request.stop_date %>
-<li>
+      <% if request.employee != current_employee %> 
+        <% if Date.today < request.stop_date %>
 
-      <p><b><%= request.project %>:</b> <%= request.start_date %> to <%= request.stop_date %> (Status: <%= request.progress_status %>) </br>
+      <li>
 
-        Posted by: <%= request.employee.name %> in <%= request.employee.location %> Office (Group: <%= request.employee.group %>) </br>
-        Description: <%= request.content %></br>
-      </p> 
+        <p><b><%= request.project %>:</b> <%= request.start_date %> to <%= request.stop_date %> (Status: <%= request.progress_status %>) </br>
+          Posted by: <%= request.employee.name %> in <%= request.employee.location %> Office (Group: <%= request.employee.group %>) </br>
+          Description: <%= request.content %></br>
+        </p> 
+
         <p>
           <% if request.applied_status(current_employee) == "applied" %>
                Applied
@@ -50,9 +51,11 @@ $( "#tabs" ).tabs();
                <%= link_to "Apply", new_request_response_path(request), class: "btn" %>
           <% end %>
         </p>
-       </li>
-            <% end %>
+
+      </li>
+
         <% end %>
+      <% end %>
 
     <% end %>
 
@@ -64,75 +67,93 @@ $( "#tabs" ).tabs();
   <h3>
     My Profile
   </h3>
-  <p>
-      <%= link_to 'Edit Profile', edit_employee_path(@employee) =%>
-  </p>
+
+  <p class="employees">
+    <%= link_to 'Edit Profile', edit_employee_path(@employee) =%>
+  </p></br>
   
-      <div>
+  <p>
+    <%= gravatar_for @employee %>
+  </p>
 
-      <%= gravatar_for @employee %>
+  <div class="offset2">
+    <div class="employees">
 
-      </div>
-    <div class="offset2">
+    <p>
+        Name:
+        <%= @employee.name %>
+    </p>
 
-      <div class="employees">
+    <p>
+        Email:
+        <%= @employee.email %>
+    </p>
 
-      <p>
-          Name:
-          <%= @employee.name %>
-      </p>
+    <p>
+        Office:
+        <%= @employee.location %>
+    </p>
 
-      <p>
-          Email:
-          <%= @employee.email %>
-      </p>
+    <p>
+        Department:
+        <%= @employee.department %>
+    </p>
 
-      <p>
-          Group:
-          <%= @employee.group %>
-      </p>
+    <p>
+        Group:
+        <%= @employee.group %>
+    </p>
 
-      <p>
-          Location:
-          <%= @employee.location %>
-      </p>
+    <p>
+        Job Title:
+        <%= @employee.job_title %>
+    </p>
 
-      <p>  
-        Current Skills:  
-        <%= @employee.skills.map(&:name).join(", ") %>    
-      </p>
+    <p>
+        Immediate Supervisor:
+        <%= @employee.supervisor %>
+    </p>
 
-      <p>Desired Skills:
-          <% @employee.target_skills.each do |ts| %>    
-          <%= ts.skill.name %>    
-          <% end %>  
-      </p>
+    <p>
+        Years with Company:
+        <%= @employee.years_at_company %>
+    </p>
 
-      <p>
-          Short Description about <%= @employee.name %>:
-          <%= @employee.description %>
-      </p>
+    <p>  
+      Employee Skills:
+      <% @employee.employee_skills.each do |es| %>    
+      <%= es.skill.name %> 
+      <% end %>  
+    </p>
 
-      <p>
-            <h5>Projects I've worked on:</h5>
+    <p>Desired Skills:
+        <% @employee.target_skills.each do |ts| %>    
+        <%= ts.skill.name %>    
+        <% end %>  
+    </p>
 
-    <% @selections.each do |selection| %>          
-      <% if selection.employee_id == current_employee.id %>  
-        <p>                      
-            <%= Request.find(selection.request_id).project %>:
-            <%= Request.find(selection.request_id).start_date %> to 
-            <%= Request.find(selection.request_id).stop_date %> 
-            (Status: <%= Request.find(selection.request_id).progress_status %>)
-            <%= Request.find(selection.request_id).content %> 
-        </p>
-      <% end %>        
-    <% end %>
-  <% end %>   
-</p>
+    <p>
+        Short Description about <%= @employee.name %>:
+        <%= @employee.description %>
+    </p>
+
+    <p>
+      <b>Projects I've worked on:</b>
+      <% @employee.selections.each do |selection| %>          
+        <% if selection.employee_id == current_employee.id %>  
+          <p>                      
+              <%= selection.request.project %>:
+              <%= selection.request.start_date %> to 
+              <%= selection.request.stop_date %> 
+              (<%= selection.request.progress_status %>)
+              <%= selection.request.content %> 
+          </p>
+        <% end %>        
+      <% end %>
+    </p>
 
   </div>
   </div>
-
 </div>
 
 
@@ -157,12 +178,12 @@ $( "#tabs" ).tabs();
           <p>Applicants:</br>
 
           <% request.responses.each do |response| %>
-                <% if !response.selections.empty? %>    
-                         <%= link_to response.employee.name, employee_path(response.employee) %> Selected                                
-                <% else %> 
-                         <%= link_to response.employee.name, employee_path(response.employee) %> <%= link_to 'Select', new_response_selection_path(response) %>
-                <% end %>
-</br>
+            <% if !response.selections.empty? %>    
+                     <%= link_to response.employee.name, employee_path(response.employee) %> Selected                                
+            <% else %> 
+                     <%= link_to response.employee.name, employee_path(response.employee) %> <%= link_to 'Select', new_response_selection_path(response) %>
+            <% end %>
+            </br>
 
           <% end %>                       
 

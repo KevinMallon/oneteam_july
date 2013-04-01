@@ -12,7 +12,9 @@
 
 <p>
   <b>Skills needed:</b>
-  <%= @request.skills_needed %>
+  <% @request.skills_needed.each do |sn| %>    
+  <%= sn.name %> 
+  <% end %>  
 </p>
 
 <p>
@@ -28,11 +30,6 @@
 <p>
   <b>Request:</b>
   <%= @request.content %>
-</p>
-
-<p>
-  <b>Client:</b>
-  <%= @request.client %>
 </p>
 
 <p>

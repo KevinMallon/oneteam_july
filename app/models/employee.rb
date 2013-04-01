@@ -47,7 +47,7 @@ class Employee < ActiveRecord::Base
   end
 
   def employee_skills_ids=(employee_skills_ids)
-    self.employee_skills = employee_skills_ids.delete_if(&:empty?).map {|id| EmployeeSkill.new({:skill_id => id})}
+    self.employee_skills = employee_skills_ids.map {|id| EmployeeSkill.create({:skill_id => id})}
   end
 
   def target_skills_ids
@@ -55,7 +55,7 @@ class Employee < ActiveRecord::Base
   end
 
   def target_skills_ids=(target_skills_ids)
-    self.target_skills = target_skills_ids.delete_if(&:empty?).map {|id| TargetSkill.new({:skill_id => id})}
+    self.target_skills = target_skills_ids.map {|id| TargetSkill.create({:skill_id => id})}
   end
 
   def employee_skills_levels
@@ -74,6 +74,25 @@ class Employee < ActiveRecord::Base
          #setter
   end 
 
+
+  def has_skill_level(skill_id, level)          
+    employee_skills.each do |dev_id|       
+      return true  if dev_id.skill_id == skill_id && dev_id.level == level                   
+    end              
+    level == 0
+  end   
+    
+  def target_skill_level(skill_id, level)   
+  target_skills.each do |emp_id|       
+    return true  if emp_id.skill_id == skill_id && emp_id.level == level          
+    end              
+    level == 0    
+  end 
+      
+  def new_skill_level(skill_id, level)      
+    level == 3
+  end    
+        
 private
   def create_remember_token
     self.remember_token = SecureRandom.urlsafe_base64

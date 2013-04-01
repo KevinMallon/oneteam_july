@@ -18,13 +18,7 @@ class EmployeesController < ApplicationController
   # GET /employees/1.json
   def show
     @employee = Employee.find(params[:id])
-    @requests = @employee.requests if signed_in?
 
-    @employee_skills = EmployeeSkill.find_all_by_employee_id(current_employee.id)
-    @target_skills = TargetSkill.find_all_by_employee_id(current_employee.id)
-
-    @selections = Selection.all    
-    @my_selections = Selection.order(:id).page(params[:page])    
     @skills = Skill.all 
 
     respond_to do |format|
@@ -77,7 +71,8 @@ class EmployeesController < ApplicationController
         format.html { redirect_to @employee }
         format.json { head :no_content }
       else
-        format.html { render action: "show" }
+        flash[:failed] = "Failed to update."
+        format.html { render action: "edit" }
         format.json { render json: @employee.errors, status: :unprocessable_entity }
       end
     end

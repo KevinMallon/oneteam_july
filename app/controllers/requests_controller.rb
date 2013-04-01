@@ -9,8 +9,7 @@ class RequestsController < ApplicationController
     @myrequests = current_employee.requests.paginate(page: params[:page])
     @requests = Request.all
     @employee = current_employee
-    @selections = Selection.all    
-    @my_selections = Selection.order(:id).page(params[:page])    
+    @selections = Selection.all      
     @skills = Skill.all 
   end
 
@@ -56,7 +55,6 @@ class RequestsController < ApplicationController
   def create
     @request = current_employee.requests.build(params[:request])
     @request.skills_needed = params[:skills_needed].to_a     
-    @request.skills_needed = @request.skills_needed.join(", ") 
 
     respond_to do |format|
 
@@ -75,8 +73,8 @@ class RequestsController < ApplicationController
       @request = Request.find(params[:id])
     if @request.update_attributes(params[:request])
       requests_path
-    else
-      render 'edit'
+    else      
+        redirect_to my_requests_path(current_employee.id), :alert => "Unable to update request."
     end
 
     respond_to do |format|

@@ -18,66 +18,67 @@
     <%= @employee.name %>
 </h3>
   
-      <div>
+<div>
+  <%= gravatar_for @employee %>
+</div>
 
-      <%= gravatar_for @employee %>
+<div class="offset2">
+<div class="employees">
+<p>
+    Name:
+    <%= @employee.name %>
+</p>
 
-      </div>
-    <div class="offset2">
+<p>
+    Email:
+    <%= @employee.email %>
+</p>
 
-      <div class="employees">
+<p>
+    Office:
+    <%= @employee.location %>
+</p>
 
-      <p>
-          Name:
-          <%= @employee.name %>
-      </p>
+<p>
+    Department:
+    <%= @employee.department %>
+</p>
 
-      <p>
-          Email:
-          <%= @employee.email %>
-      </p>
+<p>
+    Group:
+    <%= @employee.group %>
+</p>
 
-      <p>  
-        Employee Skills:
-        <% @employee.employee_skills.each do |es| %>    
-        <%= es.skill.name %> 
-        <% end %>  
-      </p>
+<p>
+    Job Title:
+    <%= @employee.job_title %>
+</p>
 
-        <p>Target Skills:
-          <% @employee.target_skills.each do |ts| %>    
-          <%= ts.skill.name %>  
-          <% end %>  
-        </p>
+<p>
+    Immediate Supervisor:
+    <%= @employee.supervisor %>
+</p>
+
+<p>
+    Years with Company:
+    <%= @employee.years_at_company %>
+</p>
+
+<p>  
+  Employee Skills:
+  <% @employee.employee_skills.each do |es| %>    
+  <%= es.skill.name %> 
+  <% end %>  
+</p>
+
+<p>Target Skills:
+  <% @employee.target_skills.each do |ts| %>    
+  <%= ts.skill.name %>  
+  <% end %>  
+</p>
 
 
 
-      <p>
-          Group:
-          <%= @employee.group %>
-      </p>
-
-      <p>
-          Location:
-          <%= @employee.location %>
-      </p>
-
-      <p>
-                    <h5>Projects I've worked on:</h5>
-
-    <% Selection.all.each do |selection| %>          
-      <% if selection.employee_id == current_employee.id %>  
-      <p>                      
-          <%= Request.find(selection.request_id).project %>:
-          <%= Request.find(selection.request_id).start_date %> to 
-          <%= Request.find(selection.request_id).stop_date %> 
-          (Status: <%= Request.find(selection.request_id).progress_status %>)
-          <%= Request.find(selection.request_id).content %> 
-      </p>
-      <% end %>        
-    <% end %>
-
-      </p>
 
   
 

@@ -35,6 +35,13 @@ class Request < ActiveRecord::Base
   accepts_nested_attributes_for :skills
   accepts_nested_attributes_for :request_skills
   
+  validate :later_stop_date  
+
+  def later_stop_date    
+    if stop_date < start_date           
+      errors.add(:end_date,  "End Date must be later than start_date")    
+    end  
+  end
 
   def progress_status
     if Date.today > start_date 
@@ -54,7 +61,7 @@ class Request < ActiveRecord::Base
   end
 
   def skills_needed_ids
-    self.request_skills.map &:skill_id
+    self.request_skills.delete_if(&:empty?).map &:skill_id
   end
 
   def skills_needed_ids=(skills_needed_ids)
