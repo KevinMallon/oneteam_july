@@ -33,7 +33,7 @@ $( "#tabs" ).tabs();
     <ul class="employees">
   
     <% @requests.each do |request| %>
-         
+      <% if request.active == "1" %>  
       <% if request.employee != current_employee %> 
         <% if Date.today < request.stop_date %>
 
@@ -56,7 +56,7 @@ $( "#tabs" ).tabs();
 
         <% end %>
       <% end %>
-
+      <% end %>
     <% end %>
 
 </ul>    
@@ -119,18 +119,21 @@ $( "#tabs" ).tabs();
         <%= @employee.years_at_company %>
     </p>
 
-    <p>  
-      Employee Skills:
-      <% @employee.employee_skills.each do |es| %>    
-      <%= es.skill.name %> 
-      <% end %>  
-    </p>
+  <p>Current Skills:       
+    <% @skillname = [] %>            
+      <% @employee.employee_skills.each do |emp_skill| %>              
+      <% show_skill(emp_skill) %>            
+      <% end %>            
+      <%= @skillname.join(", ") %>  
+  </p>
 
-    <p>Desired Skills:
-        <% @employee.target_skills.each do |ts| %>    
-        <%= ts.skill.name %>    
-        <% end %>  
-    </p>
+  <p>Target Skills:
+    <% @skillname = [] %>            
+      <% @employee.target_skills.each do |targ_skill| %>              
+      <% show_skill(targ_skill) %>            
+      <% end %>            
+      <%= @skillname.join(", ") %>  
+  </p>
 
     <p>
         Short Description about <%= @employee.name %>:
@@ -139,6 +142,7 @@ $( "#tabs" ).tabs();
 
     <p>
       <b>Projects I've worked on:</b>
+      <% if !@employee.selections.nil? %>
       <% @employee.selections.each do |selection| %>          
         <% if selection.employee_id == current_employee.id %>  
           <p>                      
@@ -150,6 +154,7 @@ $( "#tabs" ).tabs();
           </p>
         <% end %>        
       <% end %>
+      <% end %>
     </p>
 
   </div>
@@ -159,37 +164,46 @@ $( "#tabs" ).tabs();
 
 
 <div id="tabs-3">
-  <% unless current_employee.requests.empty? %>
-    <h3>Requests I've Posted</h3>
+  <h3>Requests I've Posted</h3>
 
-    <ul  class="employees"><li><%= link_to 'New Request', new_request_path %></li></ul>
+  <ul  class="employees"><li><%= link_to 'New Request', new_request_path %></li></ul>
+
+  <% if !current_employee.requests.empty? %>
 
      <% @myrequests.each do |request| %> 
 
         <ul  class="employees">
           <li>
            <p>
-              <%= request.client %> <%= request.start_date %> - <%= request.stop_date %></br>
+              <b><%= request.project %>:</b>
+              <%= request.start_date %> - <%= request.stop_date %></br>
                Description: <%= request.content %></br>
-
-              Active <%= link_to 'Cancel', request, method: :delete, data: { confirm: 'Are you sure?' } %> <%= link_to 'Edit', edit_request_path(request) %></p>
+              <% if request.active == "1" %>
+                Active  <%= link_to 'Edit or Cancel', edit_request_path(request) %></p>
+              <% else %>
+                <span class="cancelled">Cancelled</span>
+              <% end %>              
           </p>
 
-          <p>Applicants:</br>
+          <% if request.active == "1" %>
+            <p>Applicants:</br>
 
-          <% request.responses.each do |response| %>
-            <% if !response.selections.empty? %>    
-                     <%= link_to response.employee.name, employee_path(response.employee) %> Selected                                
-            <% else %> 
-                     <%= link_to response.employee.name, employee_path(response.employee) %> <%= link_to 'Select', new_response_selection_path(response) %>
+            <% request.responses.each do |response| %>
+            
+              <% if !response.selections.empty? %>    
+                       <%= link_to response.employee.name, employee_path(response.employee) %> Selected                                
+              <% else %> 
+                       <%= link_to response.employee.name, employee_path(response.employee) %> <%= link_to 'Select', new_response_selection_path(response) %>
+              <% end %>
+              </br>
             <% end %>
-            </br>
-
           <% end %>                       
 
          </li>
         </ul>
     <% end %>
+  <% else %> 
+    You have not posted any requests.
 
 <% end %> 
 </div>

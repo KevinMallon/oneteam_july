@@ -44,10 +44,20 @@ class Request < ActiveRecord::Base
   end
 
   def progress_status
-    if Date.today > start_date 
+    if Date.today > start_date && stop_date > Date.today
       return "In Progress"
-    else 
+    elsif Date.today < start_date 
       return "Not Started" 
+    elsif Date.today > stop_date 
+      return "Project completion date has passed" 
+    end
+  end
+
+  def active_status(request)
+    if request.active = "1"
+      return "Active"
+    else
+      return "Cancelled"
     end
   end
 

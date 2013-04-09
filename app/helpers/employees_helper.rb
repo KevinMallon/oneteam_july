@@ -6,13 +6,12 @@ module EmployeesHelper
     image_tag(gravatar_url, alt: employee.name, class: "gravatar")
   end
 
-def show_skill_and_proficiency(skill_proficiency)               
-	if skill_proficiency.level != 0                          
-		name = Skill.find_by_id(skill_proficiency.skill_id).name         
-		level = skill_proficiency.level         
-		@skillname.push(name)         
-		@skillname.push(level)       
-	end 
-end
+  def show_skill(skill_level)               
+                       
+  		name = Skill.find_by_id(skill_level.skill_id).name         
+        
+  		@skillname.push(name)         
+    
 
+  end
 end

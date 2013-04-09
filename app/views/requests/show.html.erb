@@ -15,9 +15,12 @@
   <%= @request.location %>
 </p>
 
-<p>
-  <b>Skills needed:</b>
-  <%= @request.skills_needed %>
+<p><b>Skills needed:</b>      
+  <% @skillname = [] %>            
+    <% @request.request_skills.each do |skill_need| %>              
+    <% show_skill(skill_need) %>            
+    <% end %>            
+    <%= @skillname.join(", ") %>  
 </p>
 
 <p>
@@ -36,19 +39,11 @@
 </p>
 
 <p>
-  <b>Client:</b>
-  <%= @request.client %>
-</p>
-
-<p>
   <b>Project:</b>
   <%= @request.project %>
 </p>
 
 <p>
-<%= link_to 'Back to Requests', requests_path %>
+<%= link_to 'To Requests', requests_path %>
 </p>
-
-<p>
-<%= link_to 'Apply', new_request_response_path(@request), class: "btn btn-small btn-primary" %>    
-</p>
+ 

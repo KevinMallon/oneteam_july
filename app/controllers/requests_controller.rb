@@ -9,7 +9,6 @@ class RequestsController < ApplicationController
     @myrequests = current_employee.requests.paginate(page: params[:page])
     @requests = Request.all
     @employee = current_employee
-    @selections = Selection.all      
     @skills = Skill.all 
   end
 
@@ -42,11 +41,6 @@ class RequestsController < ApplicationController
 
   def edit
       @request = Request.find(params[:id])
-
-      skills_needed = params[:skills_needed]    
-      unless params[:skills_needed].nil?      
-        skills_needed = @request.skills_needed.split(", ")    
-      end
   end
 
   # POST /requests
@@ -70,12 +64,7 @@ class RequestsController < ApplicationController
   # PUT /requests/1
   # PUT /requests/1.json
   def update
-      @request = Request.find(params[:id])
-    if @request.update_attributes(params[:request])
-      requests_path
-    else      
-        redirect_to my_requests_path(current_employee.id), :alert => "Unable to update request."
-    end
+    @request = Request.find(params[:id])
 
     respond_to do |format|
       if @request.update_attributes(params[:request])
@@ -83,7 +72,7 @@ class RequestsController < ApplicationController
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
-        format.json { render json: @request.errors, status: :unprocessable_entity }
+        format.json { render json: @request.errors, status: :unprocessable_entity, notice: 'Unable to update request.' }
       end
     end
   end

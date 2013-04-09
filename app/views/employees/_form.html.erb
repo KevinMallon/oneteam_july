@@ -1,6 +1,6 @@
 <%= simple_form_for @employee do |f| %> 
-<%= hidden_field_tag "employee[employee_skill_ids][]", "" %>
-<%= hidden_field_tag "employee[target_skill_ids][]", "" %>
+<%= hidden_field_tag "employee[employee_skills_ids][]", "" %>
+<%= hidden_field_tag "employee[target_skills_ids][]", "" %>
 
   <%= f.error_notification %>
 
@@ -30,6 +30,7 @@
 </div>
 
 <div class="row-fluid">
+  
 <div class="span4">
   <%= f.input :job_title, as: :select, collection: ['Developer', 'Analyst', 'Manager'], :label => "Job Title"  %>
 </div>
@@ -41,6 +42,7 @@
 <div class="span4">
   <%= f.input :years_at_company,   as: :select, collection: ['1','2','3','4','5','6','7','8','9','10','20']  %>
 </div>
+
 </div>
 
 <div class="row-fluid">
@@ -52,7 +54,7 @@
 <div class="span6">
   <%= f.label :image, "Upload your photo at Gravatar" %>
     <p>
-    <%= gravatar_for @employee %>
+
   </p>
 
 </div>
@@ -60,31 +62,27 @@
 
 <p>
 <div class="row-fluid">
-
 <div class="span2">
       <%= f.label :current_skills %></label>
 </div>
-
 <div class="span3">
-  <% Skill.all.each do |skill| %>
-        <%= check_box_tag "employee[employee_skills_ids][]", skill.id,
-    @employee.employee_skills.compact.include?(skill) %>
-          <%= skill.name %></br>
-  <% end %>
+      <% Skill.all.each do |skill| %>
+            <%= check_box_tag "employee[employee_skills_ids][]", skill.id,
+        @employee.employee_skills.include?(skill) %>
+              <%= skill.name %></br>
+<% end %>
 </div>
 
 <div class="span2">
-  <%= f.label :desired_skills %></label>
+      <%= f.label :target_skills %></label>
 </div>
-
 <div class="span3">
-  <% Skill.all.each do |skill| %>
-        <%= check_box_tag "employee[target_skills_ids][]", skill.id,
-    @employee.target_skills.compact.include?(skill) %>
-          <%= skill.name %></br>
-  <% end %>
+      <% Skill.all.each do |skill| %>
+            <%= check_box_tag "employee[target_skills_ids][]", skill.id,
+        @employee.target_skills.include?(skill) %>
+              <%= skill.name %></br>
+<% end %>
 </div>
-
 <div class="span2">
 </div>  
 </div>
@@ -94,6 +92,12 @@
 <div class="span12">
   <%= f.button :submit, :class => 'btn-primary' %>
 </div>
+
+
 </div>
 
 <% end %>
+
+
+
+

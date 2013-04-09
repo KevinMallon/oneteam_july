@@ -18,7 +18,6 @@ class EmployeesController < ApplicationController
   # GET /employees/1.json
   def show
     @employee = Employee.find(params[:id])
-
     @skills = Skill.all 
 
     respond_to do |format|

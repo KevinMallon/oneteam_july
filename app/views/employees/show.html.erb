@@ -64,21 +64,42 @@
     <%= @employee.years_at_company %>
 </p>
 
-<p>  
-  Employee Skills:
-  <% @employee.employee_skills.each do |es| %>    
-  <%= es.skill.name %> 
-  <% end %>  
+<p>Current Skills:       
+  <% @skillname = [] %>            
+    <% @employee.employee_skills.each do |emp_skill| %>              
+    <% show_skill(emp_skill) %>            
+    <% end %>            
+    <%= @skillname.join(", ") %>  
 </p>
 
 <p>Target Skills:
-  <% @employee.target_skills.each do |ts| %>    
-  <%= ts.skill.name %>  
-  <% end %>  
+  <% @skillname = [] %>            
+    <% @employee.target_skills.each do |targ_skill| %>              
+    <% show_skill(targ_skill) %>            
+    <% end %>            
+    <%= @skillname.join(", ") %>  
+</p>
+ 
+
+<p>
+  <b>Projects I've worked on:</b>
+  <% if !@employee.selections.nil? %>
+  <% @employee.selections.each do |selection| %>          
+
+      <p>                      
+          <%= selection.request.project %>:
+          <%= selection.request.start_date %> to 
+          <%= selection.request.stop_date %> 
+          (<%= selection.request.progress_status %>)
+          <%= selection.request.content %> 
+      </p>
+  <% end %>     
+  <% end %>
 </p>
 
-
-
+<p>
+<%= link_to 'Back to Requests', requests_path %>
+</p>
 
   
 
