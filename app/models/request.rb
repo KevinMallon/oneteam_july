@@ -43,6 +43,8 @@ class Request < ActiveRecord::Base
     end  
   end
 
+
+
   def progress_status
     if Date.today > start_date && stop_date > Date.today
       return "In Progress"

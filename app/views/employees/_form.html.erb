@@ -1,6 +1,4 @@
 <%= simple_form_for @employee do |f| %> 
-<%= hidden_field_tag "employee[employee_skills_ids][]", "" %>
-<%= hidden_field_tag "employee[target_skills_ids][]", "" %>
 
   <%= f.error_notification %>
 
@@ -62,29 +60,56 @@
 
 <p>
 <div class="row-fluid">
+
 <div class="span2">
       <%= f.label :current_skills %></label>
 </div>
-<div class="span3">
-      <% Skill.all.each do |skill| %>
-            <%= check_box_tag "employee[employee_skills_ids][]", skill.id,
-        @employee.employee_skills.include?(skill) %>
-              <%= skill.name %></br>
-<% end %>
+
+<div class="span4">
+<table>         
+  <% Skill.all.each do |skill| %>       
+  <div class="inbox">       
+    <tr>
+      <td>            
+        <%= skill.name %> 
+      </td>              
+        <td>
+          <% [0, 1, 2, 3, 4].each do |level| %>       
+          <%= radio_button_tag "employee[employee_skills_data][#{skill.id}]", "#{level}", @employee.has_skill_level(skill.id, level)  %> 
+          <%= level %>           
+          <% end %>
+        </td>
+      </tr>                   
+    </div>       
+    <% end %>             
+  </table>
 </div>
 
 <div class="span2">
-      <%= f.label :target_skills %></label>
+  <%= f.label :desired_skills %></label>
 </div>
-<div class="span3">
-      <% Skill.all.each do |skill| %>
-            <%= check_box_tag "employee[target_skills_ids][]", skill.id,
-        @employee.target_skills.include?(skill) %>
-              <%= skill.name %></br>
-<% end %>
+
+<div class="span4"> 
+<table>     
+  <% Skill.all.each do |skill| %>       
+  <div class="inbox">         
+    <tr>
+      <td>            
+        <%= skill.name %> 
+      </td>              
+      <td>
+        <% [0, 1, 2, 3, 4].each do |level| %>      
+         <%= radio_button_tag "employee[target_skills_data][#{skill.id}]", "#{level}", @employee.target_skill_level(skill.id, level)  %>
+         <%= level %>
+          <% end %>
+        </td>
+      </tr>                   
+    </div>       
+    <% end %>             
+  </table>
 </div>
-<div class="span2">
-</div>  
+
+ 
 </div>
 </p>
 

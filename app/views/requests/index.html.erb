@@ -34,7 +34,7 @@ $( "#tabs" ).tabs();
   
     <% @requests.each do |request| %>
       <% if request.active == "1" %>  
-      <% if request.employee != current_employee %> 
+ 
         <% if Date.today < request.stop_date %>
 
       <li>
@@ -47,8 +47,10 @@ $( "#tabs" ).tabs();
         <p>
           <% if request.applied_status(current_employee) == "applied" %>
                Applied
-          <% else %>
+          <% elsif request.employee != current_employee %>
                <%= link_to "Apply", new_request_response_path(request), class: "btn" %>
+          <% elsif request.employee == current_employee %>
+               <span class="attention">You posted this request. You cannot apply for your own requests.</span>
           <% end %>
         </p>
 
@@ -56,7 +58,7 @@ $( "#tabs" ).tabs();
 
         <% end %>
       <% end %>
-      <% end %>
+ 
     <% end %>
 
 </ul>    
@@ -181,15 +183,13 @@ $( "#tabs" ).tabs();
               <% if request.active == "1" %>
                 Active  <%= link_to 'Edit or Cancel', edit_request_path(request) %></p>
               <% else %>
-                <span class="cancelled">Cancelled</span>
+                <span class="attention">Cancelled</span>
               <% end %>              
           </p>
 
           <% if request.active == "1" %>
             <p>Applicants:</br>
-
-            <% request.responses.each do |response| %>
-            
+            <% request.responses.each do |response| %>           
               <% if !response.selections.empty? %>    
                        <%= link_to response.employee.name, employee_path(response.employee) %> Selected                                
               <% else %> 

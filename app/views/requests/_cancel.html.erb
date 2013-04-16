@@ -1,0 +1,7 @@
+<p>Do you want to cancel the request, "<%= @request.project %>" ?</p> 
+
+<%= form_for(@request) do |f| %>  
+<%= f.hidden_field :active, :value => '0' %>  
+<%= f.submit 'Cancel Request', :class => 'btn-primary' %>           
+ 
+<% end %>

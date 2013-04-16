@@ -67,7 +67,8 @@ class EmployeesController < ApplicationController
     respond_to do |format|
       if @employee.update_attributes(params[:employee])
         flash[:success] = "Profile updated."
-        format.html { redirect_to @employee }
+        sign_in @employee
+        format.html { redirect_to requests_path, :anchor => "tabs-2" }
         format.json { head :no_content }
       else
         flash[:failed] = "Failed to update."
