@@ -1,21 +1,3 @@
-# == Schema Information
-#
-# Table name: requests
-#
-#  id            :integer          not null, primary key
-#  employee_id   :integer
-#  group         :string(255)
-#  location      :string(255)
-#  skills_needed :string(255)
-#  start_date    :date
-#  stop_date     :date
-#  request       :string(255)
-#  client        :string(255)
-#  project       :string(255)
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#
-
 class Request < ActiveRecord::Base
   attr_accessible :employee_id, :client, :group, :location, :project
   attr_accessible :content, :skills_needed, :start_date, :stop_date, :active
@@ -42,8 +24,6 @@ class Request < ActiveRecord::Base
       errors.add(:end_date,  "End Date must be later than start_date")    
     end  
   end
-
-
 
   def progress_status
     if Date.today > start_date && stop_date > Date.today
@@ -73,13 +53,40 @@ class Request < ActiveRecord::Base
   end
 
   def skills_needed_ids
-    self.request_skills.delete_if(&:empty?).map &:skill_id
+    self.request_skills.map &:skill_id
   end
 
   def skills_needed_ids=(skills_needed_ids)
     self.request_skills = skills_needed_ids.delete_if(&:empty?).map {|id| RequestSkill.new({:skill_id => id})}
   end
 
+  def request_max_score(request)   
+    request.request_skills.length*4
+  end
+
+  def employee_skills_score(employee)
+    score = 0       
+      skills_needed_ids.each do |sn_id|      
+        employee.employee_skills.each do |es|        
+          if es.level != 0 && es.skill_id == sn_id          
+            score += es.level 
+          end        
+        end    
+      end
+    score      
+  end
+
+  def target_skills_score(employee)    
+    score = 0    
+    skills_needed_ids.each do |sn_id|      
+      employee.target_skills.each do |ts|        
+        if ts.level != 0 && ts.skill_id == sn_id          
+          score += ts.level         
+        end        
+      end    
+    end      
+    score  
+  end
 
 end
 

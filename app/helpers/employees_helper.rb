@@ -6,12 +6,4 @@ module EmployeesHelper
     image_tag(gravatar_url, alt: employee.name, class: "gravatar")
   end
 
-  def show_skill(skill_level)               
-                       
-  		name = Skill.find_by_id(skill_level.skill_id).name         
-        
-  		@skillname.push(name)         
-    
-
-  end
 end

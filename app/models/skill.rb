@@ -10,4 +10,6 @@ class Skill < ActiveRecord::Base
   has_many :target_skills, dependent: :destroy
   has_many :employees, through: :target_skills
 
+  has_many :employee_skill_evaluations
+
 end

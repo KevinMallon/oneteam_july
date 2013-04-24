@@ -64,20 +64,20 @@
     <%= @employee.years_at_company %>
 </p>
 
-<p>Current Skills:       
-  <% @skillname = [] %>            
+<p>Employee Skills:       
+  <% @skillnames = [] %>            
     <% @employee.employee_skills.each do |emp_skill| %>              
-    <% show_skill(emp_skill) %>            
+    <% skill_names(emp_skill) %>            
     <% end %>            
-    <%= @skillname.join(", ") %>  
+    <%= @skillnames.join(", ") %>  
 </p>
 
 <p>Target Skills:
-  <% @skillname = [] %>            
+  <% @skillnames = [] %>            
     <% @employee.target_skills.each do |targ_skill| %>              
-    <% show_skill(targ_skill) %>            
+    <% skill_names(targ_skill) %>            
     <% end %>            
-    <%= @skillname.join(", ") %>  
+    <%= @skillnames.join(", ") %>  
 </p>
  
 

@@ -97,28 +97,6 @@ def to_target_skills(target_skills_data)
 
 
 
-
-
-
-
-
-
-
-
-  def has_skill?(skill_id)          
-    employee_skills.each do |emp_id|       
-      return true  if emp_id.skill_id == skill_id                 
-    end 
-    false             
-  end   
-    
-  def wants_skill?(skill_id)   
-  target_skills.each do |emp_id|       
-    return true  if emp_id.skill_id == skill_id          
-    end              
-    false     
-  end 
-
 private
   def create_remember_token
     self.remember_token = SecureRandom.urlsafe_base64

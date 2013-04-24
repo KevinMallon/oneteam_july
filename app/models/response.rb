@@ -3,4 +3,5 @@ class Response < ActiveRecord::Base
   belongs_to :request
   belongs_to :employee
   has_many :selections, dependent: :destroy
+  has_one :employee_skill_evaluation
 end

@@ -36,6 +36,10 @@ OneteamApp::Application.routes.draw do
     resources :selections
   end
 
+  resources :responses, :shallow => true do    
+    resources :evaluations  
+  end 
+
 end
 
   # The priority is based upon order of creation:
