@@ -1,6 +1,7 @@
-class EmployeeSkillEvaluation < ActiveRecord::Base
-  attr_accessible :assessed_proficiency, :experience_points, :response_id, :skill_id
+class EmployeeSkillEvaluation < ActiveRecord::Base  
+attr_accessible :assigned_skill_level, :evaluation_id, :skill_experience_points, :skill_id    
 
-  belongs_to :response
-  belongs_to :skill
+belongs_to :evaluation  
+belongs_to :skill
+
 end

@@ -15,20 +15,7 @@ class ResponsesController < ApplicationController
     end
   end
 
-  # GET /responses/1
-  # GET /responses/1.json
-  def show
-      @response = Response.find(params[:id])
-      @responses = @request.responses
-      @employee = Employee.find_by_id(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @response }
-    end
-  end
-
-  def new
+    def new
     @request = Request.find_by_id(params[:request_id]) 
     @response = @request.responses.build
 
@@ -37,6 +24,19 @@ class ResponsesController < ApplicationController
       format.json { render json: @response }
     end
   end
+
+  # GET /responses/1
+  # GET /responses/1.json
+  def show
+      @response = Response.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @response }
+    end
+  end
+
+
 
   # POST /responses
   # POST /responses.json

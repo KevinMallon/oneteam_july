@@ -26,7 +26,7 @@ class Request < ActiveRecord::Base
   end
 
   def progress_status
-    if Date.today > start_date && stop_date > Date.today
+    if Date.today >= start_date && stop_date > Date.today
       return "In Progress"
     elsif Date.today < start_date 
       return "Not Started" 
@@ -86,6 +86,23 @@ class Request < ActiveRecord::Base
       end    
     end      
     score  
+  end
+
+
+  def proj_length    
+    (self.stop_date.to_date - self.start_date.to_date).to_i
+  end   
+
+  def view_evaluations(selection)    
+    eval_skill = []    
+    selection.evaluation.employee_skill_evaluations.each do |skill_evaluation|      
+      if skill_evaluation.assigned_skill_level != 0        
+        name = skill_evaluation.skill.name         
+        eval_skill.push(name)        
+        eval_skill.push(skill_evaluation.assigned_skill_level)      
+      end    
+    end    
+    eval_skill.join(", ")  
   end
 
 end

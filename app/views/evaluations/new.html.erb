@@ -1,0 +1,26 @@
+<h1>Evaluate Employee Skills</h1>
+
+<p>
+	Evaluate <em><%=@employee.name %></em> for the <em><%= @request.project %></em> project
+</p>
+
+<p>
+	Project Length: <%=@request.proj_length%> days
+</p>
+
+<p>
+	Relevant skills:      
+	<% @skillnames = [] %>            
+	<% @response.request.request_skills.each do |skill_need| %>
+	  <% skill_names(skill_need) %>            
+	<% end %>            
+	<%= @skillnames.join(", ") %> 
+</p>
+
+
+
+
+<%= render 'form' %>
+
+
+  

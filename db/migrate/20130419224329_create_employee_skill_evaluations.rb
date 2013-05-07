@@ -3,8 +3,8 @@ class CreateEmployeeSkillEvaluations < ActiveRecord::Migration
     create_table :employee_skill_evaluations do |t|
       t.integer :response_id
       t.integer :skill_id
-      t.integer :experience_points
-      t.integer :assessed_proficiency
+      t.integer :assigned_skill_level
+      t.integer :skill_experience_points
 
       t.timestamps
     end

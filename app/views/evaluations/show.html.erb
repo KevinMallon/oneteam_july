@@ -1,0 +1,26 @@
+
+<h2>Evaluation for <%= @employee.name %> on the <%= @request.project %> project</h2>
+
+<p>  
+	<% if !@evaluation.employee_skill_evaluations.nil? %>    
+<table>    
+	<tr>
+		<b>Skill Levels and Experience:</b>
+	</tr>    
+	<% @evaluation.employee_skill_evaluations.each do |skill_eval| %>      
+		<tr>
+			<td class="span2">
+				<em><%= Skill.find(skill_eval.skill_id).name %></em>
+			</td>      	  
+			<td class="span2">
+				Level: <%= skill_eval.assigned_skill_level %>
+			</td>      	  
+			<td class="span2">
+				Experience:  <%= skill_eval.skill_experience_points %>
+			</td>      
+		</tr>    
+	<% end %>     
+	</table>   
+<% end %>  
+</p>
+<%= link_to 'Edit', edit_response_evaluation_path(@response,@evaluation) %> | <%= link_to 'Back', requests_path(current_employee) %>

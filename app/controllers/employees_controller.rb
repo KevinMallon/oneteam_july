@@ -7,6 +7,8 @@ class EmployeesController < ApplicationController
   # GET /employees.json
   def index
     @employees = Employee.paginate(page: params[:page])
+    @responses = Response.where('employee_id' => params[:id])
+    
 
     respond_to do |format|
       format.html # index.html.erb
@@ -19,6 +21,10 @@ class EmployeesController < ApplicationController
   def show
     @employee = Employee.find(params[:id])
     @skills = Skill.all 
+    @selections = Selection.where('employee_id' => params[:id])
+    @responses = Response.where('employee_id' => params[:id])
+    @request_ids = @selections.map{|selection| selection.request_id}    
+    @my_projects = @request_ids.map{|request_id| Request.find(request_id)} 
 
     respond_to do |format|
       format.html # show.html.erb

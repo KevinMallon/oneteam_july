@@ -10,6 +10,10 @@ class RequestsController < ApplicationController
     @requests = Request.all
     @employee = current_employee
     @skills = Skill.all 
+    @selections = Selection.where('employee_id' => params[:id])
+    @responses = Response.where('employee_id' => params[:id])
+    @request_ids = @selections.map{|selection| selection.request_id}    
+    @my_projects = @request_ids.map{|request_id| Request.find(request_id)}
   end
 
   # GET /requests/1

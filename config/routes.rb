@@ -36,7 +36,7 @@ OneteamApp::Application.routes.draw do
     resources :selections
   end
 
-  resources :responses, :shallow => true do    
+  resources :responses do    
     resources :evaluations  
   end 
 

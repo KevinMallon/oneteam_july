@@ -133,13 +133,34 @@ $( "#tabs" ).tabs();
         <%= @employee.years_at_company %>
     </p>
 
-  <p>Employee Skills:       
-    <% @skillnames = [] %>            
-      <% @employee.employee_skills.each do |emp_skill| %> 
-      <% skill_names(emp_skill) %>            
-      <% end %>            
-      <%= @skillnames.join(", ") %>  
+    <p>Employee Skills:
+    <div class="span12">      
+      <table>
+        <tr>  
+          <td class="span2">Skill</td>  
+          <td class="span3">Total Experience Points</td>  
+          <td class="span3">Average Skill Level</td>  
+        </tr>
+        <% @skills.each do |skill| %>  
+          <tr>      
+            <td class="span2"><%= skill.name %></td>      
+            <td class="center"><%= @employee.skill_experience_sum(skill.id) %></td>     
+            <td class="center"><%= @employee.average_skill_level(skill.id) %></td>
+           </tr>  
+        <% end %>               
+      </table></br>
+     </div>  
+    </p>
+
+  <p>               
+      <% @employee.view_my_ratings %>   
   </p>
+
+<p>My Skill Ratings:  
+  <% @employee.employee_skills.each do |es| %>    
+  <%= es.skill.name %>(<%= es.level%>)    
+  <% end %>  
+</p>
 
   <p>Target Skills:
     <% @skillnames = [] %>            
@@ -149,32 +170,30 @@ $( "#tabs" ).tabs();
       <%= @skillnames.join(", ") %>  
   </p>
 
-    <p>
-        Short Description about <%= @employee.name %>:
-        <%= @employee.description %>
-    </p>
-
-    <p>
-      <b>Projects I've worked on:</b>
-      <% if !@employee.selections.nil? %>
-      <% @employee.selections.each do |selection| %>          
-        <% if selection.employee_id == current_employee.id %>  
-          <p>                      
-              <%= selection.request.project %>:
-              <%= selection.request.start_date %> to 
-              <%= selection.request.stop_date %> 
-              (<%= selection.request.progress_status %>)
-              <%= selection.request.content %> 
-          </p>
-        <% end %>        
-      <% end %>
-      <% end %>
-    </p>
+  <p>
+    <b>Projects I've worked on:</b>
+    <% if !@employee.selections.nil? %>
+    <% @employee.selections.each do |selection| %>          
+      <% if selection.employee_id == current_employee.id %>  
+        <p>                      
+            <em><%= selection.request.project %>:</em>
+            <%= selection.request.start_date %> to 
+            <%= selection.request.stop_date %> 
+            (<%= selection.request.progress_status %>)</br> 
+            <% selection.request.responses.each do |selection| %>                    
+              <% if !selection.evaluation.nil? %>              
+                Skill ratings: <%= selection.employee.view_evaluations(selection) %>
+              <% end %> 
+          <% end %>
+        </p>
+      <% end %>        
+    <% end %>
+    <% end %>
+  </p>
 
   </div>
   </div>
 </div>
-
 
 
 <div id="tabs-3">
@@ -210,7 +229,12 @@ $( "#tabs" ).tabs();
             <p>Applicants:</br>
             <% request.responses.each do |response| %>           
               <% if !response.selections.empty? %>    
-                <%= link_to response.employee.name, employee_path(response.employee) %> Selected | <%= link_to 'Evaluate Employee Skills', response_path(response) %></br>
+                <%= link_to response.employee.name, employee_path(response.employee) %> Selected | 
+                  <% if !response.evaluation.nil? %>  
+                    <%= link_to 'Edit Employee Skills Evaluation', edit_response_evaluation_path(response,response.evaluation) %></br>
+                  <% else %>
+                  <%= link_to 'Evaluate Employee Skills', new_response_evaluation_path(response) %></br>
+                  <% end %>
                 <em>Employee skills</em> score for this project: <%= request.employee_skills_score(response.employee) %> out of a possible <%= request.request_max_score(request) %></br>
                 <em>Target skills</em> score for this project: <%= request.target_skills_score(response.employee) %> out of a possible <%= request.request_max_score(request) %></p>                 
               <% else %> 

@@ -1,0 +1,22 @@
+<h1>Edit Employee Skills Evaluation</h1>
+
+<p>
+	Evaluate <em><%=@employee.name %></em> for <em><%= @request.project %></em> project
+</p>
+
+<p>
+	Project Length: <%=@request.proj_length%> days
+</p>
+
+<p>
+	Relevant skills:      
+	<% @skillnames = [] %>            
+	<% @response.request.request_skills.each do |skill_need| %>
+	  <% skill_names(skill_need) %>            
+	<% end %>            
+	<%= @skillnames.join(", ") %> 
+</p>
+
+<%= form_for([@response,@evaluation]) do |f| %>  
+	<%= render 'form', :f => f %> </br>  
+<% end %>  

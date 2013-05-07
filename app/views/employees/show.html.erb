@@ -64,12 +64,26 @@
     <%= @employee.years_at_company %>
 </p>
 
-<p>Employee Skills:       
-  <% @skillnames = [] %>            
-    <% @employee.employee_skills.each do |emp_skill| %>              
-    <% skill_names(emp_skill) %>            
-    <% end %>            
-    <%= @skillnames.join(", ") %>  
+<p>Employee Skills:
+<div class="span12">      
+ <table>
+  <tr>  
+    <td class="span2">Skill</td>  
+    <td class="span3">Total Experience Points</td>  
+    <% if current_employee == @employee %>    
+    <td class="span3">Average Skill Rating</td>  
+    <% end %>  
+  </tr><% @skills.each do |skill| %>  
+  <tr>      
+    <td class="span2"><%= skill.name %></td>      
+    <td class="center"><%= @employee.skill_experience_sum(skill.id) %></td>     
+     <% if current_employee == @employee %>        
+     <td class="center"><%= @employee.average_skill_level(skill.id) %></td>      
+     <% end %>    
+   </tr>  
+   <% end %>               
+ </table></br>
+ </div>  
 </p>
 
 <p>Target Skills:
@@ -79,40 +93,25 @@
     <% end %>            
     <%= @skillnames.join(", ") %>  
 </p>
- 
 
 <p>
   <b>Projects I've worked on:</b>
   <% if !@employee.selections.nil? %>
-  <% @employee.selections.each do |selection| %>          
-
-      <p>                      
-          <%= selection.request.project %>:
-          <%= selection.request.start_date %> to 
-          <%= selection.request.stop_date %> 
-          (<%= selection.request.progress_status %>)
-          <%= selection.request.content %> 
-      </p>
-  <% end %>     
+    <% @my_projects.each do |my_project| %>
+      <p class="span12">                                
+        <b><em><%= my_project.project %>:</em></b>
+        <%= my_project.start_date %> to 
+        <%= my_project.stop_date %> 
+        (<%= my_project.progress_status %>)
+        <%= my_project.location %> </br>
+        <% my_project.responses.each do |response| %>                    
+        <% end %>
+      </p> 
+    <% end %>     
   <% end %>
 </p>
 
-<p>
+<row class="span12">
 <%= link_to 'Back to Requests', requests_path(@requests) %>
-</p>
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
+</row>
 

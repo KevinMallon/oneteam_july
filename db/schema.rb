@@ -11,15 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130419224329) do
+ActiveRecord::Schema.define(:version => 20130425222839) do
 
   create_table "employee_skill_evaluations", :force => true do |t|
-    t.integer  "response_id"
+    t.integer  "evaluation_id"
     t.integer  "skill_id"
-    t.integer  "experience_points"
-    t.integer  "assessed_proficiency"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
+    t.integer  "assigned_skill_level"
+    t.integer  "skill_experience_points"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
   end
 
   create_table "employee_skills", :force => true do |t|
@@ -49,6 +49,12 @@ ActiveRecord::Schema.define(:version => 20130419224329) do
   end
 
   add_index "employees", ["remember_token"], :name => "index_employees_on_remember_token"
+
+  create_table "evaluations", :force => true do |t|
+    t.integer  "response_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "request_skills", :force => true do |t|
     t.integer  "request_id"
