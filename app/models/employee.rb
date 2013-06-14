@@ -1,6 +1,6 @@
 class Employee < ActiveRecord::Base
   attr_accessible :employee_id, :name, :email, :password, :password_confirmation 
-  attr_accessible :group, :location, :current_project, :current_skills 
+  attr_accessible :group, :location_id, :current_project, :current_skills 
   attr_accessible :skills_interested_in, :department, :supervisor 
   attr_accessible :years_at_company, :description, :job_title
   attr_accessible :skill_ids, :employee_skills_data, :target_skills_data

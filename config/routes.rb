@@ -1,4 +1,7 @@
 OneteamApp::Application.routes.draw do 
+  resources :dashboards
+
+
   resources :target_skills
 
 
@@ -24,8 +27,7 @@ OneteamApp::Application.routes.draw do
   resources :employee_skills
   resources :target_skills
   resources :request_skills  
-
-
+  resources :locations  
 
   resources :requests, :shallow => true do
     resources :responses

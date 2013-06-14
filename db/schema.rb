@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130425222839) do
+ActiveRecord::Schema.define(:version => 20130519203920) do
 
   create_table "employee_skill_evaluations", :force => true do |t|
     t.integer  "evaluation_id"
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(:version => 20130425222839) do
     t.string   "remember_token"
     t.boolean  "admin"
     t.string   "group"
-    t.string   "location"
+    t.string   "location_id"
     t.string   "current_project"
     t.string   "department"
     t.string   "supervisor"
@@ -56,6 +56,12 @@ ActiveRecord::Schema.define(:version => 20130425222839) do
     t.datetime "updated_at",  :null => false
   end
 
+  create_table "locations", :force => true do |t|
+    t.string   "location_name"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
   create_table "request_skills", :force => true do |t|
     t.integer  "request_id"
     t.integer  "skill_id"
@@ -66,7 +72,7 @@ ActiveRecord::Schema.define(:version => 20130425222839) do
   create_table "requests", :force => true do |t|
     t.integer  "employee_id"
     t.string   "group"
-    t.string   "location"
+    t.string   "location_id"
     t.string   "skills_needed"
     t.date     "start_date"
     t.date     "stop_date"

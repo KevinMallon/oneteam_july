@@ -1,5 +1,5 @@
 class Request < ActiveRecord::Base
-  attr_accessible :employee_id, :client, :group, :location, :project
+  attr_accessible :employee_id, :client, :group, :location_id, :project, :created_at, :updated_at
   attr_accessible :content, :skills_needed, :start_date, :stop_date, :active
   attr_accessible :skill_ids, :skills_needed_ids
 
