@@ -1,21 +1,72 @@
-<h1>Listing dashboards</h1>
+<h1>Dashboard</h1>
 
 <table>
-  <tr>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+<div>
 
-<% @dashboards.each do |dashboard| %>
+<table id='reqsum'>
+  <thead>
+    <tr>   
+      <th>Post Date</th>
+      <th></th>
+      <th>Title</th>
+      <th>Office</th>
+      <th>Selected Developer</th>
+      <th>Developer's Office</th>
+    </tr>
+  </thead>
+<tbody>
+<% @dashboard.requests_summary.each do |req_info| %>
   <tr>
-    <td><%= link_to 'Show', dashboard %></td>
-    <td><%= link_to 'Edit', edit_dashboard_path(dashboard) %></td>
-    <td><%= link_to 'Destroy', dashboard, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= req_info["request_created_on"] %></td>
+    <td><%= req_info["   "] %></td>
+    <td><%= req_info["project"] %></td>
+    <td><%= req_info["request_location"] %></td>
+    <td><%= req_info["employee"] %></td>
+    <td><%= req_info["employee_location"] %></td>
   </tr>
-<% end %>
+<% end %> 
+</tbody>
 </table>
 
-<br />
+<br>
+<br>
 
-<%= link_to 'New Dashboard', new_dashboard_path %>
+<table id='monthreqsum'>
+  <thead>
+    <tr>
+    <th>Month</th>
+    <th>Requests</th>
+    <th>Responded To</th>
+    <th>Filled</th>
+    <th>Cancelled</th>
+    </tr>    
+  </thead>
+<tbody>
+  <% @dashboard.requests_summary_by_month.each do |total| %>
+    <tr>
+      <td><%= total["Month"] %></td>
+      <td><%= total["Requests"] %></td>
+      <td><%= total["Responses"] %></td>
+      <td><%= total["Selections"] %></td>
+      <td><%= total["Cancelled"] %></td>
+    </tr>
+  <% end %>
+</tbody>
+</table> 
+</div>  
+
+
+</table>
+
+
+
+
+
+

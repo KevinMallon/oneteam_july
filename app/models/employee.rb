@@ -5,7 +5,7 @@ class Employee < ActiveRecord::Base
   attr_accessible :years_at_company, :description, :job_title
   attr_accessible :skill_ids, :employee_skills_data, :target_skills_data
 
-
+  has_many :locations, dependent: :destroy
   has_many :requests, dependent: :destroy
   has_secure_password
   has_many :responses, dependent: :destroy
@@ -20,7 +20,7 @@ class Employee < ActiveRecord::Base
   accepts_nested_attributes_for :employee_skills
   accepts_nested_attributes_for :target_skills
   accepts_nested_attributes_for :requests
-
+  accepts_nested_attributes_for :locations
  
   before_save { |employee| employee.email = email.downcase }
   before_save :create_remember_token
