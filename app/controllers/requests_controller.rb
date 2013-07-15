@@ -6,14 +6,25 @@ class RequestsController < ApplicationController
   # GET /requests
   # GET /requests.json
   def index
-    @myrequests = current_employee.requests.paginate(page: params[:page])
-    @requests = Request.all
+    if params[:employee_id]
+      @my_requests = Request.where("employee_id = ?",
+       params[:employee_id])
+      @requests = @my_requests.paginate :page =>
+       params[:page], :per_page => 10 
+      render 'my_requests' 
+    else 
+      @requests = Request.paginate :page =>
+       params[:page], :per_page => 10   
+    end
+    
     @employee = current_employee
     @skills = Skill.all 
     @selections = Selection.where('employee_id' => params[:id])
     @responses = Response.where('employee_id' => params[:id])
     @request_ids = @selections.map{|selection| selection.request_id}    
     @my_projects = @request_ids.map{|request_id| Request.find(request_id)}
+    location = Location.where('location_id' => params[:id])
+    @dashboard = Dashboard.new
   end
 
   # GET /requests/1

@@ -1,14 +1,14 @@
 <header>
-  <div >
-    <div class="container">
-      <ul class="nav pull-right">
-        <li>
-          <%= link_to "Sign out", signout_path, method: "delete" %>
-        </li>
-      </ul>
-
-
-      
+	<h1>OneTeam</h1> 
+  <% if signed_in? %>
+    <div >
+      <div class="container">
+        <ul class="nav pull-right">
+          <li>
+            <%= link_to "Sign out", signout_path, method: "delete" %>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
+  <% end -%>
 </header>

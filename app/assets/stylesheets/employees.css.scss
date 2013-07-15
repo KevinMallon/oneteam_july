@@ -3,12 +3,18 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
  /* employees index */
+$grayMediumLight: #eaeaea;
+$lightGray: #999;
+$grayLight: #999;
+$grayLighter: #999;
+$grayDarker: #999;
 
 .employees {
   list-style: none;
   margin: 0;
 
   li {
+    font-size: 1em;
     overflow: auto;
     padding: 10px 0;
     border-top: 1px solid $grayLighter;

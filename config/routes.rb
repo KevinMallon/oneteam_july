@@ -2,8 +2,6 @@ OneteamApp::Application.routes.draw do
 
   get "skills/new"
 
-  match '/employees/:employee_id/requests' => 'requests#index'
-
   root to: 'sessions#new'
   
   match '/home', to: 'static_pages#home'
@@ -12,6 +10,14 @@ OneteamApp::Application.routes.draw do
   match '/signin', to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete
   
+  match '/employees/:employee_id/requests' => 'requests#index', :as => :employee_requests
+ 
+  match '/dashboards/requests_overview' => 'dashboards#requests_overview', :as => :dashboard_requests_overview
+  match '/dashboards/skills_overview' => 'dashboards#skills_overview', :as => :dashboard_skills_overview
+  match '/dashboards/guest_developers_overview' => 'dashboards#guest_developers_overview', :as => :dashboard_guest_developers_overview
+
+
+
   resources :employees
   resources :static_pages
   resources :sessions, only: [:new, :create, :destroy]
@@ -19,9 +25,10 @@ OneteamApp::Application.routes.draw do
   resources :employee_skills
   resources :target_skills
   resources :request_skills  
-  resources :locations  
   resources :dashboards
+  resources :locations
 
+  resources :employee_locations
 
   resources :requests, :shallow => true do
     resources :responses

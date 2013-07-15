@@ -1,0 +1,87 @@
+<nav>
+  <ul class="nav nav-pills" class="pull-left">
+    <% if signed_in? %>
+      <%= nav_link 'Usage Data', dashboard_requests_overview_path %>
+      <%= nav_link 'Skills Report', dashboard_skills_overview_path %>        
+      <%= nav_link "Impact Report", dashboard_guest_developers_overview_path %>         
+    <% end %>
+  </ul>
+</nav>
+
+
+<h4>Requests</h4>
+<table id='requests_summary' class="tablesorter table table-striped table-bordered requests report">
+  <thead>
+    <tr>   
+      <th>Post Date</th>
+      <th>Title</th>
+      <th>Office</th>
+      <th>Selected Developer</th>
+      <th>Developer's Office</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @dashboard.requests_summary.each do |req_info| %>
+    <tr>
+      <td><%= req_info["request_created_on"] %></td>
+      <td><%= req_info["project"] %></td>
+      <td><%= req_info["request_location"] %></td>
+      <td><%= req_info["employee"] %></td>
+      <td><%= req_info["employee_location"] %></td>
+    </tr>
+  <% end %> 
+  </tbody>
+</table>
+<br>
+
+
+<h4>Requests Summary by Month</h4>
+<table id='monthlyreqs' class="tablesorter table table-striped table-bordered requests report">
+  <thead>
+    <tr>
+    <th>Month</th>
+    <th>Requests</th>
+    <th>Responded To</th>
+    <th>Filled</th>
+    <th>Cancelled</th>
+    </tr>    
+  </thead>
+  <tbody>
+    <% @dashboard.requests_summary_by_month.each do |total| %>
+      <tr>
+        <td><%= total["Month"] %></td>
+        <td><%= total["Requests"] %></td>
+        <td><%= total["Responses"] %></td>
+        <td><%= total["Selections"] %></td>
+        <td><%= total["Cancelled"] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table> 
+<br>
+
+<h4>Days To Fill Request</h4>
+<table id='days_to_fill' class="tablesorter table table-striped table-bordered requests report">
+  <thead>
+    <tr>
+      <th>1 Day</th>
+      <th>1-3_Days</th>
+      <th>3-6_Days</th>
+      <th>Over_6_Days</th>
+    </tr>    
+  </thead>
+  <tbody>
+    <% @dashboard.days_to_fill.each do |total| %>
+      <tr>
+        <td><%= total["1_Day"] %></td>
+        <td><%= total["1-3_Days"] %></td>
+        <td><%= total["3-6_Days"] %></td>
+        <td><%= total["Over_6_Days"] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table> 
+</body>
+</html>
+
+

@@ -1,19 +1,8 @@
 <% provide(:title, @employee.name) %>
-
-<!DOCTYPE html>
-  <html>
-    <head>
-    <title>Bootstrap 101 Template</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <script src="http://code.jquery.com/jquery.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    </head>
-  </html>
- 
-
-
+<p class="employees">
+  <%= link_to 'Edit Profile', edit_employee_path(@employee) %>
+</p></br>
+    
 <h3>
     <%= @employee.name %>
 </h3>
@@ -36,7 +25,7 @@
 
 <p>
     Office:
-    <%= @employee.location %>
+          <%= @employee.employee_location.location.location_name %>
 </p>
 
 <p>
@@ -111,7 +100,4 @@
   <% end %>
 </p>
 
-<row class="span12">
-<%= link_to 'Back to Requests', requests_path(@requests) %>
-</row>
 

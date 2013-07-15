@@ -52,6 +52,9 @@ namespace :db do
           skill_id: @tskillpicks[n],                                  
           level: rand(1..4))
       end
+      EmployeeLocation.create!(                          
+          employee_id: Employee.last.id,  
+          location_id: location_id)  
     end      
 
     def create_selection (response_id)

@@ -1,0 +1,96 @@
+<nav>
+  <ul class="nav nav-pills" class="pull-left">
+    <% if signed_in? %>
+      <%= nav_link 'Usage Data', dashboard_requests_overview_path %>
+      <%= nav_link 'Skills Report', dashboard_skills_overview_path %>        
+      <%= nav_link "Impact Report", dashboard_guest_developers_overview_path %>         
+    <% end %>
+  </ul>
+</nav>
+
+<h4>Number of Offices Worked</h4>
+<table id='offices_worked' class="tablesorter table table-striped table-bordered requests report">
+  <thead>
+    <tr>
+    <th>Employee</th>
+    <th>First Month</th>
+    <th>After 2 Months</th>
+    <th>After 3 Months</th>
+    <th>After 4 Months</th>
+    <th>After 5 Months</th>
+    <th>Until Now</th>
+    </tr>    
+  </thead>
+<tbody>
+  <% @dashboard.offices_worked.each do |total| %>
+    <tr>
+      <td><%= total["Employee"] %></td>
+      <td><%= total["To_5M_Ago"] %></td>
+      <td><%= total["To_4M_Ago"] %></td>
+      <td><%= total["To_3M_Ago"] %></td>
+      <td><%= total["To_2M_Ago"] %></td>
+      <td><%= total["To_1M_Ago"] %></td>
+      <td><%= total["Until_Today"] %></td>         
+    </tr>
+  <% end %>
+</tbody>
+</table>
+<br>
+
+<h4>Offices Filling Requests (6 Months)</h4>
+<table id='offices_worked_6' class="tablesorter table table-striped table-bordered requests report">
+  <thead>
+    <tr>
+    <th>Requested By</th>
+    <th>Chicago</th>
+    <th>Boston</th>
+    <th>Houston</th>
+    <th>San Francisco</th>
+    <th>London</th>
+    <th>Mumbai</th>
+    </tr>    
+  </thead>
+<tbody>
+  <% @dashboard.office_exchanges_6.each do |total| %>
+    <tr>
+      <td><%= total["Requesting"] %></td>
+      <td><%= total["Chicago"] %></td>
+      <td><%= total["Boston"] %></td>
+      <td><%= total["Houston"] %></td>
+      <td><%= total["San_Francisco"] %></td>
+      <td><%= total["London"] %></td>
+      <td><%= total["Mumbai"] %></td>         
+    </tr>
+  <% end %>
+</tbody>
+</table>
+<br>
+
+<h4>Offices Filling Requests (3 Months)</h4>
+<table id='offices_worked_3' class="tablesorter table table-striped table-bordered requests report">
+  <thead>
+    <tr>
+    <th>Requested By</th>
+    <th>Chicago</th>
+    <th>Boston</th>
+    <th>Houston</th>
+    <th>San Francisco</th>
+    <th>London</th>
+    <th>Mumbai</th>
+    </tr>    
+  </thead>
+<tbody>
+  <% @dashboard.office_exchanges_3.each do |total| %>
+    <tr>
+      <td><%= total["Requesting"] %></td>
+      <td><%= total["Chicago"] %></td>
+      <td><%= total["Boston"] %></td>
+      <td><%= total["Houston"] %></td>
+      <td><%= total["San_Francisco"] %></td>
+      <td><%= total["London"] %></td>
+      <td><%= total["Mumbai"] %></td>         
+    </tr>
+  <% end %>
+</tbody>
+</table>
+

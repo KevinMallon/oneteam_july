@@ -2,18 +2,29 @@
 <html>
   <head>
     <title><%= full_title(yield(:title)) %></title>
-    <%= stylesheet_link_tag    'custom', media: "all" %>
-
-    <%= javascript_include_tag "application" %>
+    <%= stylesheet_link_tag "application", media: "all" %>  
+    <%= javascript_include_tag "application" %>  
     <%= csrf_meta_tags %>
-    <%= render 'layouts/shim' %>
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
   </head>
   <body>
     <%= render 'layouts/header' %>
-    <div class="container">
+
+    <div id="tabbed_area" class="container">
+      <nav>
+          <ul class="nav nav-tabs" class="pull-left">
+            <% if signed_in? %>
+              <%= nav_link 'All Requests', requests_path %>
+              <%= nav_link 'My Profile', employee_path(current_employee) %>
+              <%= nav_link "Requests I've Posted", employee_requests_path(current_employee) %> 
+              <%= nav_link "Dashboard", dashboard_requests_overview_path %>           
+            <% end %>
+          </ul>
+      </nav>
+
+
       <% flash.each do |key, value| %>
         <div class="alert alert-<%= key %>"><%= value %></div>
       <% end %>

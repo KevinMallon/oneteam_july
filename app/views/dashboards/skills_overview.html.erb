@@ -1,0 +1,69 @@
+<nav>
+  <ul class="nav nav-pills" class="pull-left">
+    <% if signed_in? %>
+      <%= nav_link 'Usage Data', dashboard_requests_overview_path %>
+      <%= nav_link 'Skills Report', dashboard_skills_overview_path %>        
+      <%= nav_link "Impact Report", dashboard_guest_developers_overview_path %>         
+    <% end %>
+  </ul>
+</nav>
+<br>
+
+
+<h4>Interested Employees</h4>
+<table id='skill_interests' class="tablesorter table table-striped table-bordered requests report">
+  <thead>
+    <tr>
+    <th>Skill</th>
+    <th>Chicago</th>
+    <th>Boston</th>
+    <th>Houston</th>
+    <th>San Francisco</th>
+    <th>London</th>
+    <th>Mumbai</th>
+    </tr>    
+  </thead>
+<tbody>
+  <% @dashboard.skill_interests.each do |total| %>
+    <tr>
+      <td><%= total["Skill"] %></td>
+      <td><%= total["Chicago"] %></td>
+      <td><%= total["Boston"] %></td>
+      <td><%= total["Houston"] %></td>
+      <td><%= total["San_Francisco"] %></td>
+      <td><%= total["London"] %></td>
+      <td><%= total["Mumbai"] %></td>          
+    </tr>
+  <% end %>
+</tbody>
+</table>
+<br>
+
+<h4>Average Skill Level</h4>
+<table id='average_skills' class="tablesorter table table-striped table-bordered requests report">
+  <thead>
+    <tr>
+    <th>Skill</th>
+    <th>Chicago</th>
+    <th>Boston</th>
+    <th>Houston</th>
+    <th>San Francisco</th>
+    <th>London</th>
+    <th>Mumbai</th>
+    </tr>    
+  </thead>
+<tbody>
+  <% @dashboard.average_skills.each do |total| %>
+    <tr>
+      <td><%= total["Skill"] %></td>
+      <td><%= total["Chicago"] %></td>
+      <td><%= total["Boston"] %></td>
+      <td><%= total["Houston"] %></td>
+      <td><%= total["San_Francisco"] %></td>
+      <td><%= total["London"] %></td>
+      <td><%= total["Mumbai"] %></td>           
+    </tr>
+  <% end %>
+</tbody>
+</table>
+

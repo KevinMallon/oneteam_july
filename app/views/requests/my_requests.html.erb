@@ -1,0 +1,53 @@
+   <p class="employees"><%= link_to 'New Request', new_request_path %></p></br>
+
+    <% if !current_employee.requests.empty? %>
+
+       <% @myrequests.each do |request| %> 
+
+          <ul class="employees">
+            <li>
+             <p>
+                <b><%= request.project %>:</b>
+                <%= request.start_date %> - <%= request.stop_date %></br>
+                 Description: <%= request.content %></br>
+                <% if request.active == "1" %>
+                  Active  <%= link_to 'Edit or Cancel', edit_request_path(request) %></br>
+                  Relevant skills:      
+                  <% @skillnames = [] %>            
+                  <% request.request_skills.each do |skill_need| %>
+                    <% skill_names(skill_need) %>            
+                  <% end %>            
+                  <%= @skillnames.join(", ") %> 
+                </p>
+                <% else %>
+                  <span class="attention">Cancelled</span>
+                <% end %>              
+            </p>
+
+            <% if request.active == "1" %>
+              <p>Applicants:</br>
+              <% request.responses.each do |response| %>           
+                <% if !response.selections.empty? %>    
+                  <%= link_to response.employee.name, employee_path(response.employee) %> Selected | 
+                    <% if !response.evaluation.nil? %>  
+                      <%= link_to 'Edit Employee Skills Evaluation', edit_response_evaluation_path(response,response.evaluation) %></br>
+                    <% else %>
+                    <%= link_to 'Evaluate Employee Skills', new_response_evaluation_path(response) %></br>
+                    <% end %>
+                  <em>Employee skills</em> score for this project: <%= request.employee_skills_score(response.employee) %> out of a possible <%= request.request_max_score(request) %></br>
+                  <em>Target skills</em> score for this project: <%= request.target_skills_score(response.employee) %> out of a possible <%= request.request_max_score(request) %></p>                 
+                <% else %> 
+                  <%= link_to response.employee.name, employee_path(response.employee) %> <%= link_to 'Select', new_response_selection_path(response) %></br>
+                  <em>Employee skills</em> score for this project: <%= request.employee_skills_score(response.employee) %> out of a possible <%= request.request_max_score(request) %></br>
+                  <em>Target skills</em> score for this project: <%= request.target_skills_score(response.employee) %> out of a possible <%= request.request_max_score(request) %></p> 
+                <% end %>
+              <% end %>
+            <% end %>                       
+
+           </li>
+          </ul>
+      <% end %>
+    <% else %> 
+      You have not posted any requests.
+
+  <% end %> 

@@ -1,3 +1,9 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
+jQuery ->
+  $('#requests_summary').tablesorter();
+  $('#monthlyreqs').tablesorter();
+  $('#days_to_fill').tablesorter();
+  $('#skill_interests').tablesorter();
+  $('#average_skills').tablesorter();
+  $('#offices_worked').tablesorter();
+  $('#offices_worked_6').tablesorter();
+  $('#offices_worked_3').tablesorter()

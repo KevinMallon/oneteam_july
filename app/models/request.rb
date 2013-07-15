@@ -8,7 +8,7 @@ class Request < ActiveRecord::Base
 
   validates_presence_of :employee_id
 
-  has_many :locations, dependent: :destroy
+  has_one :location, dependent: :destroy
   has_many :responses, :dependent => :destroy
   
   has_many :skills, dependent: :destroy, :source => :skill
@@ -17,7 +17,7 @@ class Request < ActiveRecord::Base
 
   accepts_nested_attributes_for :skills
   accepts_nested_attributes_for :request_skills
-  accepts_nested_attributes_for :locations
+  accepts_nested_attributes_for :location
   
   validate :later_stop_date  
 
